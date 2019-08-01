@@ -29,7 +29,11 @@
 // Circle sections
 .section-shaped {
     //margin: 180px 0;
-    position: relative;
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
     .stars-and-coded{
         margin-top: 8rem;

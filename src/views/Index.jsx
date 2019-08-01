@@ -19,9 +19,8 @@ class Index extends React.Component {
     return (
       <>
       <MiNavbar></MiNavbar>
-        {/* <Inicio></Inicio> 
-        <Buscador></Buscador>*/}
-       <Menucarrera></Menucarrera>
+      
+       <Inicio></Inicio>
         
         <main ref="main">
           <div></div>
