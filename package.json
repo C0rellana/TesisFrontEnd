@@ -1,11 +1,11 @@
 {
-  "name": "argon-design-system-react",
+  "name": "estudeo_ucm",
   "version": "1.0.0",
-  "description": "React version of Argon Design System by Creative Tim",
+  "description": "Aplicacion creada para estudiantes de la UCM, Tesis 2019",
   "main": "index.js",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/argon-design-system-react.git"
+    "type": "",
+    "url": ""
   },
   "keywords": [
     "react",
@@ -22,12 +22,9 @@
     "argon-design-system-react",
     "design-system-react"
   ],
-  "author": "Creative Tim",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/argon-design-system-react/issues"
-  },
-  "homepage": "https://demos.creative-tim.com/argon-design-system-react/",
+  "author": "Carlos Orellana Fuentes",
+  "license": "1",
+  "homepage": "https://master.d3ofs5ya0s8l99.amplifyapp.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
