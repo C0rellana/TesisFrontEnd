@@ -5,7 +5,7 @@
     @include transition($transition-base);
 }
 .headroom--pinned {
-	@extend .position-fixed;
+	@extend .position-relative;
     transform: translateY(0%);
 }
 .headroom--unpinned {

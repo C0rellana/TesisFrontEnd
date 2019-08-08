@@ -1,36 +1,28 @@
 
 import React from "react";
 import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-import Search from "./IndexSections/Search.jsx";
+import MiNavbar from "components/Navbars/MiNavbar.jsx";
+import * as Constants from './IndexSections/misconstantes'
+import Tabs from "./IndexSections/Tabs";
+
 import {
   Container,
 
 } from "reactstrap";
 
-import { FaSearch } from "react-icons/fa";
-const animatedComponents = makeAnimated();
 
-const carreras=[
-  { value: '1', label: 'Informatica' },
-  { value: '2', label: 'Construccion' },
-  { value: '3', label: 'Enfermeria' }
-]
-const ramos=[
-  { value: '1', label: 'Calculo 1' },
-  { value: '2', label: 'Algebra 2' },
-  { value: '3', label: 'Intro a la comp.' }
-]
-
-
-class Inicio extends React.Component {
+class Buscador extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      boolean : true
+      boolean : true,
+      ramos : [],
+
+      
     }
    this.handleClick = this.handleClick.bind(this);
+   this.selectvalue = this.selectvalue.bind(this);
   
   }
   handleClick() {
@@ -38,49 +30,59 @@ class Inicio extends React.Component {
       boolean: !state.boolean
     }));
   }
- 
-
+  
+  selectvalue(e) {
+    var salida =[]
+    if(e !=null){
+      for (let i = 0; i < e.length; i++) {
+        salida =salida.concat(e[i].ramos);
+      }
+    }
+  
+    this.ramos = salida
+    this.setState((state, props) => {
+      return {ramos: salida};
+    });
+    
+    
+  }
 
   render() {
+  
     return (
       <>
-        <section className="section section-lg section-shaped">
-        <style>{'body { background-color: orange; }'}</style>
+       <MiNavbar></MiNavbar>
         <Container>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="form-group">
-              <Search></Search>
+          <div className="row">
+            <div className="col-md-6">
+              <Select
+              closeMenuOnSelect={true}
+              components={Constants.animatedComponents}
+              placeholder="Todas las carreras"
+              isMulti
+              options={Constants.carreras}
+              styles={Constants.colourStyles}
+              onChange={this.selectvalue}
+
+              />
+            </div>
+            <div className="col-md-6">
+              <Select
+              closeMenuOnSelect={true}
+              components={Constants.animatedComponents}
+              placeholder="Todos los ramos"
+              isMulti
+              options={this.ramos}
+              styles={Constants.colourStyles}
+        
+              />
             </div>
           </div>
-          <div className="col-md-6">
-            <Select
-            closeMenuOnSelect={true}
-            components={animatedComponents}
-            placeholder="Todas las carreras"
-            isMulti
-            options={carreras}
-            />
-          </div>
-          <div className="col-md-6">
-            <Select
-            closeMenuOnSelect={true}
-            components={animatedComponents}
-            placeholder="Todos los ramos"
-            isMulti
-            options={ramos}
-      
-            />
-        </div>
- 
-    
-        </div>
+          <Tabs></Tabs>
         </Container>
-  
-        </section>
       </>
     );
   }
 }
 
-export default Inicio;
+export default Buscador;

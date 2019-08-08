@@ -29,7 +29,7 @@ class MiNavbar extends React.Component {
         <header className="header-global">
           <Navbar
          
-            className="navbar-main navbar-transparent navbar-dark  headroom"
+            className="navbar-main navbar-transparent navbar-dark  bg-default"
             expand="md"
             id="navbar-main"
           >

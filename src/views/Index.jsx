@@ -1,13 +1,5 @@
 import React from "react";
 
-// reactstrap components
-
-// core components
-import MiNavbar from "components/Navbars/MiNavbar.jsx";
-
-import Inicio from "./Inicio";
-import Buscador from "./Buscador";
-import Menucarrera from "./Menucarrera";
 
 class Index extends React.Component {
   componentDidMount() {
@@ -17,11 +9,7 @@ class Index extends React.Component {
   }
   render() {
     return (
-      <>
-      <MiNavbar></MiNavbar>
-      
-       <Inicio></Inicio>
-        
+      <>    
         <main ref="main">
           <div></div>
         </main>
