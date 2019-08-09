@@ -18,25 +18,20 @@ function Basic(props) {
 
   return (
     <section>
-
-        <div className="row">
-          <div className="col-md-12">
-            <Card className="shadow">
-              <TabPane>
-                <div {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <br></br> 
-                    <center><i class="fa fa-cloud-upload fa-5x" aria-hidden="true"></i></center>
-                    <center><strong>Arrastrar archivos aquí, o click para seleccionar</strong></center>
-                  </div>
-              </TabPane>
-              <hr></hr>
-              <TabPane>
-                   <ul>{files}</ul>
-              </TabPane>
-            </Card>  
-          </div>
-        </div>
+          <Card className="shadow">
+            <TabPane>
+              <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <br></br> 
+                  <center><i className="fa fa-cloud-upload fa-5x" aria-hidden="true"></i></center>
+                  <center><strong>Arrastrar archivos aquí, o click para seleccionar</strong></center>
+                </div>
+            </TabPane>
+            <hr></hr>
+            <TabPane>
+                  <ul>{files}</ul>
+            </TabPane>
+          </Card>  
   </section>
   );
 }

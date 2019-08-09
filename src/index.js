@@ -18,7 +18,7 @@ ReactDOM.render(
       <Route path="/Buscador" exact render={props => <Buscador {...props} />} />
       <Route path="/Upload" exact render={props => <Upload {...props} />} />
 
-      //<Redirect to="/" />
+      <Redirect to="/" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

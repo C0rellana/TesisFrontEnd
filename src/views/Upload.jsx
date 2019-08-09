@@ -1,6 +1,8 @@
 import React from "react";
-import axios from 'axios';
-import Upload from "./IndexSections/UploadFile";
+import UploadFile from "./IndexSections/UploadFile";
+import MiNavbar from "components/Navbars/MiNavbar.jsx";
+import Select from 'react-select';
+import * as Constants from './IndexSections/misconstantes'
 // reactstrap components
 
 import {
@@ -10,11 +12,10 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   CardHeader,
-  Container
+  Container,
+  Col,
+  Row
 } from "reactstrap";
 
 
@@ -24,10 +25,11 @@ class FormUpload extends React.Component {
     super(props);
 
     this.state = {
-      
-      email:'',
-      password:'',
-      alert: false,
+      nombre:'',
+      categoria:'',
+      carrera: '',
+      ramo: '',
+      descripcion: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
@@ -38,79 +40,110 @@ class FormUpload extends React.Component {
     const target = event.target;
     const name = target.name;
     const value = target.value
-    
+
     this.setState({
       [name]: value
     });
+    console.log(this.state)
   }
 
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state)
-
-    axios.post('http://localhost:8000/login', {
-      email: this.state.email,
-      password: this.state.password,
-    })
-    .then(response => { 
-      sessionStorage.setItem('email', this.state.email)
-      sessionStorage.setItem('nombre', response.data.nombre)
-      sessionStorage.setItem('key', response.data.api_key)
-    
-      //console.log(response.data)
-      this.props.history.push('/')
-    })
-    .catch(error => {
-      console.log(error.response.data)
-      this.setState({alert: true})
-      this.setState({mensaje: error.response.data.message})
-  
-    });
   }
 
 
 
   render() {
-    //const {handleClick} = this.props;
-
-    return (
+     return (
       <>
-          <section>
+          <MiNavbar></MiNavbar>
               <Container>
                 <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-4">
                         <div className="text text-center">
-                                <strong><big>Compartir Archivos </big></strong>
+                            <strong><big>Compartir Archivos </big></strong>
                         </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
                         <Form onSubmit={this.handleSubmit}>
-                            <FormGroup className="mb-3">
-                                <InputGroup className="input-group-alternative">
-                                    <InputGroupAddon addonType="prepend">
-                                    <InputGroupText>
-                                        <i className="ni ni-email-83" />
-                                    </InputGroupText>
-                                    </InputGroupAddon>
-                                    <Input placeholder="text" name="text" type="text" onChange={this.handleInputChange}/>
-                                </InputGroup>
-                            </FormGroup>
-                            <Upload></Upload>
-                            <div className="text-center"> 
-                                <Button
-                                    className="my-4"
-                                    color="primary"
-                                    type="submit"
-                                >
-                                    Compartir
-                                </Button>
-                            </div>
+                      
+                          <FormGroup>
+                            <Input
+                              name="descripcion"
+                              placeholder="Describa los archivos para ayudar a la busqueda de estos."
+                              rows="1"
+                              type="textarea"
+                              maxLength="200"
+                              onChange={this.handleInputChange}
+                            />
+                          </FormGroup>
+                          <Row>
+                              <Col md="6">
+                                <FormGroup>
+                                  <Input
+                                    name="nombre"
+                                    placeholder="Ingrese un nombre para el/los archivos"
+                                    type="text"
+                                    onChange={this.handleInputChange}
+                                    
+                                  />
+                                </FormGroup>
+                              </Col>
+                              <Col>
+                              <FormGroup>
+                                <Select
+                                    name="categoria"
+                                    closeMenuOnSelect={true}
+                                    components={Constants.animatedComponents}
+                                    placeholder="Seleccione una categoria"
+                                    options={Constants.categorias}
+                                    styles={Constants.colourStyles}
+                                
+                                    
+                                    />
+                                </FormGroup>
+                              </Col>
+                              <Col md="6">
+                              <FormGroup>
+                                <Select
+                                  name="carrera"
+                                  closeMenuOnSelect={true}
+                                  components={Constants.animatedComponents}
+                                  placeholder="Mi Carrera"
+                                  isDisabled
+                                  options={Constants.carreras}
+                                  styles={Constants.colourStyles}
+                                  
+                                  
+                                  />
+                              </FormGroup>
+                              </Col>
+                              <Col md="6">
+                              <FormGroup>
+                                <Select
+                                name="ramo"
+                                closeMenuOnSelect={true}
+                                components={Constants.animatedComponents}
+                                placeholder="Ramo X (COD-1202)"
+                                isMulti
+                                options={this.ramos}
+                                styles={Constants.colourStyles}
+                               
+                                />
+                              </FormGroup> 
+                              </Col>
+                            </Row>
+                          <UploadFile></UploadFile>
+        
+                          <div className="text-center"> 
+                              <Button className="my-4" color="primary" type="submit"> Compartir</Button>
+                          </div>
                         </Form>
                     </CardBody>
                 </Card>
-        </Container>
-          </section>
-     
+              </Container>
+         
       </>
     );
   }
