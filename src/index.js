@@ -10,6 +10,7 @@ import "assets/css/miscss.css";
 import Index from "views/Index";
 import Buscador from "views/Buscador.jsx";
 import Upload from "views/Upload.jsx";
+
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
