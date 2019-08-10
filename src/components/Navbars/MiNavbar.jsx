@@ -1,8 +1,6 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-// JavaScript plugin that hides or shows a component based on your scroll
-import Headroom from "headroom.js";
+
 // reactstrap components
 import {
   UncontrolledCollapse,
@@ -18,18 +16,12 @@ import {
 } from "reactstrap";
 
 class MiNavbar extends React.Component {
-  componentDidMount() {
-    let headroom = new Headroom(document.getElementById("navbar-main"));
-    // initialise
-    headroom.init();
-  }
+
   render() {
     return (
       <>
-        <header className="header-global">
           <Navbar
-         
-            className="navbar-main navbar-transparent navbar-dark  bg-default"
+            className="navbar-transparent bg-default"
             expand="md"
             id="navbar-main"
           >
@@ -54,14 +46,11 @@ class MiNavbar extends React.Component {
                         />
                       </Link>
                     </Col>
-                    <Col className="collapse-close" xs="6">
-                      <button className="navbar-toggler" id="navbar_global">
-                        <span />
-                        <span />
-                      </button>
-                    </Col>
+
                   </Row>
                 </div>
+                <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+                </Nav> 
                 <Nav className="align-items-lg-center ml-lg-auto" navbar>
                   <NavItem>
                     <NavLink
@@ -95,27 +84,10 @@ class MiNavbar extends React.Component {
                       Instagram
                     </UncontrolledTooltip>
                   </NavItem>
-                <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                 {/* <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Iniciar Sesion</span>
-                    </DropdownToggle>
-                    <DropdownMenu>
-                     <DropdownItem to="/login" tag={Link}>
-                        Login
-                      </DropdownItem>
-                      <DropdownItem to="/register" tag={Link}>
-                        Register
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>*/}
-                </Nav> 
                </Nav>
               </UncontrolledCollapse>
             </Container>
-          </Navbar>
-        </header>
+          </Navbar> 
       </>
     );
   }

@@ -143,7 +143,7 @@ class TabsSection extends React.Component {
         options: {
           filter: false,
           customBodyRender: (value) => (
-           <a href="/#"><i class="ni ni-cloud-download-95 ni-2x"></i>
+           <a href="/#"><i className="ni ni-cloud-download-95 ni-2x"></i>
 
            </a>
           ) 

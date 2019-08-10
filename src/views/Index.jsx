@@ -31,7 +31,7 @@ class Inicio extends React.Component {
     return (
       <>
         <section className="section section-lg section-shaped">
-          <div className="shape shape-style-1 bg-gradient-orange ">
+          <div className="shape shape-style-1 bg-gradient-blue ">
             <span />
             <span />
             <span />

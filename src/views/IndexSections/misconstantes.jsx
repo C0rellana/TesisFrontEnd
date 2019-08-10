@@ -105,4 +105,8 @@ export const carreras=[
   ] },
   ]
 
-  
+export const ramos=[
+  {value:'1', label:'Sistemas Distribuidos - ICI-611'},
+  {value:'2', label:'Inteligencia Artificial - ICI-612'},
+  {value:'3', label:'Computacion Grafica - ICI-613'},
+]
