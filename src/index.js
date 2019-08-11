@@ -10,6 +10,7 @@ import "assets/css/miscss.css";
 import Index from "views/Index";
 import Buscador from "views/Buscador.jsx";
 import Upload from "views/Upload.jsx";
+import Denuncias from "views/Denuncias.jsx";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -17,7 +18,7 @@ ReactDOM.render(
       <Route path="/" exact render={props => <Index {...props} />} />
       <Route path="/Buscador" exact render={props => <Buscador {...props} />} />
       <Route path="/Upload" exact render={props => <Upload {...props} />} />
-
+      <Route path="/Denuncias" exact render={props => <Denuncias {...props} />} />
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>,

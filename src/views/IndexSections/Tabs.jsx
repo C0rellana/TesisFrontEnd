@@ -12,7 +12,10 @@ import {
   NavLink,
   Nav,
   Row,
-  Col
+  Col,
+  Modal,
+  Button,
+  Input
 } from "reactstrap";
 
 
@@ -23,15 +26,22 @@ class TabsSection extends React.Component {
     super(props);
     this.state = {
       icontTabs2: [],
-      rating: 0
+      rating: 0,
+      modal:false,
     };
     this.changeRating = this.changeRating.bind(this); 
   }
  
+  toggleModal = state => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
 
   toggleNavs = (e, state, index) => {
     e.preventDefault();
     this.setState({
+      defaultModal:true,
     });
     if(this.state.icontTabs2.includes(index)){
       var z = this.state.icontTabs2.indexOf(index);
@@ -59,9 +69,7 @@ class TabsSection extends React.Component {
   })
 
   render() {  
-    let nav_item =[]
-    console.log(this.state.rating)
-   
+    let nav_item =[]   
     for (let i = 0; i < Constants.categorias.length; i++) {   
       nav_item.push(      
         <NavItem key={i} >
@@ -85,25 +93,37 @@ class TabsSection extends React.Component {
       {
         name: "Nombre",
         options: {
-          filter: true
+          filter: true,
+          customBodyRender: (value) => (
+            <small>{value}</small>
+           ) 
         }
       },
       {
         name: "Ramo",
         options: {
-          filter: true
+          filter: true,
+          customBodyRender: (value) => (
+            <small>{value}</small>
+           ) 
         }
       },
       {
         name: "Usuario",
         options: {
-          filter: true
+          filter: true,
+          customBodyRender: (value) => (
+            <small>{value}</small>
+           ) 
         }
       },
       {
         name: "Formato",
         options: {
-          filter: false
+          filter: false,
+          customBodyRender: (value) => (
+            <small>{value}</small>
+           ) 
         }
       },
       {
@@ -136,16 +156,40 @@ class TabsSection extends React.Component {
         name: "Año",
         options: {
           filter: false,
+          customBodyRender: (value) => (
+            <small>{value}</small>
+           ) 
         }
       },
       {
         name: "Enlace",
         options: {
           filter: false,
+          sort: false,
           customBodyRender: (value) => (
-           <a href="/#"><i className="ni ni-cloud-download-95 ni-2x"></i>
-
-           </a>
+            <center>
+              <a href="/#"><i className="ni ni-cloud-download-95"></i></a>
+           </center>
+          ) 
+        },
+      },
+      {
+        name: "Denunciar",
+        options: {
+          filter: false,
+          sort: false,
+          customBodyRender: (value) => (
+            <center>
+            <button
+              className="miboton"
+              type="button"
+              onClick={() => this.toggleModal()}    
+            >
+             <i  className="fa fa-exclamation-triangle" style={{color:'red'}}></i>
+           </button>
+           </center>
+      
+            
           ) 
         },
       },
@@ -153,6 +197,49 @@ class TabsSection extends React.Component {
 
     return (
       <>
+        <Modal
+          className="modal-dialog-centered modal-danger"
+          contentClassName="bg-gradient-danger"
+          isOpen={this.state.modal}
+          toggle={() => this.toggleModal()}
+        >  
+          <div className="modal-body">
+            <button
+                    aria-label="Close"
+                    className="close"
+                    data-dismiss="modal"
+                    type="button"
+                    onClick={() => this.toggleModal()}
+                  >
+                    <span aria-hidden={true}>×</span>
+              </button>
+            <div align="center">
+              <i className="fa fa-exclamation-triangle fa-4x" ></i>
+              <br/><br/>
+              <small>
+                Tu denuncia será enviada para revisión junto con tus datos.
+              </small>
+              <hr></hr>
+              <Input
+                type="textArea"
+                maxLength="100"
+                placeholder="Ingrese una descripcion para la denuncia"
+                onChange={this.handleDenunciaChange}
+              />
+            </div>
+          </div>
+          <div className="modal-footer">            
+            <Button
+              className="btn-white"
+              color="default"
+              type="button"
+              align="center"
+            >
+              Enviar
+            </Button>
+          </div>
+        </Modal>
+      
         <Row className="justify-content-center">
           <Col lg="12">
             <div className="nav-wrapper">

@@ -76,7 +76,6 @@ class Loginv1 extends React.Component {
       <>
       
           <section>
-            <div className="transform-perspective-right">
                 <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-4">
                         <div className="text text-center">
@@ -139,7 +138,6 @@ class Loginv1 extends React.Component {
                     </Form>
                     </CardBody>
                 </Card>
-            </div>
           </section>
      
       </>

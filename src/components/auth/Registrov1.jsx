@@ -83,7 +83,6 @@ class Register extends React.Component {
     return (
       <>
        <section>
-       <div className="transform-perspective-right">
             <Card className="bg-secondary shadow border-0">
                 <CardHeader className="bg-white pb-4">
                      <div className="text text-center">
@@ -169,7 +168,6 @@ class Register extends React.Component {
                     </Form>
                 </CardBody>
             </Card>  
-          </div>
         </section>
         
       </>
