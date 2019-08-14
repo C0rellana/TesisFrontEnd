@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { auth } from '../../services/authenticacion';
+import  { withRouter } from 'react-router-dom'
 // reactstrap components
 import {
   UncontrolledCollapse,
@@ -16,6 +17,17 @@ import {
 } from "reactstrap";
 
 class MiNavbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this); 
+  }
+
+  logout() {
+    auth.logout()
+    console.log("Cerrando Sesión")
+    this.props.history.push("/Auth");
+  }
+
 
   render() {
     return (
@@ -52,6 +64,31 @@ class MiNavbar extends React.Component {
                 <Nav className="navbar-nav-hover align-items-lg-center" navbar>
                 </Nav> 
                 <Nav className="align-items-lg-center ml-lg-auto" navbar>
+                <NavItem>
+                    <NavLink
+                      className="nav-link-icon"
+                      href="/buscador"
+                    >
+                        <small>Buscador</small>
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                      className="nav-link-icon"
+                      href="/upload"
+                    >
+                        <small>Compartir</small>
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                      className="nav-link-icon"
+                      href="#"
+                      onClick={this.logout}
+                    >
+                        <small>Cerrar Sesión</small>
+                    </NavLink>
+                  </NavItem>
                   <NavItem>
                     <NavLink
                       className="nav-link-icon"
@@ -93,4 +130,4 @@ class MiNavbar extends React.Component {
   }
 }
 
-export default MiNavbar;
+export default withRouter(MiNavbar)

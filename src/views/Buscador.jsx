@@ -18,7 +18,6 @@ class Buscador extends React.Component {
     this.state = {
       boolean : true,
       ramos : [],
-
       
     }
    this.handleClick = this.handleClick.bind(this);
