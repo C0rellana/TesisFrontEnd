@@ -1,12 +1,16 @@
-#SISTEMA TESIS 2019  FRONEND REACTJS  
+# BackEnd Tesis 2019!
 
-## Repositorio para llevar el control del front-end de la tesis 2019    
+  - Sistema para llevar el control del backend para la tesis 2019.
+  - Sistema creado en ReactJS + Template Argon 2019
 
+### Installation
 
-COMANDOS  
+*Requiere tener instalado [Node.js](https://nodejs.org/).
 
-``` 
-npm install
-npm update
-npm start
+Instalar las dependencias e iniciar aplicacion.
+
+```sh
+$ cd BackEnd
+$ npm install
+$ npm start
 ```
