@@ -10,7 +10,7 @@
 Instalar las dependencias e iniciar aplicacion.
 
 ```sh
-$ cd BackEnd
+$ cd FrontEnd
 $ npm install
 $ npm start
 ```
