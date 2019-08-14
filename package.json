@@ -1,7 +1,7 @@
 {
   "name": "estudeo_ucm",
   "version": "1.0.0",
-  "description": "Aplicacion creada para estudiantes de la UCM, Tesis 2019",
+  "description": "Aplicacion creada para estudiantes de la UCM, Tesis 2019. Template Argon 2019 ReactJS",
   "main": "index.js",
   "repository": {
     "type": "",

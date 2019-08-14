@@ -2,7 +2,7 @@
 import React from "react";
 import Select from 'react-select';
 import MiNavbar from "components/Navbars/MiNavbar.jsx";
-import * as Constants from './IndexSections/misconstantes'
+import * as Constants from 'services/Constantes'
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 
 
-class Denuncias extends React.Component {
+class Report extends React.Component {
 
   constructor(props) {
     super(props)
@@ -172,4 +172,4 @@ class Denuncias extends React.Component {
   }
 }
 
-export default Denuncias;
+export default Report;

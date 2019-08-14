@@ -1,8 +1,8 @@
 import React from "react";
-import UploadFile from "./IndexSections/UploadFile";
+import UploadFile from "components/Upload/UploadFile";
 import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import Select from 'react-select';
-import * as Constants from './IndexSections/misconstantes'
+import * as Constants from 'services/Constantes'
 // reactstrap components
 
 import {

@@ -6,13 +6,13 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss";
 import "assets/css/miscss.css";
-import {PrivateRoute} from "components/auth/PrivateRoute";
+import {PrivateRoute} from "components/Auth/PrivateRoute";
 
 import Home from "views/Home";
 import Auth from "views/Auth";
-import Buscador from "views/Buscador.jsx";
+import Search from "views/Search";
 import Upload from "views/Upload.jsx";
-import Denuncias from "views/Denuncias.jsx";
+import Report from "views/Report";
 
 
 ReactDOM.render(
@@ -27,12 +27,12 @@ ReactDOM.render(
 
 
      {/* Rutas con autentificacion  ROL : USER */}
-    <PrivateRoute  path="/buscador" roles={["User"]} component={Buscador} />
+    <PrivateRoute  path="/buscador" roles={["User"]} component={Search} />
     <PrivateRoute  path="/Upload" roles={["User"]} component={Upload} />
   
 
     {/* Rutas con autentificacion  ROL : MOD */}
-    <PrivateRoute path="/denuncias" roles={["Mod"]} component={Denuncias} />
+    <PrivateRoute path="/denuncias" roles={["Mod"]} component={Report} />
 
 
     {/* Cualquier otra ruta Redirect to / */}

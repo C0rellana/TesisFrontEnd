@@ -5,8 +5,8 @@ import {
   Row,
   Col
 } from "reactstrap";
-import Login from "components/auth/Login";
-import Registro from "components/auth/Registro";
+import Login from "components/Auth/Login";
+import Registro from "components/Auth/Registro";
 
 
 

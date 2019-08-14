@@ -5,7 +5,7 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import classnames from "classnames";
 import StarRatings from 'react-star-ratings';
 
-import * as Constants from './misconstantes'
+import * as Constants from 'services/Constantes'
 
 import {
   NavItem,

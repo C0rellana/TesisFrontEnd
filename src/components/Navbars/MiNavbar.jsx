@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { auth } from '../../services/authenticacion';
+import { auth } from 'services/authenticacion';
 import  { withRouter } from 'react-router-dom'
 // reactstrap components
 import {

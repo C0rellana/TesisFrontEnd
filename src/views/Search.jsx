@@ -2,8 +2,8 @@
 import React from "react";
 import Select from 'react-select';
 import MiNavbar from "components/Navbars/MiNavbar.jsx";
-import * as Constants from './IndexSections/misconstantes'
-import Tabs from "./IndexSections/Tabs";
+import * as Constants from 'services/Constantes'
+import Tabs from "components/Search/Tabs";
 
 import {
   Container,
@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 
 
-class Buscador extends React.Component {
+class Search extends React.Component {
 
   constructor(props) {
     super(props)
@@ -84,4 +84,4 @@ class Buscador extends React.Component {
   }
 }
 
-export default Buscador;
+export default Search;
