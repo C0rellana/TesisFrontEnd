@@ -1,4 +1,4 @@
-import {ApiLogin} from "./api";
+import {ApiLogin, ApiRegister} from "./api";
 import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 
@@ -19,6 +19,23 @@ function login(correo, password) {
 
 }
 
+
+function register(object) {
+
+    return axios.post(ApiRegister,{
+
+        nombre: object.nombre,
+        rut: object.rut,
+        correo: object.correo,
+        password: object.password,
+        cod_carrera:1,
+        })
+        .then(response => {
+            return response.data;
+        });
+
+}
+
 function logout() {
     sessionStorage.removeItem('currentUser');
     currentUserSubject.next(null);
@@ -28,6 +45,7 @@ function logout() {
 export const auth = {
     login,
     logout,
+    register,
     currentUser: currentUserSubject.asObservable(),
     get currentUserValue () { return currentUserSubject.value }
 };

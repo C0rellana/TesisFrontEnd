@@ -5,6 +5,8 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import classnames from "classnames";
 import StarRatings from 'react-star-ratings';
 
+import { categoria } from 'services/categoria';
+import { auth } from 'services/authenticacion';
 import * as Constants from 'services/Constantes'
 
 import {
@@ -19,8 +21,6 @@ import {
 } from "reactstrap";
 
 
-
-
 class TabsSection extends React.Component {
   constructor(props) {
     super(props);
@@ -28,10 +28,22 @@ class TabsSection extends React.Component {
       icontTabs2: [],
       rating: 0,
       modal:false,
+      categorias:[]
     };
     this.changeRating = this.changeRating.bind(this); 
   }
  
+  componentDidMount() {
+    //obtener las carreras de la API
+    var usuario = auth.currentUserValue;
+    categoria.getAllCategoriasbyCarrera(usuario.carrera)
+        .then(res => {
+            this.setState({
+              categorias: res
+            })
+        })
+   }
+
   toggleModal = state => {
     this.setState({
       modal: !this.state.modal
@@ -70,7 +82,7 @@ class TabsSection extends React.Component {
 
   render() {  
     let nav_item =[]   
-    for (let i = 0; i < Constants.categorias.length; i++) {   
+    for (let i = 0; i < this.state.categorias.length; i++) {   
       nav_item.push(      
         <NavItem key={i} >
           <NavLink key={i} 
@@ -83,8 +95,8 @@ class TabsSection extends React.Component {
             href="#"
             role="tab"       
           >
-            <i className={Constants.categorias[i].icon} />
-            {Constants.categorias[i].label}
+            <i className={this.state.categorias[i].icon} />
+            {this.state.categorias[i].label}
           </NavLink>
         </NavItem>
         )

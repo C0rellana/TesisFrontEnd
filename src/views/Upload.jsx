@@ -3,6 +3,10 @@ import UploadFile from "components/Upload/UploadFile";
 import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import Select from 'react-select';
 import * as Constants from 'services/Constantes'
+import { archivo } from 'services/archivos';
+import { auth } from 'services/authenticacion';
+import { categoria } from 'services/categoria';
+import { ramo } from 'services/ramos';
 // reactstrap components
 
 import {
@@ -26,12 +30,12 @@ class FormUpload extends React.Component {
     super(props);
 
     this.state = {
-      nombre:'',
       categoria:'',
-      carrera: '',
       ramo: '',
       descripcion: '',
-      files:[]
+      files:[],
+      categorias:[],
+      ramos: []
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -39,6 +43,23 @@ class FormUpload extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this); 
 
   }
+  componentDidMount() {
+    //obtener las carreras de la API
+    var usuario = auth.currentUserValue;
+    ramo.getRamosbyRamos(usuario.carrera)
+      .then(res => {
+        this.setState({
+          ramos: res
+        })
+    })
+
+    categoria.getAllCategoriasbyCarrera(usuario.carrera)
+        .then(res => {
+            this.setState({
+              categorias: res
+            })
+        })
+   }
 
   //cambios en input
   handleInputChange(event) {
@@ -60,7 +81,17 @@ class FormUpload extends React.Component {
   //enviar formulario
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state)
+    var usuario = auth.currentUserValue;
+    var object={
+      cod_usuario:usuario.id,
+      cod_categoria: this.state.categoria,
+      cod_carrera: usuario.carrera,
+      cod_ramo: this.state.ramo,
+      descripcion: this.state.descripcion,
+      files: this.state.files
+    }
+    archivo.Upload(object)
+ 
   }
 
   //recibir files 
@@ -84,46 +115,25 @@ class FormUpload extends React.Component {
                     <CardBody className="px-lg-5 py-lg-5">
                         <Form onSubmit={this.handleSubmit}>
                           <Row>
-                              <Col md="6">
-                                <FormGroup>
-                                  <Input
-                                    disabled
-                                    name="nombre"
-                                    placeholder="Ingrese un nombre para el/los archivos"
-                                    type="text"
-                                    onChange={this.handleInputChange}  
-                                  />
-                                </FormGroup>
-                              </Col>
+                           
                               <Col>
                               <FormGroup>
                                 <Select
                                     closeMenuOnSelect={true}
                                     placeholder="Seleccione una categoria"
-                                    options={Constants.categorias}
+                                    options={this.state.categorias}
                                     styles={Constants.colourStyles}     
                                     onChange={(value) => this.handleSelectChange(value, "categoria")}                      
                                     />
                                 </FormGroup>
                               </Col>
-                              <Col md="6">
-                              <FormGroup>
-                                <Select
-                                  closeMenuOnSelect={true}
-                                  placeholder="Mi Carrera"
-                                  isDisabled
-                                  options={Constants.carreras}
-                                  styles={Constants.colourStyles}  
-                                  onChange={(value) => this.handleSelectChange(value, "carrera")}
-                                  />
-                              </FormGroup>
-                              </Col>
+        
                               <Col md="6">
                               <FormGroup>
                                 <Select
                                 closeMenuOnSelect={true}
-                                placeholder="Ramo  - COD 1202"
-                                options={Constants.ramos}
+                                placeholder="Ramo   COD-1111"
+                                options={this.state.ramos}
                                 styles={Constants.colourStyles}
                                 onChange={(value) => this.handleSelectChange(value, "ramo")}
                                 />

@@ -22,17 +22,17 @@ ReactDOM.render(
     {/* Rutas sin autentificacion */}
     <Route path="/Auth" exact render={props => <Auth {...props} />} />
 
-     {/* Rutas con autentificacion  ROL : USER Y MOD*/}
-    <PrivateRoute exact path="/" roles={["User","Mod"]} component={Home} />   
+     {/* Rutas con autentificacion  ROL : ["USER","ADMIN","CGA"]*/}
+    <PrivateRoute exact path="/" roles={["USER","ADMIN","CGA"]} component={Home} />   
 
 
      {/* Rutas con autentificacion  ROL : USER */}
-    <PrivateRoute  path="/buscador" roles={["User"]} component={Search} />
-    <PrivateRoute  path="/Upload" roles={["User"]} component={Upload} />
+    <PrivateRoute  path="/buscador" roles={["USER","ADMIN","CGA"]} component={Search} />
+    <PrivateRoute  path="/Upload" roles={["USER","ADMIN","CGA"]} component={Upload} />
   
 
     {/* Rutas con autentificacion  ROL : MOD */}
-    <PrivateRoute path="/denuncias" roles={["Mod"]} component={Report} />
+    <PrivateRoute path="/denuncias" roles={["CGA"]} component={Report} />
 
 
     {/* Cualquier otra ruta Redirect to / */}

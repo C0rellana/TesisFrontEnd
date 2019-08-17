@@ -1,15 +1,10 @@
-
 import React from "react";
 import Select from 'react-select';
 import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import * as Constants from 'services/Constantes'
 import Tabs from "components/Search/Tabs";
-
-import {
-  Container,
-
-} from "reactstrap";
-
+import { carrera } from 'services/carrera';
+import { Container} from "reactstrap";
 
 class Search extends React.Component {
 
@@ -18,32 +13,38 @@ class Search extends React.Component {
     this.state = {
       boolean : true,
       ramos : [],
-      
+      CarreraRamos: []
     }
    this.handleClick = this.handleClick.bind(this);
-   this.selectvalue = this.selectvalue.bind(this);
+   this.changeCarrera = this.changeCarrera.bind(this);
   
   }
+  componentDidMount() {
+    //obtener las carreras de la API
+    carrera.getAllCarrerasRamos()
+        .then(res => {
+            this.setState({
+                CarreraRamos: res
+            })
+        })
+   }
   handleClick() {
     this.setState(state => ({
       boolean: !state.boolean
     }));
   }
-  
-  selectvalue(e) {
+  //VALORES PARA RAMOS SEGUN CARRERA
+  changeCarrera(e) {
     var salida =[]
     if(e !=null){
       for (let i = 0; i < e.length; i++) {
-        salida =salida.concat(e[i].ramos);
+        salida =salida.concat(e[i].Ramos);
       }
     }
-  
     this.ramos = salida
     this.setState((state, props) => {
       return {ramos: salida};
     });
-    
-    
   }
 
   render() {
@@ -59,9 +60,8 @@ class Search extends React.Component {
               components={Constants.animatedComponents}
               placeholder="Todas las carreras"
               isMulti
-              options={Constants.carreras}
+              options={this.state.CarreraRamos}
               styles={Constants.colourStyles}
-              onChange={this.selectvalue}
 
               />
             </div>

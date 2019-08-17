@@ -24,7 +24,7 @@ class MiNavbar extends React.Component {
 
   logout() {
     auth.logout()
-    console.log("Cerrando Sesión")
+    alert("Cerrando Sesión")
     this.props.history.push("/Auth");
   }
 

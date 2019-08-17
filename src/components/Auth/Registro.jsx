@@ -1,7 +1,7 @@
 import React from "react";
-import axios from 'axios';
 import { IoIosThumbsDown } from "react-icons/io";
 import  { withRouter} from 'react-router-dom'
+import { auth } from 'services/authenticacion';
 // reactstrap components
 import {
   Button,
@@ -52,29 +52,21 @@ class Register extends React.Component {
   }
 
 
-
-
   handleSubmit(event) {
     event.preventDefault();
-    //console.log(this.state)
-
-    axios.post('http://localhost:8000/register', {
+    var object={
       nombre: this.state.nombre,
       rut: this.state.rut,
-      email: this.state.email,
+      correo: this.state.email,
       password: this.state.password,
-      c_password: this.state.password
-    })
-    .then(response => { 
-      this.props.history.push('/login-page')
-    })
-    .catch(error => {
-      //console.log(error.response.data.message)
-      this.setState({alert: true})
-      this.setState({mensaje: error.response.data.message})
+    }
   
-    });
-    
+    auth.register(object)
+    .then(
+        response => {
+         alert(response.message)
+        },
+    );
   }
 
 
@@ -109,7 +101,7 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="nombre" name="nombre" type="text" onChange={this.handleInputChange}/>
+                            <Input placeholder="nombre" name="nombre" type="text" onChange={this.handleInputChange} required/>
                             </InputGroup>
                         </FormGroup>
 
@@ -120,18 +112,18 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input  name="rut" type="text" pattern="[0-9]{7,8}-[0-9Kk]{1}"  placeholder="12345678-5" onChange={this.handleInputChange}/>
+                            <Input  name="rut" type="text" pattern="[0-9]{7,8}-[0-9Kk]{1}"  placeholder="12345678-5" onChange={this.handleInputChange} required/>
                             </InputGroup>
                         </FormGroup>
                     
-                        <FormGroup>
+                        <FormGroup >
                             <InputGroup className="input-group-alternative mb-3">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
                                 <i className="ni ni-email-83" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" name="email" onChange={this.handleInputChange}/>
+                            <Input placeholder="Email" type="email" name="email"  onChange={this.handleInputChange}required/>
                             </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -147,6 +139,8 @@ class Register extends React.Component {
                                 autoComplete="off"
                                 name="password"
                                 onChange={this.handleInputChange}
+                                required
+                                minlength="6" 
                             />
                             </InputGroup>
                         </FormGroup>

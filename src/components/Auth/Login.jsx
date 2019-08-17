@@ -27,39 +27,31 @@ class Login extends React.Component {
       password:'',
       alert: false,
     };
-    
-
      //Si esta logeado ->redirect
-    if (auth.currentUserValue) { 
-      console.log("Ya esta logeado: ->Redirect to / ")
-      this.props.history.push("/");
-        
-    }
+    if (auth.currentUserValue) this.props.history.push("/");
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
 
   }
 
-
+  //Cada vez que hay un cambio en el formulario(inputs)
   handleInputChange(event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value
-    
+    const name = event.target.name;
+    const value = event.target.value
     this.setState({
       [name]: value
     });
   }
 
+  //Al enviar formulario.
   handleSubmit(event) {
-    event.preventDefault();
-    
+    event.preventDefault();//cancelar eventos de redireccion
     auth.login(this.state.correo, this.state.password)
         .then(
             response => {
               if(response.success){
-                console.log("logueado con exito: Redirect to /")
+                alert(response.message) //por el momento
                 this.props.history.push("/");
               }
             },
@@ -70,7 +62,7 @@ class Login extends React.Component {
 
   render() {
     const {handleClick} = this.props;
-    
+
     return (
       <>
           <section>

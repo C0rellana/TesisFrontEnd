@@ -1,5 +1,6 @@
 import makeAnimated from 'react-select/animated';
 
+
 //categorias de las carreras
 export const categorias=[
     { value: '0', label: 'Libros',icon: 'fa fa-book mr-2', },
@@ -89,6 +90,7 @@ export const colourStyles = {
 };
 
 //constantes para input selet
+
 export const carreras=[
   { value: '1', label: 'Informatica',ramos:[
     {value:'1.1', label:'ramo1',otro:'otro1'},
