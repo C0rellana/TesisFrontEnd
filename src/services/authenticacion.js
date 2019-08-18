@@ -1,8 +1,19 @@
-import {ApiLogin, ApiRegister} from "./api";
+import {ApiLogin, ApiRegister,ApiGetData} from "./api";
 import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 
+
 const currentUserSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('currentUser')));
+
+
+//arreglar error
+var ConfigHeader = {
+        headers: {
+           Authorization: currentUserSubject.value.token,
+        }
+     }
+
+
 
 function login(correo, password) {
 
@@ -18,7 +29,6 @@ function login(correo, password) {
         });
 
 }
-
 
 function register(object) {
 
@@ -41,11 +51,22 @@ function logout() {
     currentUserSubject.next(null);
 }
 
+function GetData() {
+
+    return axios.get(ApiGetData,ConfigHeader)
+        .then(response => {
+            return response.data;
+        });
+}
+
+
 
 export const auth = {
     login,
     logout,
     register,
     currentUser: currentUserSubject.asObservable(),
-    get currentUserValue () { return currentUserSubject.value }
+    get currentUserValue () { return currentUserSubject.value },
+    GetData,
+    ConfigHeader
 };

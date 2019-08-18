@@ -62,6 +62,7 @@ class Search extends React.Component {
               isMulti
               options={this.state.CarreraRamos}
               styles={Constants.colourStyles}
+              onChange={this.changeCarrera}
 
               />
             </div>

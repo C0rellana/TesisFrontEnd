@@ -100,12 +100,12 @@ class Login extends React.Component {
                             />
                         </InputGroup>
                         </FormGroup>
-                        <div className="text-right">
+                        {/* <div className="text-right">
                         <a className="text-light" href="#pablo" onClick={e => e.preventDefault()} >
                         <small>¿Olvido la contraseña?</small>
                         </a>
 
-                        </div>
+                        </div> */}
             
                         <div className="text-center"> 
                         <Button

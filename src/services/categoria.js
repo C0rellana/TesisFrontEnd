@@ -1,8 +1,9 @@
 import { ApiCategorias} from "./api";
 import axios from 'axios';
+import { auth } from 'services/authenticacion';
 
-function getAllCategoriasbyCarrera(id) {
-    return axios.get(ApiCategorias+'/'+id)
+function getAllCategoriasbyCarrera() {
+    return axios.get(ApiCategorias,auth.ConfigHeader)
         .then(response => {
             return response.data;
         });

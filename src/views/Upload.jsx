@@ -4,9 +4,9 @@ import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import Select from 'react-select';
 import * as Constants from 'services/Constantes'
 import { archivo } from 'services/archivos';
-import { auth } from 'services/authenticacion';
 import { categoria } from 'services/categoria';
 import { ramo } from 'services/ramos';
+
 // reactstrap components
 
 import {
@@ -30,12 +30,8 @@ class FormUpload extends React.Component {
     super(props);
 
     this.state = {
-      categoria:'',
-      ramo: '',
-      descripcion: '',
-      files:[],
-      categorias:[],
-      ramos: []
+      categoria:'', ramo: '', descripcion: '', files:[],
+      categorias:[], ramos: []
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
@@ -44,21 +40,20 @@ class FormUpload extends React.Component {
 
   }
   componentDidMount() {
-    //obtener las carreras de la API
-    var usuario = auth.currentUserValue;
-    ramo.getRamosbyRamos(usuario.carrera)
-      .then(res => {
-        this.setState({
-          ramos: res
-        })
-    })
 
-    categoria.getAllCategoriasbyCarrera(usuario.carrera)
+      ramo.getRamosbyRamos()
         .then(res => {
-            this.setState({
-              categorias: res
-            })
-        })
+          this.setState({
+            ramos: res
+          })
+      });
+
+      categoria.getAllCategoriasbyCarrera()
+      .then(res => {
+          this.setState({
+            categorias: res
+          })
+      })
    }
 
   //cambios en input
@@ -81,16 +76,16 @@ class FormUpload extends React.Component {
   //enviar formulario
   handleSubmit(event) {
     event.preventDefault();
-    var usuario = auth.currentUserValue;
-    var object={
-      cod_usuario:usuario.id,
-      cod_categoria: this.state.categoria,
-      cod_carrera: usuario.carrera,
-      cod_ramo: this.state.ramo,
-      descripcion: this.state.descripcion,
-      files: this.state.files
-    }
-    archivo.Upload(object)
+    const formData = new FormData();
+    this.state.files.map((file,index)=>{
+        return formData.append(`file${index}`, file);
+      })
+    //formData.append('cod_usuario', usuario.id);
+    formData.append('cod_categoria', this.state.categoria);
+    formData.append('cod_ramo', this.state.categoria);
+    formData.append('descripcion', this.state.descripcion);
+
+    archivo.Upload(formData)
  
   }
 

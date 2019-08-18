@@ -6,6 +6,7 @@ import classnames from "classnames";
 import StarRatings from 'react-star-ratings';
 
 import { categoria } from 'services/categoria';
+import { archivo } from 'services/archivos';
 import { auth } from 'services/authenticacion';
 import * as Constants from 'services/Constantes'
 
@@ -21,6 +22,7 @@ import {
 } from "reactstrap";
 
 
+
 class TabsSection extends React.Component {
   constructor(props) {
     super(props);
@@ -28,7 +30,8 @@ class TabsSection extends React.Component {
       icontTabs2: [],
       rating: 0,
       modal:false,
-      categorias:[]
+      categorias:[],
+      data:[]
     };
     this.changeRating = this.changeRating.bind(this); 
   }
@@ -42,12 +45,27 @@ class TabsSection extends React.Component {
               categorias: res
             })
         })
+
+     archivo.GetAll()
+      .then(res => {
+        this.setState({
+          data: res
+        })
+    })
+      
    }
 
   toggleModal = state => {
     this.setState({
       modal: !this.state.modal
     });
+  }
+
+  downloadfile(value){
+    archivo.DownloadArchivo(value).then(data=>{
+      window.location.assign(data);
+     
+    })
   }
 
   toggleNavs = (e, state, index) => {
@@ -84,14 +102,14 @@ class TabsSection extends React.Component {
     let nav_item =[]   
     for (let i = 0; i < this.state.categorias.length; i++) {   
       nav_item.push(      
-        <NavItem key={i} >
-          <NavLink key={i} 
+        <NavItem key={this.state.categorias[i].value} >
+          <NavLink key={this.state.categorias[i].value} 
             aria-selected="true"
             className={classnames("mb-sm-3 mb-md-1 ", {
-              active: this.state.icontTabs2.includes(i),            
+              active: this.state.icontTabs2.includes(this.state.categorias[i].value),            
             })}
           
-            onClick={e => this.toggleNavs(e, "iconTabs", i)}
+            onClick={e => this.toggleNavs(e, "iconTabs", this.state.categorias[i].value)}
             href="#"
             role="tab"       
           >
@@ -103,7 +121,8 @@ class TabsSection extends React.Component {
     }
     const columns = [
       {
-        name: "Nombre",
+        name: "nombre",
+        label:"Nombre",
         options: {
           filter: true,
           customBodyRender: (value) => (
@@ -113,24 +132,27 @@ class TabsSection extends React.Component {
       },
       {
         name: "Ramo",
+        label:"Ramo",
         options: {
           filter: true,
           customBodyRender: (value) => (
-            <small>{value}</small>
+            <small>{value.nombre}</small>
            ) 
         }
       },
       {
         name: "Usuario",
+        label:"Usuario",
         options: {
           filter: true,
           customBodyRender: (value) => (
-            <small>{value}</small>
+            <small>{value.nombre}</small>
            ) 
         }
       },
       {
-        name: "Formato",
+        name: "formato",
+        label:"Formato",
         options: {
           filter: false,
           customBodyRender: (value) => (
@@ -139,7 +161,8 @@ class TabsSection extends React.Component {
         }
       },
       {
-        name: "Valoracion",
+        name: "valoracion",
+        label:"Valoración",
         options: {
           filter: false,
           customBodyRender: (value) => (
@@ -157,7 +180,8 @@ class TabsSection extends React.Component {
         }
       },
       {
-        name: "categoria",
+        name: "cod_categoria",
+        labe:"categoria",
         options: {
           filter: true,
           filterList: this.state.icontTabs2, //para filtrar por categoria
@@ -165,7 +189,8 @@ class TabsSection extends React.Component {
         }
       },
       {
-        name: "Año",
+        name: "año",
+        label:"Año",
         options: {
           filter: false,
           customBodyRender: (value) => (
@@ -174,13 +199,21 @@ class TabsSection extends React.Component {
         }
       },
       {
-        name: "Enlace",
+        name: "enlace",
+        label:"Enlace",
         options: {
           filter: false,
           sort: false,
+          //PENDIENTE
           customBodyRender: (value) => (
             <center>
-              <a href="/#"><i className="ni ni-cloud-download-95"></i></a>
+              <button
+              className="miboton"
+              type="button"
+              onClick={() => this.downloadfile(value)}    
+            >
+             <i  className="ni ni-cloud-download-95" ></i>
+           </button>
            </center>
           ) 
         },
@@ -197,7 +230,7 @@ class TabsSection extends React.Component {
               type="button"
               onClick={() => this.toggleModal()}    
             >
-             <i  className="fa fa-exclamation-triangle" style={{color:'red'}}></i>
+             <i  className="fa fa-exclamation-circle" style={{color:'red'}}></i>
            </button>
            </center>
       
@@ -263,7 +296,7 @@ class TabsSection extends React.Component {
          <div  style= {{  position: "sticky"}}> 
          <MuiThemeProvider theme={this.getMuiTheme()}>
             <MUIDataTable 
-              data={Constants.data}
+              data={this.state.data}
               columns={columns}
               options={Constants.options}
             />  
