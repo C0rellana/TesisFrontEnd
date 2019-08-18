@@ -44,19 +44,16 @@ class Login extends React.Component {
     });
   }
 
-  //Al enviar formulario.
-  handleSubmit(event) {
+  //boton de login
+  async handleSubmit(event) {
     event.preventDefault();//cancelar eventos de redireccion
-    auth.login(this.state.correo, this.state.password)
-        .then(
-            response => {
-              if(response.success){
-                alert(response.message) //por el momento
-                this.props.history.push("/");
-              }
-            },
-        );
+    var data= await auth.login(this.state.correo, this.state.password);
+    if(data.success){
+      alert(data.message) //por el momento
+      this.props.history.push("/")
+    }
   }
+
 
 
 

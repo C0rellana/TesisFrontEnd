@@ -2,71 +2,56 @@ import {ApiLogin, ApiRegister,ApiGetData} from "./api";
 import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 
+//Obtener session y token
+var session= sessionStorage.getItem('session');
+if(session==='undefined'){session=null;} 
+const Usuario = new BehaviorSubject(JSON.parse(session));
 
-const currentUserSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('currentUser')));
-
-
-//arreglar error
 var ConfigHeader = {
         headers: {
-           Authorization: currentUserSubject.value.token,
+           Authorization:Usuario.value?Usuario.value.token:"",
         }
-     }
+    }
 
+async function login(correo, password) {
 
-
-function login(correo, password) {
-
-    return axios.post(ApiLogin,{
-        correo:correo,
-        password:password,
-
-        })
-        .then(response => {
-            sessionStorage.setItem('currentUser', JSON.stringify(response.data.data));
-            currentUserSubject.next(response.data.data);
-            return response.data;
-        });
-
+    const response = await axios.post(ApiLogin, {
+        correo: correo,
+        password: password,
+    });
+    sessionStorage.setItem('session', JSON.stringify(response.data.data));
+    Usuario.next(response.data.data);
+    return response.data;
 }
 
-function register(object) {
-
-    return axios.post(ApiRegister,{
-
+async function register(object) {
+    const response = await axios.post(ApiRegister, {
         nombre: object.nombre,
         rut: object.rut,
         correo: object.correo,
         password: object.password,
-        cod_carrera:1,
-        })
-        .then(response => {
-            return response.data;
-        });
-
+        cod_carrera: 1,
+    });
+    return response.data;
 }
 
 function logout() {
-    sessionStorage.removeItem('currentUser');
-    currentUserSubject.next(null);
-}
-
-function GetData() {
-
-    return axios.get(ApiGetData,ConfigHeader)
-        .then(response => {
-            return response.data;
-        });
+    sessionStorage.removeItem('session');
+    Usuario.next(null);
 }
 
 
+async function GetData() {
+    const response = await axios.get(ApiGetData, ConfigHeader);
+    return response.data;
+}
 
 export const auth = {
     login,
     logout,
     register,
-    currentUser: currentUserSubject.asObservable(),
-    get currentUserValue () { return currentUserSubject.value },
+    currentUser: Usuario.asObservable(),
+    get currentUserValue () { return Usuario.value },
     GetData,
     ConfigHeader
 };

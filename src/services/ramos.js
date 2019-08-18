@@ -2,7 +2,7 @@ import { ApiRamos} from "./api";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
-function getRamosbyRamos() {
+function getRamosbyCarrera() {
     return axios.get(ApiRamos,auth.ConfigHeader)
         .then(response => {
             return response.data;
@@ -11,5 +11,5 @@ function getRamosbyRamos() {
 
 
 export const ramo = {
-    getRamosbyRamos,
+    getRamosbyCarrera,
 };

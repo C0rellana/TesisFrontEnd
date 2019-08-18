@@ -24,57 +24,26 @@ import {
 
 
 class FormUpload extends React.Component {
-
-  
   constructor(props) {
     super(props);
-
     this.state = {
       categoria:'', ramo: '', descripcion: '', files:[],
       categorias:[], ramos: []
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
+
     this.dataFromDropZone = this.dataFromDropZone.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
 
   }
-  componentDidMount() {
-
-      ramo.getRamosbyRamos()
-        .then(res => {
-          this.setState({
-            ramos: res
-          })
-      });
-
-      categoria.getAllCategoriasbyCarrera()
-      .then(res => {
-          this.setState({
-            categorias: res
-          })
+  async componentDidMount() {
+      this.setState({
+        ramos: await ramo.getRamosbyCarrera(),
+        categorias: await categoria.getAllCategoriasbyCarrera()
       })
-   }
-
-  //cambios en input
-  handleInputChange(event) {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value
-    this.setState({
-      [name]: value
-    });
- 
-  }
-  //cambios en input select
-  handleSelectChange(value,name) { 
-    this.setState({
-      [name]: value.value
-    });  
   }
 
-  //enviar formulario
-  handleSubmit(event) {
+  //Enviar archivos
+  async handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData();
     this.state.files.map((file,index)=>{
@@ -82,14 +51,13 @@ class FormUpload extends React.Component {
       })
     //formData.append('cod_usuario', usuario.id);
     formData.append('cod_categoria', this.state.categoria);
-    formData.append('cod_ramo', this.state.categoria);
+    formData.append('cod_ramo', this.state.ramo);
     formData.append('descripcion', this.state.descripcion);
+    await archivo.Upload(formData)
 
-    archivo.Upload(formData)
- 
   }
 
-  //recibir files 
+  //Obtener archivos desde el componente hijo 
   dataFromDropZone = (fileData) => {
     this.setState({
       files: fileData
@@ -117,8 +85,8 @@ class FormUpload extends React.Component {
                                     closeMenuOnSelect={true}
                                     placeholder="Seleccione una categoria"
                                     options={this.state.categorias}
-                                    styles={Constants.colourStyles}     
-                                    onChange={(value) => this.handleSelectChange(value, "categoria")}                      
+                                    styles={Constants.colourStyles}        
+                                    onChange={(e) => this.setState({ categoria: e.value })}              
                                     />
                                 </FormGroup>
                               </Col>
@@ -130,7 +98,7 @@ class FormUpload extends React.Component {
                                 placeholder="Ramo   COD-1111"
                                 options={this.state.ramos}
                                 styles={Constants.colourStyles}
-                                onChange={(value) => this.handleSelectChange(value, "ramo")}
+                                onChange={(e) => this.setState({ ramo: e.value })}     
                                 />
                               </FormGroup> 
                               </Col>
@@ -142,7 +110,7 @@ class FormUpload extends React.Component {
                                     rows="1"
                                     type="textarea"
                                     maxLength="200"
-                                    onChange={this.handleInputChange}
+                                    onChange={(e) => this.setState({ [e.target.name]: e.target.value })} 
                                   />
                                 </FormGroup>
                                 </Col>
@@ -159,8 +127,7 @@ class FormUpload extends React.Component {
                         </Form>
                     </CardBody>
                 </Card>
-              </Container>
-         
+              </Container> 
       </>
     );
   }

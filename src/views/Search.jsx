@@ -19,15 +19,13 @@ class Search extends React.Component {
    this.changeCarrera = this.changeCarrera.bind(this);
   
   }
-  componentDidMount() {
+  async componentDidMount() {
     //obtener las carreras de la API
-    carrera.getAllCarrerasRamos()
-        .then(res => {
-            this.setState({
-                CarreraRamos: res
-            })
-        })
-   }
+    this.setState({
+        CarreraRamos:  await carrera.getAllCarrerasRamos()
+    })
+  }
+  
   handleClick() {
     this.setState(state => ({
       boolean: !state.boolean

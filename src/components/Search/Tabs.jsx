@@ -36,36 +36,23 @@ class TabsSection extends React.Component {
     this.changeRating = this.changeRating.bind(this); 
   }
  
-  componentDidMount() {
+  async componentDidMount() {
     //obtener las carreras de la API
-    var usuario = auth.currentUserValue;
-    categoria.getAllCategoriasbyCarrera(usuario.carrera)
-        .then(res => {
-            this.setState({
-              categorias: res
-            })
-        })
-
-     archivo.GetAll()
-      .then(res => {
-        this.setState({
-          data: res
-        })
+    var usuario = await auth.currentUserValue;
+    this.setState({
+      categorias: await categoria.getAllCategoriasbyCarrera(usuario.carrera),
+      data: await archivo.GetAll()
     })
-      
    }
+  async downloadfile(value){
+   var url= await archivo.DownloadArchivo(value);
+   window.location.assign(url);
+  }
 
   toggleModal = state => {
     this.setState({
       modal: !this.state.modal
     });
-  }
-
-  downloadfile(value){
-    archivo.DownloadArchivo(value).then(data=>{
-      window.location.assign(data);
-     
-    })
   }
 
   toggleNavs = (e, state, index) => {
