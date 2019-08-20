@@ -22,8 +22,7 @@ import {
 } from "reactstrap";
 
 
-
-class TabsSection extends React.Component {
+class Tabla extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,28 +30,29 @@ class TabsSection extends React.Component {
       rating: 0,
       modal:false,
       categorias:[],
-      data:[]
+      data:[],
     };
     this.changeRating = this.changeRating.bind(this); 
   }
- 
+  async componentDidUpdate(prevProps){
+    if(this.props.DATAFILTER !== prevProps.DATAFILTER){
+      this.setState({ data: this.props.DATAFILTER })
+    } 
+  }
   async componentDidMount() {
-    //obtener las carreras de la API
     var usuario = await auth.currentUserValue;
-    this.setState({
-      categorias: await categoria.getAllCategoriasbyCarrera(usuario.carrera),
-      data: await archivo.GetAll()
-    })
+    this.state.data=await archivo.GetAll()
+    this.state.categorias= await categoria.getAllCategoriasbyCarrera(usuario.carrera)
+    this.setState({});
    }
+   
   async downloadfile(value){
    var url= await archivo.DownloadArchivo(value);
    window.location.assign(url);
   }
 
   toggleModal = state => {
-    this.setState({
-      modal: !this.state.modal
-    });
+    this.setState({ modal: !this.state.modal });
   }
 
   toggleNavs = (e, state, index) => {
@@ -69,11 +69,6 @@ class TabsSection extends React.Component {
     }
  
   };
-  changeRating( newRating, name ) {
-    this.setState({
-      rating: newRating
-    });
-  }
 
   getMuiTheme = () => createMuiTheme({
     overrides: {
@@ -81,11 +76,26 @@ class TabsSection extends React.Component {
         chip: {
           display: 'none'
         }
-      }
+      },
+      MUIDataTableHeadCell: {
+          sortAction:{
+            textAlign: 'center',
+            display: 'block'
+          
+        },
+    },
+
     }
   })
 
+
+  async changeRating(newRating, name) {
+  var  data= await archivo.NuevaValoracion(name,newRating)
+  alert(data.message)
+  }
+
   render() {  
+    
     let nav_item =[]   
     for (let i = 0; i < this.state.categorias.length; i++) {   
       nav_item.push(      
@@ -100,8 +110,11 @@ class TabsSection extends React.Component {
             href="#"
             role="tab"       
           >
-            <i className={this.state.categorias[i].icon} />
+          
+            <small>
             {this.state.categorias[i].label}
+            </small>
+            
           </NavLink>
         </NavItem>
         )
@@ -109,21 +122,51 @@ class TabsSection extends React.Component {
     const columns = [
       {
         name: "nombre",
-        label:"Nombre",
+        label:"Nombre",    
         options: {
           filter: true,
-          customBodyRender: (value) => (
-            <small>{value}</small>
+          customBodyRender: (value,tableMeta) => (
+            
+            <small>
+             { this.state.data.length>0? <i 
+                className="fa fa-circle mr-2" 
+                style={{color:this.state.data[tableMeta.rowIndex].Categorium.color}}>
+              </i> :
+              <i></i>
+            }
+             
+              {value.length<10? value: value.slice(0, 10)+'...' }
+            
+            </small>
+           ) 
+         
+        }
+      },
+
+      {
+        name: "descripcion",
+        label:"Descripción",
+        options: {
+          width: 10,
+          filter: true,
+          customBodyRender: (value) => (    
+            <small>  
+              {value.length<80? value: value.slice(0, 80)+'...' }
+           
+            </small> 
            ) 
         }
       },
+
+    
       {
-        name: "Ramo",
+        name: "Contenido",
         label:"Ramo",
         options: {
+          display:true,
           filter: true,
           customBodyRender: (value) => (
-            <small>{value.nombre}</small>
+            <small>{value.Ramo.label} ({value.Ramo.codigo})</small>
            ) 
         }
       },
@@ -131,9 +174,57 @@ class TabsSection extends React.Component {
         name: "Usuario",
         label:"Usuario",
         options: {
+          display:false,
           filter: true,
           customBodyRender: (value) => (
             <small>{value.nombre}</small>
+           ) 
+        }
+      },
+      {
+        name: "valoracion",
+        label:"Valoración",
+        options: {
+          filter: false,
+          customBodyRender: (value,tableMeta) => (
+            <StarRatings
+              rating={value}
+              
+              name={this.state.data.length>0?this.state.data[tableMeta.rowIndex].id.toString():''}
+              starRatedColor="#172b4d"
+              starHoverColor="#f97a03"
+              changeRating={this.changeRating}
+              numberOfStars={5}
+              starDimension='12px'
+              starSpacing = '0'
+          /> 
+           ) 
+        }
+      },
+      {
+        name: "cod_categoria",
+        label:"Categoria",
+        options: {
+          filter: true,
+          filterList: this.state.icontTabs2, //para filtrar por categoria
+          display: "false",
+           customBodyRender: (value,tableMeta) => (
+             <small>{
+              this.state.data.length>0
+              ?this.state.data[tableMeta.rowIndex].Categorium.nombre
+              :''
+            }</small>
+           ) 
+        }
+      },
+      {
+        name: "año",
+        label:"Año",
+        options: {
+          display: "false",
+          filter: false,
+          customBodyRender: (value) => (
+            <small>{value}</small>
            ) 
         }
       },
@@ -144,64 +235,43 @@ class TabsSection extends React.Component {
           filter: false,
           customBodyRender: (value) => (
             <small>{value}</small>
-           ) 
-        }
-      },
-      {
-        name: "valoracion",
-        label:"Valoración",
-        options: {
-          filter: false,
-          customBodyRender: (value) => (
-
-            <StarRatings
-              rating={value}
-              starRatedColor="#172b4d"
-              changeRating={this.changeRating}
-              numberOfStars={5}
-              name='rating'
-              starDimension='15px'
-              starSpacing = '5'
-          />
-           ) 
-        }
-      },
-      {
-        name: "cod_categoria",
-        labe:"categoria",
-        options: {
-          filter: true,
-          filterList: this.state.icontTabs2, //para filtrar por categoria
-          display: "false"
-        }
-      },
-      {
-        name: "año",
-        label:"Año",
-        options: {
-          filter: false,
-          customBodyRender: (value) => (
-            <small>{value}</small>
+           
            ) 
         }
       },
       {
         name: "enlace",
-        label:"Enlace",
+        label:"Descargar",
+        position:"center",
         options: {
           filter: false,
           sort: false,
-          //PENDIENTE
-          customBodyRender: (value) => (
-            <center>
-              <button
-              className="miboton"
-              type="button"
-              onClick={() => this.downloadfile(value)}    
-            >
-             <i  className="ni ni-cloud-download-95" ></i>
-           </button>
-           </center>
+          customBodyRender: (value,tableMeta) => (  
+            <div align="center">
+            {this.state.data.length>0
+              ?this.state.data[tableMeta.rowIndex].isEnlace?
+                <a
+                  className="miboton"
+                  type="button"
+                  rel="noopener noreferrer"
+                  href={value}
+                  target="_blank"
+                >
+                  <i  className="fa fa-link" ></i>
+                </a>   
+                :
+                <button
+                  className="miboton"
+                  type="button"
+                  onClick={() => this.downloadfile(value)}    
+                >
+                  <i  className="ni ni-cloud-download-95" ></i>
+                </button> 
+              :''  
+            }
+           </div>
+              
+            
           ) 
         },
       },
@@ -210,18 +280,16 @@ class TabsSection extends React.Component {
         options: {
           filter: false,
           sort: false,
-          customBodyRender: (value) => (
-            <center>
+          customBodyRender: (value) => ( 
+            <div align="center">
             <button
               className="miboton"
               type="button"
               onClick={() => this.toggleModal()}    
             >
              <i  className="fa fa-exclamation-circle" style={{color:'red'}}></i>
-           </button>
-           </center>
-      
-            
+           </button> 
+           </div>
           ) 
         },
       },
@@ -299,5 +367,5 @@ class TabsSection extends React.Component {
   }
 }
 
-export default TabsSection;
+export default Tabla;
 

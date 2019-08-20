@@ -2,11 +2,14 @@ import { ApiRamos} from "./api";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
-function getRamosbyCarrera() {
-    return axios.get(ApiRamos,auth.ConfigHeader)
-        .then(response => {
-            return response.data;
-        });
+async function getRamosbyCarrera() {
+    const response = await axios.get(ApiRamos, auth.ConfigHeader);
+   
+    response.data.map((value) => {
+        return value.label =value.label +' ('+ value.codigo+')';
+
+      });
+    return response.data;
 }
 
 

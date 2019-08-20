@@ -65,6 +65,7 @@
     "react-scripts": "3.0.0",
     "react-select": "^3.0.4",
     "react-star-ratings": "^2.3.0",
+    "react-toastify": "^5.3.2",
     "reactstrap": "8.0.0"
   },
   "devDependencies": {

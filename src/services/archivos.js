@@ -1,32 +1,38 @@
-import { ApiArchivos,ApiDownloadArchivo} from "./api";
+import { ApiArchivos,ApiDownloadArchivo,ApiValorarArchivo,ApiFilterArchivo} from "./api";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
-function Upload(object) {
-    return axios.post(ApiArchivos,object,auth.ConfigHeader)
-    .then(response => {
-        alert(response)
-            return response.data;
-        });
+async function Upload(object) {
+    const response = await axios.post(ApiArchivos, object, auth.ConfigHeader);
+ 
+    return response.data;
 }
 
-function GetAll() {
-    return axios.get(ApiArchivos,auth.ConfigHeader)
-    .then(response => {
-            return response.data;
-        });
+async function GetAll() {
+    const response = await axios.get(ApiArchivos, auth.ConfigHeader);
+    return response.data;
 }
 
-function DownloadArchivo(file) {
-    return axios.post(ApiDownloadArchivo,{nombre:file},auth.ConfigHeader)
-    .then(response => {
-            return response.data;
-        });
+async function FilterArchivo(carrera,ramo,contenido) {
+    const response = await axios.post(ApiFilterArchivo,{ carreras:carrera, ramos: ramo, contenidos: contenido }, auth.ConfigHeader);
+    return response.data;
+}
+
+async function DownloadArchivo(file) {
+    const response = await axios.post(ApiDownloadArchivo, { nombre: file }, auth.ConfigHeader);
+    return response.data;
+}
+
+async function NuevaValoracion(archivo,value) {
+    const response = await axios.post(ApiValorarArchivo, { archivo:archivo, value: value }, auth.ConfigHeader);
+    return response.data;
 }
 
 export const archivo = {
     Upload,
     GetAll,
-    DownloadArchivo
+    NuevaValoracion,
+    DownloadArchivo,
+    FilterArchivo
 };
 

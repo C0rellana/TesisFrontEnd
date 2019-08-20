@@ -1,5 +1,6 @@
 import React from "react";
 import UploadFile from "components/Upload/UploadFile";
+import Enlaces from "components/Upload/Enlaces";
 import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import Select from 'react-select';
 import * as Constants from 'services/Constantes'
@@ -14,12 +15,12 @@ import {
   Card,
   CardBody,
   FormGroup,
-  Form,
   Input,
   CardHeader,
   Container,
   Col,
-  Row
+  Row,
+  Form
 } from "reactstrap";
 
 
@@ -27,12 +28,13 @@ class FormUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoria:'', ramo: '', descripcion: '', files:[],
-      categorias:[], ramos: []
+      categoria:'', contenido: '', descripcion: '', files:[],enlaces:[],
+      categorias:[], ramos: [],contenidos:[], enlace:false,
     };
-
     this.dataFromDropZone = this.dataFromDropZone.bind(this);
+    this.dataEnlaces = this.dataEnlaces.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
+    this.togglechange = this.togglechange.bind(this); 
 
   }
   async componentDidMount() {
@@ -40,8 +42,14 @@ class FormUpload extends React.Component {
         ramos: await ramo.getRamosbyCarrera(),
         categorias: await categoria.getAllCategoriasbyCarrera()
       })
+      
   }
-
+  togglechange() {
+    this.setState({
+      enlace:this.state.enlace?false:true
+    })
+  }
+ 
   //Enviar archivos
   async handleSubmit(event) {
     event.preventDefault();
@@ -49,10 +57,12 @@ class FormUpload extends React.Component {
     this.state.files.map((file,index)=>{
         return formData.append(`file${index}`, file);
       })
-    //formData.append('cod_usuario', usuario.id);
+  
+    formData.append('enlaces', JSON.stringify(this.state.enlaces))
     formData.append('cod_categoria', this.state.categoria);
-    formData.append('cod_ramo', this.state.ramo);
+    formData.append('cod_contenido', this.state.contenido);
     formData.append('descripcion', this.state.descripcion);
+    formData.append('enlace',this.state.enlace)
     await archivo.Upload(formData)
 
   }
@@ -62,9 +72,16 @@ class FormUpload extends React.Component {
     this.setState({
       files: fileData
     });
-};
+  };
+  //Obtener enlaces desde el componente hijo 
+  dataEnlaces = (enlaces) => {
+    this.setState({
+      enlaces: enlaces
+    });
+  };
 
   render() {
+   // console.log(this.state.ramos)
      return (
       <>
           <MiNavbar></MiNavbar>
@@ -76,55 +93,73 @@ class FormUpload extends React.Component {
                         </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
+                        <div align="right">
+                          <label className="switch">
+                            <input type="checkbox" id="togBtn" onClick={this.togglechange}/>
+                            <div className="slider round">
+                            <span className="on"><small>Enlace</small></span><span className="off"><small>Archivos</small></span>
+                            </div>
+                          </label>
+                        </div>
+
                         <Form onSubmit={this.handleSubmit}>
                           <Row>
-                           
-                              <Col>
+                              <Col md="6">
                               <FormGroup>
-                                <Select
+                                  <Select
                                     closeMenuOnSelect={true}
                                     placeholder="Seleccione una categoria"
                                     options={this.state.categorias}
                                     styles={Constants.colourStyles}        
                                     onChange={(e) => this.setState({ categoria: e.value })}              
-                                    />
+                                  />
                                 </FormGroup>
                               </Col>
-        
                               <Col md="6">
-                              <FormGroup>
-                                <Select
-                                closeMenuOnSelect={true}
-                                placeholder="Ramo   COD-1111"
-                                options={this.state.ramos}
-                                styles={Constants.colourStyles}
-                                onChange={(e) => this.setState({ ramo: e.value })}     
-                                />
-                              </FormGroup> 
+                                <FormGroup>
+                                  <Select
+                                    closeMenuOnSelect={true}
+                                    placeholder="Ramo   COD-1111"
+                                    options={this.state.ramos}
+                                    onChange={(e) => this.setState({contenidos: e.Contenidos})}      
+                                    styles={Constants.colourStyles}    
+                                  />
+                                </FormGroup> 
                               </Col>
-                              <Col md="12">     
+                              <Col md="6">     
+                                <FormGroup>
+                                  <Select
+                                  closeMenuOnSelect={true}
+                                  placeholder="Contenido"
+                                  options={this.state.contenidos}
+                                  styles={Constants.colourStyles}
+                                  onChange={(e) => this.setState({ contenido: e.value })}     
+                                  />
+                                </FormGroup> 
+                                </Col>
+
+                              <Col md="6">     
                                 <FormGroup>
                                   <Input
                                     name="descripcion"
                                     placeholder="Describa los archivos para ayudar a la busqueda de estos."
                                     rows="1"
+                                    required
                                     type="textarea"
                                     maxLength="200"
                                     onChange={(e) => this.setState({ [e.target.name]: e.target.value })} 
                                   />
                                 </FormGroup>
                                 </Col>
-
                             </Row>
-                           
-                          <UploadFile 
-                            dataFromDropZone = {this.dataFromDropZone}
-                          />
-
+                            {this.state.enlace
+                              ?<Enlaces dataEnlaces = {this.dataEnlaces}/>
+                              :<UploadFile dataFromDropZone = {this.dataFromDropZone}/>
+                            }          
                           <div className="text-center"> 
-                              <Button className="my-4" color="primary" type="submit"> Compartir</Button>
+                              <Button className="my-4" type="submit" color="primary" > Compartir</Button>
                           </div>
-                        </Form>
+                          </Form>
                     </CardBody>
                 </Card>
               </Container> 

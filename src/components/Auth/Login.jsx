@@ -49,8 +49,8 @@ class Login extends React.Component {
     event.preventDefault();//cancelar eventos de redireccion
     var data= await auth.login(this.state.correo, this.state.password);
     if(data.success){
-      alert(data.message) //por el momento
       this.props.history.push("/")
+     
     }
   }
 
@@ -78,7 +78,7 @@ class Login extends React.Component {
                                 <i className="ni ni-email-83" />
                             </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" name="correo" type="email" onChange={this.handleInputChange}/>
+                            <Input placeholder="Correo" name="correo" type="email" onChange={this.handleInputChange}/>
                         </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -89,7 +89,7 @@ class Login extends React.Component {
                             </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             type="password"
                             autoComplete="off"
                             name="password"

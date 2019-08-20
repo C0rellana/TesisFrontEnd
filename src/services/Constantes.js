@@ -1,6 +1,5 @@
 import makeAnimated from 'react-select/animated';
 
-
 //categorias de las carreras
 export const categorias=[
     { value: '0', label: 'Libros',icon: 'fa fa-book mr-2', },
@@ -38,7 +37,7 @@ export const options = {
   responsive: "scroll",
   download: false,
   print: false,
-  viewColumns: false,
+  viewColumns: true,
   filter:false,
   selectableRows:"none",
   textLabels: {
@@ -69,6 +68,14 @@ export const animatedComponents = makeAnimated();
 
 //define stilos para los select multiples
 export const colourStyles = {
+  control: base => ({
+    ...base,
+    fontSize:"70%"
+  }),
+  menu: base => ({
+    ...base,
+    fontSize:"70%"
+  }),
   multiValue: (styles,) => {
     return {
       ...styles,

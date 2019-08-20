@@ -101,7 +101,7 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="nombre" name="nombre" type="text" onChange={this.handleInputChange} required/>
+                            <Input placeholder="Nombre & Apellido" name="nombre" type="text" onChange={this.handleInputChange} required/>
                             </InputGroup>
                         </FormGroup>
 
@@ -112,7 +112,7 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input  name="rut" type="text" pattern="[0-9]{7,8}-[0-9Kk]{1}"  placeholder="12345678-5" onChange={this.handleInputChange} required/>
+                            <Input  name="rut" type="text" pattern="[0-9]{7,8}-[0-9Kk]{1}"  placeholder="Rut: 12345678-5" onChange={this.handleInputChange} required/>
                             </InputGroup>
                         </FormGroup>
                     
@@ -123,7 +123,7 @@ class Register extends React.Component {
                                 <i className="ni ni-email-83" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Email" type="email" name="email"  onChange={this.handleInputChange}required/>
+                            <Input placeholder="Correo" type="email" name="email"  onChange={this.handleInputChange}required/>
                             </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -134,7 +134,7 @@ class Register extends React.Component {
                                 </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                                placeholder="Password"
+                                placeholder="Contraseña"
                                 type="password"
                                 autoComplete="off"
                                 name="password"

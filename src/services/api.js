@@ -15,8 +15,9 @@ const ApiCategorias= API+"/categorias";
 
 //archivos
 const ApiArchivos= API+"/archivos";
+const ApiFilterArchivo= API+"/FilterArchivos";
 const ApiDownloadArchivo= API+"/GetArchivo";
-
+const ApiValorarArchivo= API+"/ValorarArchivo";
 //ramos
 const ApiRamos= API+"/ramos";
 
@@ -32,5 +33,7 @@ export {
     ApiCarreras,
     ApiCategorias,
     ApiCarrerasRamos,
-    ApiGetData
+    ApiGetData,
+    ApiValorarArchivo,
+    ApiFilterArchivo
 }
