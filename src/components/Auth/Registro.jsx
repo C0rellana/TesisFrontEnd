@@ -1,5 +1,4 @@
 import React from "react";
-import { IoIosThumbsDown } from "react-icons/io";
 import  { withRouter} from 'react-router-dom'
 import { auth } from 'services/authenticacion';
 // reactstrap components
@@ -52,7 +51,7 @@ class Register extends React.Component {
   }
 
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     var object={
       nombre: this.state.nombre,
@@ -61,12 +60,18 @@ class Register extends React.Component {
       password: this.state.password,
     }
   
-    auth.register(object)
-    .then(
-        response => {
-         alert(response.message)
-        },
-    );
+    var data= await auth.register(object)
+    if(data.success){
+      
+    }
+    else{
+      this.setState({
+        alert:true,
+        message:data.message,
+      })
+
+    }
+
   }
 
 
@@ -76,26 +81,23 @@ class Register extends React.Component {
     return (
       <>
        <section>
-            <Card className="bg-secondary shadow border-0">
+            <Card className="shadow border-0">
                 <CardHeader className="bg-white pb-4">
                      <div className="text text-center">
                         <strong><big>Registro </big></strong>
                     </div>
                 </CardHeader>
                 <CardBody className=" px-lg-5 py-lg-5">
-                    <UncontrolledAlert color="danger" fade={false} isOpen={this.state.alert} toggle={this.onDismiss}>
-                      
-                        <IoIosThumbsDown /> 
-                        {" "}
-                        <span className="alert-inner--text">
-                            <strong>Error!</strong> {this.state.mensaje}
-                        </span>
-                    </UncontrolledAlert>
+                <UncontrolledAlert color="danger" fade={true} isOpen={this.state.alert} toggle={this.onDismiss}>
+                      <small >
+                        {this.state.message}
+                      </small>
+                 </UncontrolledAlert>
 
 
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup>
-                            <InputGroup className="input-group-alternative mb-3">
+                            <InputGroup className=" mb-3">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
                                 <i className="ni ni-hat-3" />
@@ -106,7 +108,7 @@ class Register extends React.Component {
                         </FormGroup>
 
                         <FormGroup>
-                            <InputGroup className="input-group-alternative mb-3">
+                            <InputGroup className="mb-3">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
                                 <i className="ni ni-hat-3" />
@@ -117,7 +119,7 @@ class Register extends React.Component {
                         </FormGroup>
                     
                         <FormGroup >
-                            <InputGroup className="input-group-alternative mb-3">
+                            <InputGroup className=" mb-3">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
                                 <i className="ni ni-email-83" />
@@ -127,7 +129,7 @@ class Register extends React.Component {
                             </InputGroup>
                         </FormGroup>
                         <FormGroup>
-                            <InputGroup className="input-group-alternative">
+                            <InputGroup className="">
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText>
                                 <i className="ni ni-lock-circle-open" />
@@ -140,7 +142,7 @@ class Register extends React.Component {
                                 name="password"
                                 onChange={this.handleInputChange}
                                 required
-                                minlength="6" 
+                                
                             />
                             </InputGroup>
                         </FormGroup>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
 async function getAllCarrerasRamos() {
-    const response = await axios.get(ApiCarrerasRamos, auth.ConfigHeader);
+    const response = await axios.get(ApiCarrerasRamos, await auth.ConfigHeader());
     response.data.map((value) => {
         value.label =value.label +' ('+ value.sigla+')';
           value.Ramos.map((ramo) => {
@@ -15,7 +15,7 @@ async function getAllCarrerasRamos() {
 
 }
 async function getAllCarreras() {
-    const response = await axios.get(ApiCarreras, auth.ConfigHeader);
+    const response = await axios.get(ApiCarreras,  await auth.ConfigHeader());
     return response.data;
 
 }

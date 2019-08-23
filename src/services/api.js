@@ -1,4 +1,4 @@
-const API="http://127.0.0.1:5000"
+const API="http://192.168.18.37:5000"
 //default localhost
 
 //auth 
@@ -18,6 +18,8 @@ const ApiArchivos= API+"/archivos";
 const ApiFilterArchivo= API+"/FilterArchivos";
 const ApiDownloadArchivo= API+"/GetArchivo";
 const ApiValorarArchivo= API+"/ValorarArchivo";
+const ApiDenuncia= API+"/DenunciarArchivo";
+
 //ramos
 const ApiRamos= API+"/ramos";
 
@@ -35,5 +37,6 @@ export {
     ApiCarrerasRamos,
     ApiGetData,
     ApiValorarArchivo,
-    ApiFilterArchivo
+    ApiFilterArchivo,
+    ApiDenuncia
 }

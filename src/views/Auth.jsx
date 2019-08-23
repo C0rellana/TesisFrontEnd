@@ -9,7 +9,6 @@ import Login from "components/Auth/Login";
 import Registro from "components/Auth/Registro";
 
 
-
 class Auth extends React.Component {
 
   constructor(props) {
@@ -30,35 +29,37 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <>
-        <section className="section section-lg section-shaped">
-          <div className="shape shape-style-1 bg-gradient-info ">
-          </div>
-          <Container className="py-md">
-            <Row className="row-grid justify-content-between align-items-center">
-              <Col lg="6">
-                <h3 className="display-3 text-white">
-                  Estudeo UCM 2019{" "}
-                  <span className="text-white">eslogan eslogan eslogan</span>
-                </h3>
-                <p className="lead text-white">
-                descripcion descripcion descripcion descripcion
-                descripcion descripcion descripcion descripcion descripcion descripcion
-                descripcion descripcion descripcion descripcion descripcion descripcion
-                descripcion descripcion descripcion descripcion descripcion descripcion 
-                </p>
-
-              </Col>
-
-              <Col className="mb-lg-auto" lg="5">
-              {this.state.boolean ? <Login boolean={this.state.boolean} handleClick = {this.handleClick} ></Login>   :  <Registro boolean={this.state.boolean} handleClick = {this.handleClick}> </Registro> }    
-              </Col>
-
-            </Row>
-          </Container>
-
       
+      <> 
+      <main >
+        <section className="section section-lg section-shaped" >
+          <div className="shape shape-style-1 bg-purple">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+     
+          <Container className=""  >
+            <Row className="row-grid justify-content-between align-items-center" >
+              <Col lg="5">
+                {this.state.boolean ? <Login boolean={this.state.boolean} handleClick = {this.handleClick} ></Login>   :  <Registro boolean={this.state.boolean} handleClick = {this.handleClick}> </Registro> }    
+                </Col>
+                <Col lg="6">
+                  <h3 className="display-3 text-white">
+                    Estudeo UCM 2019
+                  </h3>
+                  <p  className="lead text-white">
+                    descripcion descripcion descripcion descripcion
+                    descripcion descripcion descripcion descripcion descripcion descripcion
+                    descripcion descripcion descripcion descripcion descripcion descripcion
+                    descripcion descripcion descripcion descripcion descripcion descripcion 
+                  </p>
+                </Col>
+              </Row>
+          </Container>
+         
         </section>
+ 
+      </main>
+        
       </>
     );
   }

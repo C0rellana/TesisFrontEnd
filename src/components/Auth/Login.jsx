@@ -12,7 +12,8 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  CardHeader
+  CardHeader,
+  UncontrolledAlert
 } from "reactstrap";
 
 
@@ -26,13 +27,14 @@ class Login extends React.Component {
       correo:'',
       password:'',
       alert: false,
+      message:'',
     };
      //Si esta logeado ->redirect
     if (auth.currentUserValue) this.props.history.push("/");
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
-
+    this.onDismiss = this.onDismiss.bind(this); 
   }
 
   //Cada vez que hay un cambio en el formulario(inputs)
@@ -45,13 +47,23 @@ class Login extends React.Component {
   }
 
   //boton de login
-  async handleSubmit(event) {
+   handleSubmit(event) {
     event.preventDefault();//cancelar eventos de redireccion
-    var data= await auth.login(this.state.correo, this.state.password);
-    if(data.success){
-      this.props.history.push("/")
-     
-    }
+    auth.login(this.state.correo, this.state.password)
+    .then(data=>{
+      if(data.success){
+        this.props.history.push("/")
+      }
+      else{
+        this.setState({
+          alert:true,
+          message:data.message,
+        })
+      }
+    }); 
+  }
+  onDismiss() {
+    this.setState({alert: false})
   }
 
 
@@ -63,37 +75,44 @@ class Login extends React.Component {
     return (
       <>
           <section>
-                <Card className="bg-secondary shadow border-0">
+                <Card className="shadow border-0">
                     <CardHeader className="bg-white pb-4">
                         <div className="text text-center">
                                 <strong><big>Iniciar Sesión </big></strong>
                         </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
+                    <UncontrolledAlert color="danger" fade={true} isOpen={this.state.alert} toggle={this.onDismiss}>
+                      <small >
+                        {this.state.message}
+                      </small>
+                    </UncontrolledAlert>
+
                     <Form onSubmit={this.handleSubmit}>
-                        <FormGroup className="mb-3">
-                        <InputGroup className="input-group-alternative">
+                        <FormGroup className="">
+                        <InputGroup className="input-group">
                             <InputGroupAddon addonType="prepend">
                             <InputGroupText>
                                 <i className="ni ni-email-83" />
                             </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Correo" name="correo" type="email" onChange={this.handleInputChange}/>
+                            <Input required placeholder="Correo" name="correo" type="email" onChange={this.handleInputChange}/>
                         </InputGroup>
                         </FormGroup>
                         <FormGroup>
-                        <InputGroup className="input-group-alternative">
+                        <InputGroup className="">
                             <InputGroupAddon addonType="prepend">
                             <InputGroupText>
                                 <i className="ni ni-lock-circle-open" />
                             </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                            placeholder="Contraseña"
-                            type="password"
-                            autoComplete="off"
-                            name="password"
-                            onChange={this.handleInputChange}
+                              required
+                              placeholder="Contraseña"
+                              type="password"
+                              autoComplete="off"
+                              name="password"
+                              onChange={this.handleInputChange}
                             />
                         </InputGroup>
                         </FormGroup>

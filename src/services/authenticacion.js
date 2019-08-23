@@ -7,12 +7,20 @@ var session= sessionStorage.getItem('session');
 if(session==='undefined'){session=null;} 
 const Usuario = new BehaviorSubject(JSON.parse(session));
 
-var ConfigHeader = {
+
+async function ConfigHeader(){
+    var session= sessionStorage.getItem('session');
+    if(session==='undefined'){session=null;} 
+    const Usuario = new BehaviorSubject(JSON.parse(session));
+
+    return {
         headers: {
            Authorization:Usuario.value?Usuario.value.token:"",
         }
     }
 
+}
+    
 async function login(correo, password) {
 
     const response = await axios.post(ApiLogin, {
@@ -42,9 +50,13 @@ function logout() {
 
 
 async function GetData() {
-    const response = await axios.get(ApiGetData, ConfigHeader);
-    return response.data;
+    return this.ConfigHeader().then(async data=>{
+       const response = await axios.get(ApiGetData, data);
+        return response.data;   
+    });
 }
+
+
 
 export const auth = {
     login,

@@ -153,7 +153,7 @@ class Report extends React.Component {
               components={Constants.animatedComponents}
               placeholder="Todos los ramos"
               isMulti
-              options={Constants.ramos}
+              //options={Constants.ramos}
               styles={Constants.colourStyles}
             />
            <br/>

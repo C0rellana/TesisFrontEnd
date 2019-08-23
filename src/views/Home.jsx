@@ -17,10 +17,10 @@ class Home extends React.Component {
       nombre: ""
     };
   }
-  async componentDidMount(){
-    var user=await auth.GetData()
-    this.setState({nombre:user.nombre.toUpperCase() }) 
-
+  componentDidMount(){
+     auth.GetData().then(user=>{
+      this.setState({nombre:user.nombre.toUpperCase() }) 
+     });
   }
 
 
@@ -29,18 +29,18 @@ class Home extends React.Component {
       <>
       
        <MiNavbar></MiNavbar>
-      
-        <section className="section section-lg section-shaped">
-          <div className="shape shape-style-1 bg-gradient-white ">
-           
+       <section className="section section-lg section-shaped" >
+          <div className="shape shape-style-1 bg-purple">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
-          <Container className="py-md">
+     
+          <Container className="">
             <Row className="row-grid justify-content-between align-items-center">
               <Col lg="6">
-                <h3 className="display-3 text">
+                <h3 className="display-3 text-white">
                   Bienvenido  @{this.state.nombre}
                 </h3>
-                <p className="lead text">
+                <p className="lead text-white">
                   <small>
                     <b>¿Que es Estudeo UCM?</b>
                     <br/>
@@ -55,16 +55,9 @@ class Home extends React.Component {
                   </small> 
                 </p>
               </Col>
-              <Col lg="6">
-
-               
-              </Col>
-
             </Row>
           </Container>
-
-      
-        </section>
+          </section>
       </>
     );
   }

@@ -29,7 +29,7 @@
 // Circle sections
 .section-shaped {
     //margin: 180px 0;
-    position: fixed;
+    position: relative;
     top:0;
     left: 0;
     right: 0;
@@ -40,7 +40,7 @@
     }
     
     .shape {
-        position: absolute;
+        position: fixed;
         top: 0;
         z-index: -1;
         width: 100%;

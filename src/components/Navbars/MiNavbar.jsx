@@ -24,7 +24,6 @@ class MiNavbar extends React.Component {
 
   logout() {
     auth.logout()
-    alert("Cerrando Sesión")
     this.props.history.push("/Auth");
   }
 
@@ -32,8 +31,8 @@ class MiNavbar extends React.Component {
   render() {
     return (
       <>
-          <Navbar
-            className="navbar-transparent bg-default"
+      <Navbar
+            className="navbar-transparent bg-purple"
             expand="md"
             id="navbar-main"
           >
@@ -54,7 +53,7 @@ class MiNavbar extends React.Component {
                       <Link to="/">
                         <img
                           alt="..."
-                          src={require("assets/img/brand/argon-react.png")}
+                          src={require("assets/img/brand/argon-react-white.png")}
                         />
                       </Link>
                     </Col>
@@ -103,22 +102,6 @@ class MiNavbar extends React.Component {
                     </NavLink>
                     <UncontrolledTooltip delay={0} target="tooltip333589074">
                       Facebook
-                    </UncontrolledTooltip>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink
-                      className="nav-link-icon"
-                      href="#"
-                      id="tooltip356693867"
-                      target="_blank"
-                    >
-                      <i className="fa fa-instagram" />
-                      <span className="nav-link-inner--text d-lg-none ml-2">
-                        Instagram
-                      </span>
-                    </NavLink>
-                    <UncontrolledTooltip delay={0} target="tooltip356693867">
-                      Instagram
                     </UncontrolledTooltip>
                   </NavItem>
                </Nav>

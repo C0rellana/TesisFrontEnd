@@ -42,7 +42,7 @@ function UploadFile(props) {
             <center><strong>Arrastrar archivos aquí, o click para seleccionar</strong></center>
 
             <div align="center">   
-              <small>Formatos permitidos: |PDF|IMG|RAR|ZIP|VIDEO|SQL|TXT|PPT/X|XLS/X|DOC/X|</small>
+              <small><small>Formatos permitidos: |PDF|IMG|RAR|ZIP|VIDEO|SQL|TXT|PPT/X|XLS/X|DOC/X|</small></small>
             </div>
           </div>
      
