@@ -53,6 +53,8 @@ async function GetData() {
     return this.ConfigHeader().then(async data=>{
        const response = await axios.get(ApiGetData, data);
         return response.data;   
+    }).catch((error)=>{
+        return error;
     });
 }
 

@@ -145,6 +145,11 @@ export const getMuiTheme = () => createMuiTheme({
         
       },
   },
-
+  MUIDataTable: {
+    responsiveScroll: {
+      minHeight: '400px',
+      maxHeight: '400px',
+    },
+  }
   }
 })

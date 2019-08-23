@@ -6,14 +6,19 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss";
 import "assets/css/miscss.css";
-import PrivateRoute from "components/Auth/PrivateRoute";
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from "views/Home";
 import Auth from "views/Auth";
 import Search from "views/Search";
 import Upload from "views/Upload.jsx";
 import Report from "views/Report";
+//Middelware
+import RequireAuth from "components/Auth/RequireAuth";
 
+var Nivel1=["USER","CGA","ADMIN"];
+var Nivel2=["CGA"];
+//var Nivel3=["ADMIN"];
 
 ReactDOM.render(
   <BrowserRouter>
@@ -23,17 +28,14 @@ ReactDOM.render(
     <Route path="/Auth" exact render={props => <Auth {...props} />} />
 
      {/* Rutas con autentificacion  ROL : ["USER","ADMIN","CGA"]*/}
-    <PrivateRoute exact path="/" roles={["USER","ADMIN","CGA"]} component={Home} />   
-
+     <Route exact path='/' component={RequireAuth(Home,Nivel1)} />
 
      {/* Rutas con autentificacion  ROL : USER */}
-    <PrivateRoute  path="/buscador" roles={["USER","ADMIN","CGA"]} component={Search} />
-    <PrivateRoute  path="/Upload" roles={["USER","ADMIN","CGA"]} component={Upload} />
-  
+      <Route exact path='/buscador' component={RequireAuth(Search,Nivel1)} />
+      <Route exact path='/Upload' component={RequireAuth(Upload,Nivel1)} />
 
     {/* Rutas con autentificacion  ROL : MOD */}
-    <PrivateRoute path="/denuncias" roles={["CGA"]} component={Report} />
-
+    <Route exact path='/denuncias' component={RequireAuth(Report,Nivel2)} />
 
     {/* Cualquier otra ruta Redirect to / */}
     <Redirect to="/" />

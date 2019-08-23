@@ -56,7 +56,7 @@ class Enlaces extends React.Component {
                     <br/>
                   </Col>
                 <Col md="6" key={Inputs.row+'c'}>
-                  <Input type="url" placeholder="URL: http://www.Mienlace.com" key={Inputs.enlace} name={Inputs.enlace} onChange={this.handleChange} required/>
+                  <Input type="url" placeholder="http://www.Mienlace.com" key={Inputs.enlace} name={Inputs.enlace} onChange={this.handleChange} required/>
                   <br/>
                 </Col>
                 
@@ -65,10 +65,10 @@ class Enlaces extends React.Component {
 
               <div align="right">
               <button className="miboton"  onClick={() => this.appendInput()}>
-                  <i style={{color:"#172B4D"}} className="fa fa-plus-circle fa-2x"></i>
+                  <i style={{color:"#8965e0"}} className="fa fa-plus-circle fa-2x"></i>
               </button>
               <button className="miboton" onClick={() => this.removeInput()}>
-                  <i style={{color:"#172B4D"}} className="fa fa-minus-circle fa-2x"></i>
+                  <i style={{color:"#8965e0"}} className="fa fa-minus-circle fa-2x"></i>
               </button>
               </div>
           </section>

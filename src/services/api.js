@@ -9,6 +9,8 @@ const ApiGetData = API+"/GetData"
 //carreras
 const ApiCarreras= API+"/carreras";
 const ApiCarrerasRamos= API+"/carrerasramos";
+const ApiGetCarrera= API+"/ApiGetCarrera";
+
 
 //categorias
 const ApiCategorias= API+"/categorias";
@@ -33,6 +35,7 @@ export {
     ApiDownloadArchivo,
     ApiRegister,
     ApiCarreras,
+    ApiGetCarrera,
     ApiCategorias,
     ApiCarrerasRamos,
     ApiGetData,

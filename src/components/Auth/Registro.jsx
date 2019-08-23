@@ -1,6 +1,8 @@
 import React from "react";
 import  { withRouter} from 'react-router-dom'
 import { auth } from 'services/authenticacion';
+import { ToastContainer, toast,Flip } from 'react-toastify';
+
 // reactstrap components
 import {
   Button,
@@ -15,7 +17,6 @@ import {
   UncontrolledAlert,
   CardHeader
 } from "reactstrap";
-
 
 class Register extends React.Component {
 
@@ -62,16 +63,21 @@ class Register extends React.Component {
   
     var data= await auth.register(object)
     if(data.success){
-      
+      toast.success('Se ha registrado correctamente');
+      setTimeout(
+        function() {
+          this.props.handleClick()
+        }
+        .bind(this),
+        3000
+    );
     }
     else{
       this.setState({
         alert:true,
         message:data.message,
       })
-
     }
-
   }
 
 
@@ -81,6 +87,15 @@ class Register extends React.Component {
     return (
       <>
        <section>
+          <ToastContainer transition={Flip}
+                        position= "top-right"
+                        autoClose= {3000}
+                        hideProgressBar= {false}
+                        closeOnClick= {true}
+                        pauseOnHover= {true}
+                        draggable= {true}
+            />
+            
             <Card className="shadow border-0">
                 <CardHeader className="bg-white pb-4">
                      <div className="text text-center">

@@ -39,7 +39,7 @@ html, body, #app, #app>div {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #172B4D;
+    background-color: #8965e0;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -57,7 +57,7 @@ html, body, #app, #app>div {
   }
   
   input:checked + .slider {
-    background-color:#172B4D;
+    background-color:#8965e0;
   }
   
   input:focus + .slider {

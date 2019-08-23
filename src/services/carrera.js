@@ -1,4 +1,4 @@
-import { ApiCarreras,ApiCarrerasRamos} from "./api";
+import { ApiCarreras,ApiCarrerasRamos,ApiGetCarrera} from "./api";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
@@ -17,10 +17,16 @@ async function getAllCarrerasRamos() {
 async function getAllCarreras() {
     const response = await axios.get(ApiCarreras,  await auth.ConfigHeader());
     return response.data;
+}
+
+async function GetCarrera() {
+  const response = await axios.get(ApiGetCarrera,  await auth.ConfigHeader());
+  return response.data;
 
 }
 
 export const carrera = {
     getAllCarrerasRamos,
     getAllCarreras,
+    GetCarrera
 };

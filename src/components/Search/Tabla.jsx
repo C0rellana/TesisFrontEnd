@@ -6,7 +6,7 @@ import { archivo } from 'services/archivos';
 import * as Constants from 'services/Constantes'
 import Categoria from "./Categoria";
 import Modal from "./Modal";
-
+import { ToastContainer, toast,Flip } from 'react-toastify';
 
 class Tabla extends React.Component {
   constructor(props) {
@@ -202,10 +202,19 @@ class Tabla extends React.Component {
         },
       },
     ];
-    
+
     
     return (
       <>      
+     
+      <ToastContainer transition={Flip}
+                    position= "top-right"
+                    autoClose= {3000}
+                    hideProgressBar= {false}
+                    closeOnClick= {true}
+                    pauseOnHover= {true}
+                    draggable= {true}
+        />
 
         <Modal isOpen={this.state.isOpen} idArchivo={this.state.idArchivo}/>
 
@@ -246,7 +255,14 @@ class Tabla extends React.Component {
   }
     
   async downloadfile(value){
-    window.location.assign(await archivo.DownloadArchivo(value));
+    var response=await archivo.DownloadArchivo(value)
+    if(response.success){
+      window.location.assign(response.url);
+    }
+    else{
+      toast.error('Ooops.. ' + response.message);
+    }
+
    };
  
 

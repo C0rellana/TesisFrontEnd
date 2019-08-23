@@ -10,6 +10,7 @@ import { ramo } from 'services/ramos';
 import FixRequiredSelect from "services/FixRequiredSelect";
 import PacmanLoader from 'react-spinners/PacmanLoader';
 // reactstrap components
+import { ToastContainer,toast,Flip } from 'react-toastify';
 
 import {
   Button,
@@ -22,7 +23,6 @@ import {
   Col,
   Row,
   Form,
-  UncontrolledAlert,
 } from "reactstrap"; 
 
 
@@ -31,7 +31,7 @@ class FormUpload extends React.Component {
     super(props);
     this.state = {
       categoria:'', contenido: '', descripcion: '', 
-      alert:false,isUploading:false,success:false,enlace:false,
+      isUploading:false,success:false,enlace:false,
       files:[],enlaces:[], categorias:[], ramos: [],contenidos:[],
       cat_value:[],ramo_value:[],cont_value:[],
     };
@@ -39,9 +39,6 @@ class FormUpload extends React.Component {
     this.dataEnlaces = this.dataEnlaces.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
     this.togglechange = this.togglechange.bind(this); 
-    this.onDismiss = this.onDismiss.bind(this); 
-    
-
   }
   async componentDidMount() {
       this.setState({
@@ -62,7 +59,8 @@ class FormUpload extends React.Component {
    
 
     if(this.state.files.length<=0 && this.state.enlaces.length<=0){
-      this.setState({alert:true})
+      toast.error('Oops... Debes ingresar al menos un archivo!');
+
     }else{
       this.setState({isUploading:true})
       const formData = new FormData();
@@ -76,7 +74,8 @@ class FormUpload extends React.Component {
       formData.append('descripcion', this.state.descripcion);
       formData.append('enlace',this.state.enlace)
       archivo.Upload(formData).then(data=>{
-      this.setState({isUploading:false, success:true})
+        this.setState({isUploading:false})
+        toast.success('Muchas gracias por compartir!');
 
       })
     }  
@@ -102,9 +101,7 @@ class FormUpload extends React.Component {
       [name]:e.value 
     });
   };
-  onDismiss() {
-    this.setState({alert: false,success:false})
-  }
+
 
 
   render() {
@@ -117,9 +114,15 @@ class FormUpload extends React.Component {
   );
      return (
       <>
-       
           <MiNavbar></MiNavbar>
-            
+          <ToastContainer transition={Flip}
+                  position= "top-right"
+                  autoClose= {3000}
+                  hideProgressBar= {false}
+                  closeOnClick= {true}
+                  pauseOnHover= {true}
+                  draggable= {true}
+                  />
                {this.state.isUploading?
                <div className="overlay">
                     <div className="divcenter">
@@ -134,12 +137,7 @@ class FormUpload extends React.Component {
                  :''
                  } 
                 <Container>
-                  <UncontrolledAlert color="success" fade={true} isOpen={this.state.success} toggle={this.onDismiss}>
-                                    <small>Gracias por compartir</small>        
-                  </UncontrolledAlert>
-                  <UncontrolledAlert color="danger" fade={true} isOpen={this.state.alert} toggle={this.onDismiss}>
-                                  <small > Oops... Debes ingresar al menos un archivo!</small>
-                  </UncontrolledAlert>
+
                   <Card className=" shadow border-0">
                       <CardHeader className="bg-white pb-4">
                           <div className="text text-center">
@@ -219,7 +217,7 @@ class FormUpload extends React.Component {
                                     
                             <div className="text-center"> 
                             
-                                <Button className="my-4" type="submit" color="primary" > Compartir</Button>
+                                <Button className="my-4" type="submit" style={{backgroundColor:"#8965e0", color:"#fff" }}> Compartir</Button>
                             </div>
                             </Form>
                       </CardBody>

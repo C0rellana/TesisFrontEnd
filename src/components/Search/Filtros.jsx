@@ -17,7 +17,8 @@ class Search extends React.Component {
       Carreras_Ids:[],
       Contenidos_Ids:[],
       Categorias_Ids:[],
-      Busqueda:''
+      Busqueda:'',
+      valueCarrera:''
     }
     this.getData = this.getData.bind(this);
     this.changeCarrera = this.changeCarrera.bind(this);
@@ -29,12 +30,17 @@ class Search extends React.Component {
    
   }
   async componentDidMount() {
+    var MiCarrera= await carrera.GetCarrera();
     this.setState({
         CarreraRamos:  await carrera.getAllCarrerasRamos(), 
+        valueCarrera:  MiCarrera,
+        Carreras_Ids:[MiCarrera.id]
     })
+    var value=this.state.CarreraRamos.filter(option => option.value === MiCarrera.value)
+    this.changeCarrera(value)
   }
   
-    //FILTRAR POR CARRERA
+   //FILTRAR POR CARRERA
     async changeCarrera(c) {
         var Ramos =[]; 
         var Carreras_Ids= [];
@@ -44,7 +50,7 @@ class Search extends React.Component {
                 Carreras_Ids=Carreras_Ids.concat(c[i].value)
             }   
         } 
-        this.setState({Ramos: Ramos, Carreras_Ids:Carreras_Ids}, () => {
+        this.setState({Ramos: Ramos, Carreras_Ids:Carreras_Ids,valueCarrera:c}, () => {
             this.getData();    
         });
     }
@@ -89,13 +95,13 @@ class Search extends React.Component {
     
 
     async getData(){
-        var Data= await archivo.FilterArchivo(
+      var Data= await archivo.FilterArchivo(
             this.state.Carreras_Ids,
             this.state.Ramos_Ids,
             this.state.Contenidos_Ids,
             this.state.Busqueda,
             )   
-        this.props.changeData(Data);
+      this.props.changeData(Data);
     }
     
 
@@ -104,7 +110,7 @@ class Search extends React.Component {
       <>    
           <Row>
             <Col md="12">
-            <div className="input-group input-group-alternative mb-4" style={{"boxShadow": "0 1px 3px rgba(196, 89, 22, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02)"}}>
+            <div className="input-group input-group-alternative mb-4" style={{"boxShadow": "rgba(196, 89, 22, 0.48) 0px 1px 3px, rgba(0, 0, 0, 0.02) 0px 1px 0px"}}>
                 <Input className="form-control" placeholder="Buscador de contenidos" onChange={(e)=> this.changeBusqueda(e.target.value)} onKeyDown={this.PressEnter} type="text"/>
                 <div className="input-group-prepend">
                   <button className="btn btn-warning" onClick={this.PressEnter} type="button">
@@ -119,6 +125,8 @@ class Search extends React.Component {
                 components={Constants.animatedComponents}
                 placeholder="Todas las carreras"
                 isMulti
+                clearable={true}
+                value={this.state.valueCarrera}
                 options={this.state.CarreraRamos}
                 styles={Constants.colourStyles}
                 onChange={this.changeCarrera}

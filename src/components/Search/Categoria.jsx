@@ -45,10 +45,11 @@ class Categoria extends React.Component {
     for (let i = 0; i < this.state.Categorias.length; i++) {   
       nav_item.push(      
         <NavItem key={this.state.Categorias[i].value} >
-          <NavLink key={this.state.Categorias[i].value} 
+          <NavLink key={this.state.Categorias[i].value}
+        
             aria-selected="true"
             className={classnames("mb-sm-3 mb-md-1 ", {
-              active: this.state.ActiveTabs.includes(this.state.Categorias[i].value),            
+              active: this.state.ActiveTabs.includes(this.state.Categorias[i].value),     
             })}
             onClick={e => this.toggleNavs(e, "iconTabs", this.state.Categorias[i].value)}
             href="#"

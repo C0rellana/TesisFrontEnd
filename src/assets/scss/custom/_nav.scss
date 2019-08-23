@@ -35,7 +35,7 @@
     .nav-link.active,
     .show > .nav-link {
         color: $nav-pills-link-active-color;
-        background-color: $nav-pills-link-active-bg;
+        background-color: #8965e0;
     }
 
     @include media-breakpoint-down(xs) {
