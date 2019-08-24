@@ -1,9 +1,12 @@
 import React from "react";
-import {Modal,Button,Input,Form,UncontrolledAlert}from "reactstrap";
+import {Modal,Button,Input,Form}from "reactstrap";
 import BaseSelect from "react-select";
 import * as Constants from 'services/Constantes'
 import FixRequiredSelect from "services/FixRequiredSelect";
 import {archivo} from "services/archivos"
+import { ToastContainer, toast,Flip } from 'react-toastify';
+
+
 class MiModal extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +14,6 @@ class MiModal extends React.Component {
       modal: true,
       denuncia:[],
       Descripcion:'',
-      success:false,
     };
     this.submit = this.submit.bind(this); 
   };
@@ -20,16 +22,10 @@ class MiModal extends React.Component {
     event.preventDefault();
     let respuesta= await archivo.Denuncia(this.props.idArchivo,this.state.denuncia.value,this.state.Descripcion);
     if(respuesta.status){
+      toast.info('Tu denuncia fue enviada');
       this.setState({
-        success: true
+        modal:false
       })
-
-      setTimeout( () => {
-        this.setState({
-          modal:false
-        })
-      }, 1000);
-
     }
   }
 
@@ -77,6 +73,16 @@ class MiModal extends React.Component {
       ]
       return (
       <>      
+        <ToastContainer transition={Flip}
+                    position= "top-right"
+                    autoClose= {3000}
+                    hideProgressBar= {false}
+                    closeOnClick= {true}
+                    pauseOnHover= {true}
+                    draggable= {true}
+                 
+        />
+
         <Modal
           className="modal-dialog-centered"
           isOpen={this.props.isOpen && this.state.modal}
@@ -98,10 +104,6 @@ class MiModal extends React.Component {
                     </button>
                 </div>
                 <div className="modal-body">
-                      <UncontrolledAlert color="success" fade={true} isOpen={this.state.success} toggle={this.onDismiss}>
-                                          <small>Tu denuncia fue enviada para revisión</small>        
-                        </UncontrolledAlert>
-                    
                         <Select 
                             placeholder="Tipo de Denuncia"
                             styles={Constants.colourStyles}    

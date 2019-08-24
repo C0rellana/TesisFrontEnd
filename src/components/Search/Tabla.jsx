@@ -5,7 +5,7 @@ import StarRatings from "react-star-ratings";
 import { archivo } from 'services/archivos';
 import * as Constants from 'services/Constantes'
 import Categoria from "./Categoria";
-import Modal from "./Modal";
+import DenunciaModal from "./DenunciaModal";
 import { ToastContainer, toast,Flip } from 'react-toastify';
 
 class Tabla extends React.Component {
@@ -216,7 +216,7 @@ class Tabla extends React.Component {
                     draggable= {true}
         />
 
-        <Modal isOpen={this.state.isOpen} idArchivo={this.state.idArchivo}/>
+        <DenunciaModal isOpen={this.state.isOpen} idArchivo={this.state.idArchivo}/>
 
           <div className="nav-wrapper">
             <Categoria changeCategoria={this.changeCategoria}/>
@@ -236,7 +236,7 @@ class Tabla extends React.Component {
 
   async changeRating(newRating, name) {
     var  Data= await archivo.NuevaValoracion(name,newRating)
-    alert(Data.message)
+    toast.info(Data.message);
   };
 
   async changeCategoria(Categorias_Ids){
