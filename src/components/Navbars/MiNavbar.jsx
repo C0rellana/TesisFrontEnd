@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { auth } from 'services/authenticacion';
 import  { withRouter } from 'react-router-dom'
 // reactstrap components
-import "assets/css/bannerU.css";
 import {
   UncontrolledCollapse,
   NavbarBrand,

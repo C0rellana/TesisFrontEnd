@@ -7,6 +7,7 @@ import * as Constants from 'services/Constantes'
 import Categoria from "./Categoria";
 import DenunciaModal from "./DenunciaModal";
 import { ToastContainer, toast,Flip } from 'react-toastify';
+import { css } from 'glamor';
 
 class Tabla extends React.Component {
   constructor(props) {
@@ -214,6 +215,7 @@ class Tabla extends React.Component {
                     closeOnClick= {true}
                     pauseOnHover= {true}
                     draggable= {true}
+                    
         />
 
         <DenunciaModal isOpen={this.state.isOpen} idArchivo={this.state.idArchivo}/>
@@ -236,7 +238,12 @@ class Tabla extends React.Component {
 
   async changeRating(newRating, name) {
     var  Data= await archivo.NuevaValoracion(name,newRating)
-    toast.info(Data.message);
+    toast.info(Data.message,{
+      className: css({
+        borderRadius:'10px',
+        top:'10em'
+      }),
+    });
   };
 
   async changeCategoria(Categorias_Ids){
@@ -260,7 +267,13 @@ class Tabla extends React.Component {
       window.location.assign(response.url);
     }
     else{
-      toast.error('Ooops.. ' + response.message);
+      toast.error('Ooops.. ' + response.message,{
+        className: css({
+          background: '#FB6340',
+          borderRadius:'10px',
+          top:'10em'
+        }),
+      });
     }
 
    };

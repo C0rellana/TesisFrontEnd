@@ -5,7 +5,7 @@ import * as Constants from 'services/Constantes'
 import FixRequiredSelect from "services/FixRequiredSelect";
 import {archivo} from "services/archivos"
 import { ToastContainer, toast,Flip } from 'react-toastify';
-
+import { css } from 'glamor';
 
 class MiModal extends React.Component {
   constructor(props) {
@@ -22,7 +22,12 @@ class MiModal extends React.Component {
     event.preventDefault();
     let respuesta= await archivo.Denuncia(this.props.idArchivo,this.state.denuncia.value,this.state.Descripcion);
     if(respuesta.status){
-      toast.info('Tu denuncia fue enviada');
+      toast.info('Tu denuncia fue enviada',{
+        className: css({
+          borderRadius:'10px',
+          top:'10em'
+        }),
+      });
       this.setState({
         modal:false
       })

@@ -2,7 +2,7 @@ import React from "react";
 import  { withRouter} from 'react-router-dom'
 import { auth } from 'services/authenticacion';
 import { ToastContainer, toast,Flip } from 'react-toastify';
-
+import { css } from 'glamor';
 // reactstrap components
 import {
   Button,
@@ -63,7 +63,12 @@ class Register extends React.Component {
   
     var data= await auth.register(object)
     if(data.success){
-      toast.success('Se ha registrado correctamente');
+      toast.success('Se ha registrado correctamente',{
+        className: css({
+          borderRadius:'10px',
+          top:'10em'
+        }),
+      });
       setTimeout(
         function() {
           this.props.handleClick()

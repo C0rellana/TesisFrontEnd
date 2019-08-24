@@ -11,6 +11,7 @@ import FixRequiredSelect from "services/FixRequiredSelect";
 import PacmanLoader from 'react-spinners/PacmanLoader';
 // reactstrap components
 import { ToastContainer,toast,Flip } from 'react-toastify';
+import { css } from 'glamor';
 
 import {
   Button,
@@ -59,7 +60,13 @@ class FormUpload extends React.Component {
    
 
     if(this.state.files.length<=0 && this.state.enlaces.length<=0){
-      toast.error('Oops... Debes ingresar al menos un archivo!');
+      toast.error('Oops... Debes ingresar al menos un archivo!',{
+        className: css({
+          background: '#FB6340',
+          borderRadius:'10px',
+          top:'10em'
+        }),
+      });
 
     }else{
       this.setState({isUploading:true})
@@ -75,7 +82,12 @@ class FormUpload extends React.Component {
       formData.append('enlace',this.state.enlace)
       archivo.Upload(formData).then(data=>{
         this.setState({isUploading:false})
-        toast.success('Muchas gracias por compartir!');
+        toast.success('Muchas gracias por compartir!',{
+          className: css({
+            borderRadius:'10px',
+            top:'10em'
+          }),
+        });
 
       })
     }  

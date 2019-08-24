@@ -7,7 +7,6 @@ import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss";
 import "assets/css/miscss.css";
 import 'react-toastify/dist/ReactToastify.css';
-
 import Home from "views/Home";
 import Auth from "views/Auth";
 import Search from "views/Search";
