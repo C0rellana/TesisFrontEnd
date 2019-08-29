@@ -44,13 +44,17 @@ class Auth extends React.Component {
                 </Col>
                 <Col lg="6">
                   <h3 className="display-3 text-white">
-                    Estudeo UCM 2019
+                    ESTUDEO UCM 
                   </h3>
-                  <p  className="lead text-white">
-                    descripcion descripcion descripcion descripcion
-                    descripcion descripcion descripcion descripcion descripcion descripcion
-                    descripcion descripcion descripcion descripcion descripcion descripcion
-                    descripcion descripcion descripcion descripcion descripcion descripcion 
+                  <p  className="lead text-white" align="justify">
+                  <small>
+                  Bienvendio!,  
+                  aquí podrás encontrar material para complementar tus estudios
+                  
+                  con personas que ya pasaron por lo mismo que tú, 
+                  recuerda que cualquier conocimiento que tengas plasmado de alguna forma 
+                  puede servirle a un compañero, comparte!!
+                  </small>
                   </p>
                 </Col>
               </Row>

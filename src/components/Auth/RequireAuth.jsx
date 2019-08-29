@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { auth } from 'services/authenticacion';
+import MiNavbar from 'components/Navbars/MiNavbar';
 
 export default function withAuth(ComponentToProtect,roles) {
   return class extends React.Component {
@@ -10,6 +11,7 @@ export default function withAuth(ComponentToProtect,roles) {
         loading: true,
         redirect: false,
         role: null,
+        user:'',
       };
     }
 
@@ -18,7 +20,7 @@ export default function withAuth(ComponentToProtect,roles) {
         auth.GetData()
         .then(res => {
           if (res.id!=null) {
-            this.setState({ loading: false,role: res.role });
+            this.setState({ loading: false,user: res });
           } else {
             this.setState({ loading: false, redirect: true });
           }
@@ -26,19 +28,20 @@ export default function withAuth(ComponentToProtect,roles) {
     }
 
     render() {  
-      const { loading, redirect,role } = this.state;
+      const { loading, redirect,user } = this.state;
       if (loading) {
         return null;
       }
       if (redirect) {
         return <Redirect to="/Auth" />;
       }
-      if (roles && roles.indexOf(role) === -1)  {
+      if (roles && roles.indexOf(user.role) === -1)  {
         return <Redirect to={{ pathname: '/'}} /> ;
       }
       return (
         <React.Fragment>
-          <ComponentToProtect {...this.props} />
+          <MiNavbar user={user} ></MiNavbar>
+          <ComponentToProtect user={user} {...this.props} />
         </React.Fragment>
       );
     }

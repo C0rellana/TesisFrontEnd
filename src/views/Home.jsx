@@ -1,6 +1,4 @@
 import React from "react";
-import MiNavbar from "components/Navbars/MiNavbar.jsx";
-import { auth } from 'services/authenticacion';
 import {
   Container,
   Row,
@@ -14,43 +12,64 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nombre: ""
+      nombre: "",
+      color:false,
     };
   }
   componentDidMount(){
-     auth.GetData().then(user=>{
-      this.setState({nombre:user.nombre.toUpperCase() }) 
-     });
+     this.setState({
+      color:this.props.user.color,
+      nombre: this.props.user.nombre,
+    })
+
   }
 
 
   render() {
     return (
       <>
-      
-       <MiNavbar></MiNavbar>
        <section className="section section-lg section-shaped" >
-          <div className="shape shape-style-1 bg-purple">
+          <div className="shape shape-style-1" style={{backgroundColor:this.state.color?this.state.color:"#8965e0"}}>
             <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
      
           <Container className="">
-            <Row className="row-grid justify-content-between align-items-center">
-              <Col lg="6">
-                <h3 className="display-3 text-white">
+          <h3 className="display-3 text-white">
                   Bienvenido  @{this.state.nombre}
                 </h3>
-                <p className="lead text-white">
+            <Row className="row-grid justify-content-between">
+              <Col lg="6">
+                <p className="lead text-white" align="justify">
                   <small>
                     <b>¿Que es Estudeo UCM?</b>
                     <br/>
-                    Es una plataforma creada con la intención de 
-                    ayudarnos entre nosotros a cursar nuestra carrera universitaria.
-                    <br/>
+                    Es una plataforma que tiene como objetivo apoyar la interaccion entre alumnos para 
+                    poder compartir material,
+                    en Estudeo ayudas, te ayudan!
+                    <br/><br/>
                     <b>¿Como lograr esto?</b>
                     <br/>
-                    Cada estudiante al cursar sus ramos obtiene una gran cantidad de material
-                    para..
+                    Cada vez que cursas una asignatura quedas con una gran cantidad de conocimiento en tus manos, 
+                    estos pueden ser de gran ayuda a tus compañeros.
+                    Mediante esta plataforma podrás compartir todos aquellos conocimientos, 
+                    así como acceder a los que alumnos de otras generaciones entregaron
+                    
+                  </small> 
+                </p>
+              </Col>
+              <Col lg="6">
+                <p className="lead text-white" align="justify">
+                  <small>
+                    <b>¿Necesitas ayuda?</b>
+                    <br/>
+                    Si tienes dudas con respecto a las funcionalidades de la plataforma puedes presionar el icono
+                    de ( <i className="fa fa-question fa-2x"></i> ) ubicado en la parte superior derecha.
+                    <br/>  <br/>
+                    <b>¿Deseas otro estilo?</b>
+                    <br/>
+                    Puedes modificar el color a tu gusto, solo tienes que presionar el icono de
+                    ( <i className="fa fa-cogs fa-2x"></i> ) ubicado en la parte superior derecha y elegir tu color favorito.
+                    
                     
                   </small> 
                 </p>

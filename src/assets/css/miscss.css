@@ -5,8 +5,51 @@
     cursor:pointer;
     overflow: hidden;
     outline:none;
-
 }
+
+/* imagen de perfil */
+.container2 {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  border-radius:50%;
+  border: 4px solid;
+  width: 150px;
+  height: 150px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.middle>input {
+  display: none;
+}
+
+
+
+.container2:hover .image {
+  opacity: 0.3;
+}
+
+.container2:hover .middle {
+  opacity: 1;
+}
+
+
 /*al centro*/
 #divElement{
   position: absolute;
@@ -39,7 +82,7 @@ html, body, #app, #app>div {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #8965e0;
+    /* background-color: #8965e0; */
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -57,7 +100,7 @@ html, body, #app, #app>div {
   }
   
   input:checked + .slider {
-    background-color:#8965e0;
+    /* background-color:#8965e0; */
   }
   
   input:focus + .slider {
@@ -125,7 +168,7 @@ html, body, #app, #app>div {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.60);
-    z-index: 1200;
+    z-index: 200;
   }
   .divcenter{
     position: fixed;
@@ -148,4 +191,14 @@ html, body, #app, #app>div {
   
   
 
- 
+/* color para tabla de notas */
+.color1{
+  background-color: #00000020;
+}
+.color2{
+  background-color: white;
+}
+.colorHeader{
+  border: 1px solid;
+  
+}

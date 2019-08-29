@@ -8,6 +8,7 @@ import Categoria from "./Categoria";
 import DenunciaModal from "./DenunciaModal";
 import { ToastContainer, toast,Flip } from 'react-toastify';
 import { css } from 'glamor';
+import { auth } from "services/authenticacion";
 
 class Tabla extends React.Component {
   constructor(props) {
@@ -16,14 +17,27 @@ class Tabla extends React.Component {
       isOpen: false, //para modal
       idArchivo:'',
       Categorias_Ids:[], //para filtro por categoria.
-      Data: []
+      Data: [],
+      IsPreferencias:false,
+      Preferencias:[]
     };
     this.changeRating = this.changeRating.bind(this); 
     this.changeCategoria = this.changeCategoria.bind(this); 
     this.togleDenuncia = this.togleDenuncia.bind(this); 
     this.downloadfile = this.downloadfile.bind(this); 
+    this.changeColumn = this.changeColumn.bind(this); 
     
   };
+
+
+  async componentDidMount(){
+    if(this.props.user.preferencias){
+      this.setState({
+        Preferencias: JSON.parse(this.props.user.preferencias),
+        IsPreferencias: true,
+      })
+    }
+  }
 
   componentDidUpdate(prevProps) {
     // Uso tipico (no olvides de comparar los props):
@@ -34,12 +48,14 @@ class Tabla extends React.Component {
 
 
   render() {  
-    var Data= this.state.Data;
-    const columns = [
+    var {Preferencias,IsPreferencias,Data} =this.state
+     
+    var columns = [
       {
         name: "nombre",
         label:"Nombre",    
         options: {
+          display:true, 
           filter: true,
           customBodyRender: (value,tableMeta) => (
             <small>
@@ -60,6 +76,7 @@ class Tabla extends React.Component {
         name: "descripcion",
         label:"Descripción",
         options: {
+          display:true, 
           width: 10,
           filter: true,
           customBodyRender: (value) => (    
@@ -97,6 +114,7 @@ class Tabla extends React.Component {
         name: "valoracion",
         label:"Valoración",
         options: {
+          display:true, 
           filter: false,
           customBodyRender: (value,tableMeta) => (
             <StarRatings
@@ -118,7 +136,7 @@ class Tabla extends React.Component {
         options: {
           filter: true,
           filterList: this.state.Categorias_Ids, //para filtrar por categoria
-          display: "false",
+          display: false,
            customBodyRender: (value,tableMeta) => (
              <small>{
               Data.length>0
@@ -132,7 +150,7 @@ class Tabla extends React.Component {
         name: "año",
         label:"Año",
         options: {
-          display: "false",
+          display: false,
           filter: false,
           customBodyRender: (value) => (
             <small>{value}</small>
@@ -143,6 +161,7 @@ class Tabla extends React.Component {
         name: "formato",
         label:"Formato",
         options: {
+          display:true, 
           filter: false,
           customBodyRender: (value) => (
             <small>{value}</small>
@@ -155,6 +174,7 @@ class Tabla extends React.Component {
         label:"Descargar",
         position:"center",
         options: {
+          display:true, 
           filter: false,
           sort: false,
           customBodyRender: (value,tableMeta) => (  
@@ -187,6 +207,7 @@ class Tabla extends React.Component {
       {
         name: "Denunciar",
         options: {
+          display:true, 
           filter: false,
           sort: false,
           customBodyRender: (value,tableMeta) => ( 
@@ -203,7 +224,58 @@ class Tabla extends React.Component {
         },
       },
     ];
+    
+    //si tengo preferencias => entonces modificarlas
+    if(IsPreferencias){
+      columns=columns.map(function callback(currentValue, i, a) {
+          currentValue.options.display=Preferencias[i].display
+          return currentValue
+      })
+    }  
 
+    //Definir opciones del datatable
+    const options = {
+      filterType: "dropdown",
+      responsive: "scroll",
+    
+      download: false,
+      rowsPerPageOptions: [10,15,20],
+      rowsPerPage: 10,
+      print: false,
+      viewColumns: true,
+      search:false,
+      filter:false,
+      selectableRows:"none",
+      textLabels: {
+        viewColumns: {
+          title: "Mostrar Columnas",
+          titleAria: "Mostrar/Ocultar columnas",
+        },
+        body: {
+          noMatch: "Modifique los filtros para mostrar resultados",
+          toolTip: "Ordenar",
+        },
+        pagination: {
+          next: "Siguiente",
+          previous: "Anterior",
+          rowsPerPage: "Resultados por pagina:",
+          displayRows: "of",
+        },
+        toolbar: {
+          viewColumns: "Ver columnas",
+          search: "Buscar",
+        },
+      },
+      onTableChange: (action, tableState) => {
+        switch (action) {
+          case "columnViewChange":
+            this.changeColumn(tableState.columns);
+            break;
+          default:
+            break;
+        }
+      }
+    }
     
     return (
       <>      
@@ -228,7 +300,7 @@ class Tabla extends React.Component {
               <MUIDataTable 
                 data={Data}
                 columns={columns}
-                options={Constants.options}  
+                options={options}
               />  
             </MuiThemeProvider>
           </div>
@@ -246,6 +318,17 @@ class Tabla extends React.Component {
     });
   };
 
+  changeColumn(columnas){
+    var CustomColumns = columnas.map(function callback(currentValue, i, a) {
+      return {"name":currentValue.name,"display":currentValue.display}
+    });
+    //se podria eliminar
+    this.setState({
+      Preferencias:CustomColumns
+    })
+    auth.FchangePreferencias(CustomColumns);
+      
+  }
   async changeCategoria(Categorias_Ids){
     this.setState({
       Categorias_Ids:Categorias_Ids

@@ -1,7 +1,6 @@
 
 import React from "react";
 import Select from 'react-select';
-import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import * as Constants from 'services/Constantes'
 import MUIDataTable from "mui-datatables";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
@@ -146,7 +145,6 @@ class Report extends React.Component {
               </div>
             </Modal>
 
-       <MiNavbar></MiNavbar>
         <Container>
             <Select
               closeMenuOnSelect={true}

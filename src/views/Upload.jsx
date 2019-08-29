@@ -1,7 +1,6 @@
 import React from "react";
 import UploadFile from "components/Upload/UploadFile";
 import Enlaces from "components/Upload/Enlaces";
-import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import BaseSelect from "react-select";
 import * as Constants from 'services/Constantes'
 import { archivo } from 'services/archivos';
@@ -117,8 +116,10 @@ class FormUpload extends React.Component {
 
 
   render() {
+    
+    var color=this.props.user.color;
 
-   const Select = props => (
+    const Select = props => (
     <FixRequiredSelect
       {...props}
       SelectComponent={BaseSelect}
@@ -126,7 +127,6 @@ class FormUpload extends React.Component {
   );
      return (
       <>
-          <MiNavbar></MiNavbar>
           <ToastContainer transition={Flip}
                   position= "top-right"
                   autoClose= {3000}
@@ -160,7 +160,7 @@ class FormUpload extends React.Component {
                           <div align="right">
                             <label className="switch">
                               <input type="checkbox" id="togBtn" onClick={this.togglechange}/>
-                              <div className="slider round">
+                              <div className="slider round" style={{backgroundColor: color?color:"#8965e0"}} >
                               <span className="on"><small>Enlace</small></span><span className="off"><small>Archivos</small></span>
                               </div>
                             </label>
@@ -223,13 +223,13 @@ class FormUpload extends React.Component {
                               </Row>
 
                               {this.state.enlace
-                                ?<Enlaces dataEnlaces = {this.dataEnlaces}/>
-                                :<UploadFile dataFromDropZone = {this.dataFromDropZone}/>
+                                ?<Enlaces dataEnlaces = {this.dataEnlaces} color= {color}/>
+                                :<UploadFile dataFromDropZone = {this.dataFromDropZone} color= {color}/>
                               }   
                                     
                             <div className="text-center"> 
                             
-                                <Button className="my-4" type="submit" style={{backgroundColor:"#8965e0", color:"#fff" }}> Compartir</Button>
+                                <Button className="my-4" type="submit" style={{backgroundColor:color?color:"#8965e0", color:"#fff" }}> Subir</Button>
                             </div>
                             </Form>
                       </CardBody>

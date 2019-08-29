@@ -110,7 +110,7 @@ class Search extends React.Component {
       <>    
           <Row>
             <Col md="12">
-            <div className="input-group input-group-alternative mb-4" style={{"boxShadow": "rgba(196, 89, 22, 0.48) 0px 1px 3px, rgba(0, 0, 0, 0.02) 0px 1px 0px"}}>
+            <div className="input-group input-group-alternative mb-4" style={{"zIndex": "0","boxShadow": "rgba(196, 89, 22, 0.48) 0px 1px 3px, rgba(0, 0, 0, 0.02) 0px 1px 0px"}}>
                 <Input className="form-control" placeholder="Buscador de contenidos" onChange={(e)=> this.changeBusqueda(e.target.value)} onKeyDown={this.PressEnter} type="text"/>
                 <div className="input-group-prepend">
                   <button className="btn btn-warning" onClick={this.PressEnter} type="button">

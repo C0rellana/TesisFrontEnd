@@ -1,4 +1,4 @@
-import {ApiLogin, ApiRegister,ApiGetData} from "./api";
+import {ApiLogin, ApiRegister,ApiGetData,ChangeColor,ApiAvatar,changePreferencias} from "./api";
 import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 
@@ -58,6 +58,41 @@ async function GetData() {
     });
 }
 
+async function FChangeColor(color) {
+    return this.ConfigHeader().then(async data=>{
+        const response = await axios.post(ChangeColor,{color:color},data);
+        return response.data;
+    }).catch((error)=>{
+        return error;
+    });
+}
+async function ChangeAvatar(object) {
+    return this.ConfigHeader().then(async data=>{
+        const response = await axios.post(ApiAvatar,object,data);
+        return response.data;
+    }).catch((error)=>{
+        return error;
+    });
+}
+
+async function GetAvatar() {
+    return this.ConfigHeader().then(async data=>{
+        const response = await axios.get(ApiAvatar,data);
+        return response.data;
+    }).catch((error)=>{
+        return error;
+    });
+}
+
+
+async function FchangePreferencias(preferencias) {
+    return this.ConfigHeader().then(async data=>{
+        const response = await axios.post(changePreferencias,{preferencias:preferencias},data);
+        return response.data;
+    }).catch((error)=>{
+        return error;
+    });
+}
 
 
 export const auth = {
@@ -67,5 +102,9 @@ export const auth = {
     currentUser: Usuario.asObservable(),
     get currentUserValue () { return Usuario.value },
     GetData,
-    ConfigHeader
+    ConfigHeader,
+    FChangeColor,
+    ChangeAvatar,
+    GetAvatar,
+    FchangePreferencias
 };

@@ -12,10 +12,11 @@ import Auth from "views/Auth";
 import Search from "views/Search";
 import Upload from "views/Upload.jsx";
 import Report from "views/Report";
+import Notas from "views/Notas";
 //Middelware
 import RequireAuth from "components/Auth/RequireAuth";
 
-var Nivel1=["USER","CGA","ADMIN"];
+var Nivel1=["USER","CGA","ADMIN","DIRECTOR"];
 var Nivel2=["CGA"];
 //var Nivel3=["ADMIN"];
 
@@ -32,6 +33,7 @@ ReactDOM.render(
      {/* Rutas con autentificacion  ROL : USER */}
       <Route exact path='/buscador' component={RequireAuth(Search,Nivel1)} />
       <Route exact path='/Upload' component={RequireAuth(Upload,Nivel1)} />
+      <Route exact path='/Notas' component={RequireAuth(Notas,Nivel1)} />
 
     {/* Rutas con autentificacion  ROL : MOD */}
     <Route exact path='/denuncias' component={RequireAuth(Report,Nivel2)} />

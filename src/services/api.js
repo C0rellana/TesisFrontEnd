@@ -5,6 +5,10 @@ const API="http://192.168.18.37:5000"
 const ApiLogin = API+"/login";
 const ApiRegister = API+"/register";
 const ApiGetData = API+"/GetData"
+const ChangeColor = API+"/ChangeColor"
+const ApiAvatar = API+"/Avatar"
+const changePreferencias = API+"/changePreferencias"
+
 
 //carreras
 const ApiCarreras= API+"/carreras";
@@ -25,12 +29,14 @@ const ApiDenuncia= API+"/DenunciarArchivo";
 //ramos
 const ApiRamos= API+"/ramos";
 
-
-
-
+//Api Notas
+const ApiNotas= API+"/notas";
 export {
     ApiRamos,
+    ApiNotas,
     ApiLogin,
+    ChangeColor,
+    ApiAvatar,
     ApiArchivos,
     ApiDownloadArchivo,
     ApiRegister,
@@ -41,5 +47,6 @@ export {
     ApiGetData,
     ApiValorarArchivo,
     ApiFilterArchivo,
-    ApiDenuncia
+    ApiDenuncia,
+    changePreferencias
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import MiNavbar from "components/Navbars/MiNavbar.jsx";
 import Tabla from "components/Search/Tabla";
 import Filtros from "components/Search/Filtros";
 import { Container, Row,Col} from "reactstrap";
@@ -22,14 +21,13 @@ class Search extends React.Component {
 
   render() {
       return (
-      <>
-       <MiNavbar></MiNavbar>     
-        <Container>
+      <> 
+        <Container> 
           <Filtros changeData={this.changeData}></Filtros>
           
           <Row className="justify-content-center">
               <Col lg="12">
-                <Tabla DATAFILTER = {this.state.Data}  ></Tabla>
+                <Tabla DATAFILTER = {this.state.Data} user={this.props.user} ></Tabla>
               </Col>
           </Row>
           
