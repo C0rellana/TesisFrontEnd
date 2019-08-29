@@ -65,11 +65,11 @@ class Home extends React.Component {
                     Si tienes dudas con respecto a las funcionalidades de la plataforma puedes presionar el icono
                     de ( <i className="fa fa-question fa-2x"></i> ) ubicado en la parte superior derecha.
                     <br/>  <br/>
-                    <b>¿Deseas otro estilo?</b>
+                    <b>¿Deseas otro color?</b>
                     <br/>
-                    Puedes modificar el color a tu gusto, solo tienes que presionar el icono de
+                    Puedes modificarlo a tu gusto, solo tienes que presionar el icono de
                     ( <i className="fa fa-cogs fa-2x"></i> ) ubicado en la parte superior derecha y elegir tu color favorito.
-                    
+                    Tambien puedes modificar tu foto de perfil presionando sobre ella y seleccionado la que mas te guste.
                     
                   </small> 
                 </p>

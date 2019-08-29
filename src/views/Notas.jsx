@@ -58,10 +58,13 @@ class Home extends React.Component {
                   pauseOnHover= {true}
                   draggable= {true}
                   />
-       <section className="section" >
-    
-            <Container className="">
-
+          <Container >
+            <p align="justify"> <b>
+                  En esta sección puedes calcular las notas faltantes para aprobar un ramo con cierta nota deseada.
+                  Puedes calcular hasta cinco notas siempre y cuando ingreses un mínimo de dos notas
+                  o calcular hasta cuatro notas ingresando simplemente una.</b> 
+            </p>
+            <br/>
             <Form onSubmit={this.Calcular} >
               <Row >
                 {this.state.Inputs.map((Inputs,index) =>
@@ -181,7 +184,6 @@ class Home extends React.Component {
               </Table>
             </div>
           </Container>
-        </section>
       </>
     );
   }

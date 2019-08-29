@@ -50,7 +50,6 @@ class Auth extends React.Component {
                   <small>
                   Bienvendio!,  
                   aquí podrás encontrar material para complementar tus estudios
-                  
                   con personas que ya pasaron por lo mismo que tú, 
                   recuerda que cualquier conocimiento que tengas plasmado de alguna forma 
                   puede servirle a un compañero, comparte!!

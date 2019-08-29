@@ -23,6 +23,11 @@ class Search extends React.Component {
       return (
       <> 
         <Container> 
+          <p align="justify"> <b>
+              Esta sección te permite buscar una gran cantidad de contenido para tus estudios, puedes personalizar 
+              la búsqueda a tu gusto modificando los siguientes filtros.</b> 
+            </p>
+            <br/>
           <Filtros changeData={this.changeData}></Filtros>
           
           <Row className="justify-content-center">
