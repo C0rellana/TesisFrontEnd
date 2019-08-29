@@ -200,20 +200,17 @@ class Home extends React.Component {
       }
       Axios.post(ApiNotas,{Notas:notas,Porcentajes:porcentajes,notadeseada:this.state.notadeseada}).then((resp)=>{
         console.log(resp.data)
-        if(resp.data.length>0){
-          this.setState({
-            data:resp.data
-          })
-        }
-        else{
-          toast.info('Oops... No se encontraron notas :( ',{
+        if(resp.data.length===0){
+          toast.info('Oops... No se puede alcanzar la nota deseada :( ',{
             className: css({
               borderRadius:'10px',
               top:'10em'
             }),
           });
-
         }
+        this.setState({
+          data:resp.data
+        })
    
       })
 

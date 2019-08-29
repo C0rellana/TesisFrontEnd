@@ -65,8 +65,10 @@ class MiNavbar extends React.Component {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   }
   changeColor(color, event){
-    auth.FChangeColor(color.hex)
-    window.location.reload();
+    auth.FChangeColor(color.hex).then(()=>{
+      window.location.reload();
+    })
+   
   }
 
   OpenAyuda(){
