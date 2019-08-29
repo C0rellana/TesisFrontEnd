@@ -3,13 +3,13 @@ import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 
 //Obtener session y token
-var session= sessionStorage.getItem('session');
+var session= localStorage.getItem('session');
 if(session==='undefined'){session=null;} 
 const Usuario = new BehaviorSubject(JSON.parse(session));
 
 
 async function ConfigHeader(){
-    var session= sessionStorage.getItem('session');
+    var session= localStorage.getItem('session');
     if(session==='undefined'){session=null;} 
     const Usuario = new BehaviorSubject(JSON.parse(session));
 
@@ -27,7 +27,7 @@ async function login(correo, password) {
         correo: correo,
         password: password,
     });
-    sessionStorage.setItem('session', JSON.stringify(response.data.data));
+    localStorage.setItem('session', JSON.stringify(response.data.data));
     Usuario.next(response.data.data);
     return response.data;
 }
@@ -44,7 +44,7 @@ async function register(object) {
 }
 
 function logout() {
-    sessionStorage.removeItem('session');
+    localStorage.removeItem('session');
     Usuario.next(null);
 }
 

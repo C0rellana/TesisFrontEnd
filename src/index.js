@@ -17,7 +17,7 @@ import Notas from "views/Notas";
 import RequireAuth from "components/Auth/RequireAuth";
 
 var Nivel1=["USER","CGA","ADMIN","DIRECTOR"];
-var Nivel2=["CGA"];
+var Nivel2=["CGA","ADMIN","DIRECTOR"];
 //var Nivel3=["ADMIN"];
 
 ReactDOM.render(

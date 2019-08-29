@@ -9,7 +9,7 @@ import {
   InputGroupAddon,InputGroupText
 } from "reactstrap";
 import {ApiNotas} from "services/api";
-
+import HashLoader from 'react-spinners/HashLoader';
 import Axios from "axios";
 import { Column,Table } from 'react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
@@ -21,6 +21,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isUploading:false,
       data:[],
       Inputs: [{porcentaje:'porcentaje-0', nota: 'nota-0',row:`row-0`},{porcentaje:'porcentaje-1', nota: 'nota-1',row:`row-1`}],
       notas: [{porcentaje:'',nota:''},{porcentaje:'',nota:''}],
@@ -58,6 +59,7 @@ class Home extends React.Component {
                   pauseOnHover= {true}
                   draggable= {true}
                   />
+
           <Container >
             <p align="justify"> <b>
                   En esta sección puedes calcular las notas faltantes para aprobar un ramo con cierta nota deseada.
@@ -128,14 +130,24 @@ class Home extends React.Component {
                 </Col>
                 <Col md="2"> 
                   <br></br>
-                  <button className="btn" style={{backgroundColor:color?color:"#8965e0" ,color:"#fff"}} type="submit">
-                    <b>Calcular</b> 
+                  <button className="btn" style={{backgroundColor:color?color:"#8965e0" ,width:"145px", color:"#fff"}} type="submit">
+                     {this.state.isUploading?
+                     <center>
+                    <HashLoader
+                      size={20}
+                      color="#fff"
+                      loading={this.state.isUploading}
+                    />   </center>
+
+                      : <b>Calcular</b>  }
                   </button>  
+                
                 </Col>
               </Row>
              
             </Form>
             <br/><br/>
+ 
             <div style={{"overflowX":"scroll","overflowY":"hidden",width:"1000",height:"auto"}}>
               <Table
                 
@@ -183,7 +195,7 @@ class Home extends React.Component {
                 />            
               </Table>
             </div>
-          </Container>
+         </Container>
       </>
     );
   }
@@ -196,12 +208,12 @@ class Home extends React.Component {
     var notas = [];
     var porcentajes=[]
     if(this.comprobarPorcentajes() && this.comprobarNotas() ){
+      this.setState({isUploading:true})
       for (let i = 0; i < N.length; i++) {
         notas.push(N[i].nota)
         porcentajes.push(N[i].porcentaje)
       }
       Axios.post(ApiNotas,{Notas:notas,Porcentajes:porcentajes,notadeseada:this.state.notadeseada}).then((resp)=>{
-        console.log(resp.data)
         if(resp.data.length===0){
           toast.info('Oops... No se puede alcanzar la nota deseada :( ',{
             className: css({
@@ -211,7 +223,8 @@ class Home extends React.Component {
           });
         }
         this.setState({
-          data:resp.data
+          data:resp.data,
+          isUploading:false
         })
    
       })
