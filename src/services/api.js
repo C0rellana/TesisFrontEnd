@@ -1,4 +1,5 @@
-const API="http://192.168.18.37:5000"
+//const API="http://192.168.18.37:5000"
+const API=process.env.REACT_APP_API;
 //default localhost
 
 //auth 
