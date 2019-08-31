@@ -7,12 +7,14 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import * as Constants from 'services/Constantes'
 import { ramo } from 'services/ramos';
+import { denuncias } from 'services/denuncias';
+import { ToastContainer,toast,Flip } from 'react-toastify';
+import { css } from 'glamor';
 import {
   Container,
   Button,
 
 } from "reactstrap";
-import Axios from "axios";
 
 
 class Report extends React.Component {
@@ -24,6 +26,9 @@ class Report extends React.Component {
       ramos: [],
       Ramoid:[]
     };
+ 
+    this.Aceptar = this.Aceptar.bind(this); 
+    this.Ignorar = this.Ignorar.bind(this); 
   }
 
    componentDidMount() {
@@ -33,9 +38,9 @@ class Report extends React.Component {
       })
     })
     
-    Axios.get("http://192.168.18.37:5000/denuncias").then((data)=>{
+    denuncias.GetDenuncias().then((data)=>{
       this.setState({
-        data :  data.data
+        data :  data
       })
     })
     
@@ -47,9 +52,49 @@ class Report extends React.Component {
 
   };
 
+  async Aceptar(id){
+    denuncias.Aceptar(id.value).then(resp=>{
+      if(resp.status){
+        toast.success("Acción completada con éxito",{
+          className: css({
+            borderRadius:'10px',
+            top:'10em'
+          }),
+        });
+      }else{
+        toast.error("No se pudo realizar la acción solicitada",{
+          className: css({
+            borderRadius:'10px',
+            top:'10em'
+          }),
+        });
+      }
+    })
+  }
+
+  async Ignorar(id){
+    denuncias.Ignorar(id.value).then(resp=>{
+      if(resp.status){
+        toast.success("Acción completada con éxito",{
+          className: css({
+            borderRadius:'10px',
+            top:'10em'
+          }),
+        });
+      }else{
+        toast.error("No se pudo realizar la acción solicitada",{
+          className: css({
+            borderRadius:'10px',
+            top:'10em'
+          }),
+        });
+      }
+    })
+
+  }
 
   render() {
-   
+
     var Data =this.state.data;
   
     const columns = [
@@ -82,7 +127,9 @@ class Report extends React.Component {
           sort: false,
           filter: false,
           customBodyRender: (value,tableMeta) => (  
-              Data[tableMeta.rowIndex].Denuncia.length
+            <center>
+              {Data[tableMeta.rowIndex].Denuncia.length}
+              </center>
            ) 
         },
         
@@ -99,14 +146,16 @@ class Report extends React.Component {
       },
       {
         name: "id",
-        label:"Eliminar",
+        label:"Aceptar",
         options: {
           sort: false,
           filter: false,
           display: true,
           customBodyRender: (value,tableMeta) => ( 
             <>
-           <Button color="danger" onClick={this.Eliminar(value)}> <i className="fa fa-trash"></i></Button>
+             <center>
+             <Button color="success" value={value} onClick={(e)=>this.Aceptar(e.target)}> <i className="fa fa-trash"></i></Button>
+             </center>
            </>
            ) 
         },
@@ -121,7 +170,9 @@ class Report extends React.Component {
           display: true,
           customBodyRender: (value,tableMeta) => ( 
             <>
-           <Button color="warning"  onClick={this.Ignorar(value)}> <i className="fa fa-eye-slash"></i></Button>
+            <center>
+           <Button color="warning" value={value}  onClick={(e)=>this.Ignorar(e.target)}> <i className="fa fa-eye-slash"></i></Button>
+           </center>
            </>
            ) 
         },
@@ -206,13 +257,27 @@ class Report extends React.Component {
     };
 
     return (
+
+
       <Container>
+                 
+         <ToastContainer transition={Flip}
+                position= "top-right"
+                autoClose= {3000}
+                hideProgressBar= {false}
+                closeOnClick= {true}
+                pauseOnHover= {true}
+                draggable= {true}
+              />
           <p align="justify"> <b>
               Esta sección contiene las denuncias realizadas por alumnos de la carrera a distintos archivos,
               puede ignorar estas denuncias o eliminar lógicamente el archivo.
               Para facilitar la tarea usted tiene la opción filtrar las denuncias por ramo.
+              </b>  </p>
               <hr/>
-              <b>ELIMINAR: </b> Esta opción eliminará lógicamente el archivo, dejándolo oculto para los estudiantes.
+              <p>
+              <b>
+              <b>ACEPTAR: </b> Esta opción eliminará lógicamente el archivo, dejándolo oculto para los estudiantes.
               <br/>
               <b>IGNORAR: </b> Esta opción ignorará y ocultara las denuncias realizadas.         
               </b> 

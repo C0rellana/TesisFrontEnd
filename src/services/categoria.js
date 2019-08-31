@@ -1,4 +1,9 @@
-import { ApiCategorias} from "./api";
+import { 
+    ApiCategorias,
+    ApiAgregarCategoria,
+    ApiEditarCategoria,
+    ApiEliminarCategoria,
+} from "./api";
 import React from "react";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
@@ -14,6 +19,29 @@ async function getAllCategoriasbyCarrera() {
     return response.data
 }
 
+async function GetCategorias() {
+    const response = await axios.get(ApiCategorias,await auth.ConfigHeader());
+       return response.data
+}
+
+async function AgregarCategoria(object) {
+    const response = await axios.post(ApiAgregarCategoria,object,await auth.ConfigHeader());
+       return response.data
+}
+async function EditarCategoria(object) {
+    const response = await axios.post(ApiEditarCategoria,object,await auth.ConfigHeader());
+       return response.data
+}
+async function EliminarCategoria(id) {
+    const response = await axios.post(ApiEliminarCategoria,{id:id},await auth.ConfigHeader());
+       return response.data
+}
+
+
 export const categoria = {
     getAllCategoriasbyCarrera,
+    GetCategorias,
+    EditarCategoria,
+    AgregarCategoria,
+    EliminarCategoria
 };

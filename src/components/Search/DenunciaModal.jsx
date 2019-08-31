@@ -3,10 +3,9 @@ import {Modal,Button,Input,Form}from "reactstrap";
 import BaseSelect from "react-select";
 import * as Constants from 'services/Constantes'
 import FixRequiredSelect from "services/FixRequiredSelect";
-import {archivo} from "services/archivos"
+import {denuncias} from "services/denuncias"
 import { ToastContainer, toast,Flip } from 'react-toastify';
 import { css } from 'glamor';
-
 class MiModal extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +19,7 @@ class MiModal extends React.Component {
 
   async submit(event){
     event.preventDefault();
-    let respuesta= await archivo.Denuncia(this.props.idArchivo,this.state.denuncia.value,this.state.Descripcion);
+    let respuesta= await denuncias.Denunciar(this.props.idArchivo,this.state.denuncia.value,this.state.Descripcion);
     if(respuesta.status){
       toast.info('Tu denuncia fue enviada',{
         className: css({
@@ -43,10 +42,12 @@ class MiModal extends React.Component {
     }
   }
 
-  componentDidMount(){
+  async componentDidMount(){
     this.setState({
-      modal:this.props.isOpen
+      modal:this.props.isOpen,
+      TiposDenuncias : await denuncias.GetTipos()
     })
+   
   }
   toggleModal(value,tableMeta){
     this.setState({
@@ -71,11 +72,6 @@ class MiModal extends React.Component {
         />
       );
 
-      const TiposDenuncias=[
-          {label:"Contenido inapropieado",value:1},
-          {label:"Derechos de Autor",value:2},
-          {label:"Otro",value:3},
-      ]
       return (
       <>      
         <ToastContainer transition={Flip}
@@ -112,7 +108,7 @@ class MiModal extends React.Component {
                         <Select 
                             placeholder="Tipo de Denuncia"
                             styles={Constants.colourStyles}    
-                            options={TiposDenuncias} 
+                            options={this.state.TiposDenuncias} 
                             isSearchable 
                             value={this.state.denuncia}
                             onChange={(e) => this.onChange(e)}   

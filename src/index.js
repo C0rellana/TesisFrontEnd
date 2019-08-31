@@ -13,6 +13,7 @@ import Search from "views/Search";
 import Upload from "views/Upload.jsx";
 import Report from "views/Report";
 import Notas from "views/Notas";
+import Categorias from "views/Categorias";
 //Middelware
 import RequireAuth from "components/Auth/RequireAuth";
 
@@ -37,7 +38,7 @@ ReactDOM.render(
 
     {/* Rutas con autentificacion  ROL : MOD */}
     <Route exact path='/denuncias' component={RequireAuth(Report,Nivel2)} />
-
+    <Route exact path='/categorias' component={RequireAuth(Categorias,Nivel2)} />
     {/* Cualquier otra ruta Redirect to / */}
     <Redirect to="/" />
     

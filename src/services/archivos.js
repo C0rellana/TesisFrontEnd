@@ -3,7 +3,6 @@ import {
     ApiDownloadArchivo,
     ApiValorarArchivo,
     ApiFilterArchivo,
-    ApiDenuncia
 } from "./api";
 
 import axios from 'axios';
@@ -36,11 +35,6 @@ async function DownloadArchivo(file) {
     return response.data;
 }
 
-async function Denuncia(archivo,tipo,descripcion) {
-    const response = await axios.post(ApiDenuncia, { archivo:archivo, tipo: tipo, descripcion:descripcion },  await auth.ConfigHeader());
-    return response.data;
-}
-
 async function NuevaValoracion(archivo,value) {
     const response = await axios.post(ApiValorarArchivo, { archivo:archivo, value: value },  await auth.ConfigHeader());
     return response.data;
@@ -52,6 +46,5 @@ export const archivo = {
     NuevaValoracion,
     DownloadArchivo,
     FilterArchivo,
-    Denuncia
 };
 

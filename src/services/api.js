@@ -19,16 +19,25 @@ const ApiGetCarrera= API+"/ApiGetCarrera";
 
 //categorias
 const ApiCategorias= API+"/categorias";
+const ApiEditarCategoria= API+"/editarcategoria";
+const ApiAgregarCategoria= API+"/agregarcategoria";
+const ApiEliminarCategoria= API+"/eliminarcategoria";
 
 //archivos
 const ApiArchivos= API+"/archivos";
 const ApiFilterArchivo= API+"/FilterArchivos";
 const ApiDownloadArchivo= API+"/GetArchivo";
 const ApiValorarArchivo= API+"/ValorarArchivo";
-const ApiDenuncia= API+"/DenunciarArchivo";
 
 //ramos
 const ApiRamos= API+"/ramos";
+
+//denuncias
+const ApiDenunciar= API+"/DenunciarArchivo";
+const ApiDenuncia= API+"/denuncias";
+const ApiAceptarDenuncia= API+"/AceptarDenuncia";
+const ApiIgnorarDenuncia= API+"/IgnorarDenuncia";
+const ApiGetTipos= API+"/GetTipos";
 
 //Api Notas
 const ApiNotas= API+"/notas";
@@ -48,6 +57,14 @@ export {
     ApiGetData,
     ApiValorarArchivo,
     ApiFilterArchivo,
+    ApiDenunciar,
     ApiDenuncia,
-    changePreferencias
+    ApiAceptarDenuncia,
+    ApiIgnorarDenuncia,
+    changePreferencias,
+    ApiGetTipos,
+    ApiEditarCategoria,
+    ApiAgregarCategoria,
+    ApiEliminarCategoria,
+
 }
