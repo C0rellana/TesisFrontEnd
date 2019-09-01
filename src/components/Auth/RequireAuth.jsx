@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { auth } from 'services/authenticacion';
 import MiNavbar from 'components/Navbars/MiNavbar';
-
+ 
 export default function withAuth(ComponentToProtect,roles) {
   return class extends React.Component {
     constructor() {
@@ -12,23 +12,32 @@ export default function withAuth(ComponentToProtect,roles) {
         redirect: false,
         role: null,
         user:'',
+        servidor:false,
       };
     }
 
     componentDidMount() {
         
         auth.GetData()
-        .then(res => {
-          if (res.id!=null) {
+        .then(res => {  
             this.setState({ loading: false,user: res });
-          } else {
-            this.setState({ loading: false, redirect: true });
+        }).catch(error=>{
+         
+          if(error.message==="Network Error"){
+            this.setState({ servidor: true });
           }
+          if(error.response.status===401){
+          this.setState({ loading: false, redirect: true });
+          }
+          
         });
     }
 
     render() {  
-      const { loading, redirect,user } = this.state;
+      const { loading, redirect,user,servidor } = this.state;
+      if(servidor){
+        return <Redirect to="/Auth" />;
+      }
       if (loading) {
         return null;
       }
@@ -42,6 +51,7 @@ export default function withAuth(ComponentToProtect,roles) {
         <React.Fragment>
           <MiNavbar user={user} ></MiNavbar>
           <ComponentToProtect user={user} {...this.props} />
+          <br></br> <br></br>
         </React.Fragment>
       );
     }

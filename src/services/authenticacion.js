@@ -54,9 +54,11 @@ async function GetData() {
        const response = await axios.get(ApiGetData, data);
         return response.data;   
     }).catch((error)=>{
-        return error;
+         throw error;
     });
 }
+
+
 
 async function FChangeColor(color) {
     return this.ConfigHeader().then(async data=>{

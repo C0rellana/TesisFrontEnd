@@ -30,8 +30,10 @@ class Login extends React.Component {
       message:'',
     };
      //Si esta logeado ->redirect
-    if (auth.currentUserValue) this.props.history.push("/");
-
+     auth.GetData().then(()=>{
+      this.props.history.push("/");
+     })
+  
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
     this.onDismiss = this.onDismiss.bind(this); 
