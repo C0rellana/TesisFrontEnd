@@ -20,8 +20,8 @@ async function Aceptar(id) {
     return response.data;
 }
 
-async function GetDenuncias() {
-    const response = await axios.get(ApiDenuncia,await auth.ConfigHeader());
+async function GetDenuncias(tipo) {
+    const response = await axios.post(ApiDenuncia,{tipo:tipo},await auth.ConfigHeader());
     return response.data;
 }
 

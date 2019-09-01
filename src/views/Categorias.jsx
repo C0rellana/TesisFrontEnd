@@ -121,17 +121,27 @@ class Categorias extends React.Component {
                                     Guardar Cambios
                                 </button>
                             </Col>
+                            <br></br>
+                            <Col md="12">   
+                                <div> 
+                                    <button onClick={this.Eliminar} className="btn btn-danger btn-block">ELIMINAR CATEGORIA </button>
+                                </div>
+                            </Col>
                         </Col>
                         <Col md="6">   
-                        <div align="right"> 
-                            <button onClick={this.Eliminar} className="btn btn-danger btn-round"><i className="fa fa-trash"></i></button>
-                        </div>
+                            <br></br>
+                            
                             <center>
                                 <ChromePicker 
                                 color={color.value?color.value:Categorias[i].color} 
                                 onChange={e=>this.setState({color:{id:Categorias[i].value,value:e.hex}})}
                                 />
-                            </center>     
+                            </center>  
+                         
+
+
+                     
+   
                         </Col>
                     
                     

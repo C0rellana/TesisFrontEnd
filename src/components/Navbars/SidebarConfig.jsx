@@ -4,7 +4,7 @@ import Sidebar from "react-sidebar";
 import { CirclePicker } from 'react-color';
 import { auth } from 'services/authenticacion';
 import {  Container} from "reactstrap";
-
+import SidebarAdmin from "./SidebarAdmin";
 class SidebarConfig extends React.Component {
     constructor(props) {
         super(props);
@@ -24,11 +24,6 @@ class SidebarConfig extends React.Component {
           })
           
         })
-    
-        this.setState({
-          color:this.props.color,
-          nombre: this.props.nombre,
-        })
       
       }
 
@@ -36,8 +31,11 @@ class SidebarConfig extends React.Component {
 
     
     var nombre=this.props.nombre;
+    var color = this.props.color;
     var isOpen= this.props.isOpen
     var Change= this.props.Change
+    var role = this.props.role
+ 
     return (
       <>
     {/* CONFIG SIDEBAR */}
@@ -46,29 +44,34 @@ class SidebarConfig extends React.Component {
           <Container>
             <br/> <br/> <br/> <br/> <br/>
             <div align="center">
-              <h4><b>@{nombre} </b></h4>
-               <div className="container2">
-                <img src={this.state.imagen} alt="" className="image" style={{"width":"150px"}}/>
-                 <div className="middle">
-                  <label htmlFor="file-input">
-                      <i className="fa fa-camera fa-2x"></i>
-                  </label>
-                  <input id="file-input" type="file" accept="image/*" onChange={this.changeImg}/>
+                <h4><b>@{nombre} </b></h4>
+                <div className="container2">
+                  <img src={this.state.imagen} alt="" className="image" style={{"width":"150px"}}/>
+                  <div className="middle">
+                    <label htmlFor="file-input">
+                        <i className="fa fa-camera fa-2x"></i>
+                    </label>
+                    <input id="file-input" type="file" accept="image/*" onChange={this.changeImg}/>
+                  </div> 
                 </div> 
-              </div> 
-              <hr></hr>  
-              <h4><b>Elige tu color preferido</b></h4>
-              <br/>   
-              <CirclePicker
-                triangle="hide"
-                width="350px" 
-                circleSize= {28}
-                circleSpacing={10}
-                onChange={ this.changeColor }
-              />
-              <hr></hr>
+                 {/* ADMIN SIDEBAR */}
+                 {(role==='ADMIN' || role==='DIRECTOR' || role==='CGA') &&
+ 
+                 <SidebarAdmin color={color} isOpen={this.state.sidebarAdminOpen} Change= {this.onSetSidebarAdminOpen}/>
+                }
+                <hr></hr>  
+                <h4><small><b>ELIGE TU COLOR FAVORITO</b></small></h4>
+                <br/>   
+                <CirclePicker
+                  triangle="hide"
+                  width="350px" 
+                  circleSize= {28}
+                  circleSpacing={10}
+                  onChange={ this.changeColor }
+                />
+               <hr></hr>
             </div>
-           
+
           </Container>  
       }
         open={isOpen}

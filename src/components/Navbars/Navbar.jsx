@@ -13,6 +13,7 @@ import {
     Container,
     Row,
     Col,
+  
   } from "reactstrap";
   
 class NavBar extends React.Component {
@@ -25,8 +26,6 @@ class NavBar extends React.Component {
     this.OpenAyuda = this.OpenAyuda.bind(this); 
 }
   render() {
-    var role=this.props.role;
-    console.log(role)
     return (
       <>
         <Ayuda isOpen={this.state.Ayuda} OpenAyuda={this.OpenAyuda}/>
@@ -83,18 +82,7 @@ class NavBar extends React.Component {
                 </Row>
             </div>
             <Nav className="align-items-lg-center ml-lg-auto" navbar>
-                {(role==='ADMIN' || role==='DIRECTOR' || role==='CGA') &&
-                    <NavItem>
-                        <NavLink
-                        className="nav-link-icon"
-                        onClick={(e) => this.props.ChangeAdmin(e)}
-                        href="/#"
-                        >         
-                        <small><b>ADMINISTRACION</b></small> 
-                        
-                        </NavLink>
-                    </NavItem>
-                }
+              
                 <NavItem>
                     <NavLink
                     className="nav-link-icon"

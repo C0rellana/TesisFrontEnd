@@ -1,46 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import  { withRouter } from 'react-router-dom'
-import Sidebar from "react-sidebar";
-
-// reactstrap components
-import {  Container} from "reactstrap";
 
 class SidebarAdmin extends React.Component {
 
   render() {
     var color=this.props.color;
-    var isOpen= this.props.isOpen
-    var Change= this.props.Change
     return (
       <>
-    {/* ADMIN SIDEBAR */}
-      <Sidebar
-        sidebar={
-          <Container>
-            <br/> <br/> <br/> <br/> <br/>
-            <div align="center">
-              <h6 style={{color:"#fff"}} ><b>PANEL DE ADMINISTRACIÓN</b></h6>
-              <hr></hr>         
+         
+              <hr></hr>  
+              <h4><small><b>PANEL DE ADMINISTRACIÓN</b></small></h4>
+            
+                    
               <Link to="/categorias">
-              <button className="btn btn-block btn-secondary">CATEGORIAS</button>
+              <button className="btn btn-block" style={{backgroundColor:color?color:"#8965e0", color:"white"}} ><small><b>CATEGORIAS</b></small></button>
               </Link>
               <br></br>
               <Link to="/denuncias">
-              <button className="btn btn-block btn-secondary" >DENUNCIAS</button>
+              <button className="btn btn-block" style={{backgroundColor:color?color:"#8965e0", color:"white"}} ><small><b>DENUNCIAS</b></small></button>
               </Link>
-             
-            </div>
-           
-          </Container>  
-      }
-        open={isOpen}
-        onSetOpen={Change}
-        styles={{ sidebar: { background: color?color:"#8965E0",color:"#fff", height:"auto", position: "fixed" } }}
-        pullRight={false}
-      >
-       <></>
-       </Sidebar>  
+              <br></br>
+              <Link to="/carrera">
+                <button className="btn btn-block" style={{backgroundColor:color?color:"#8965e0", color:"white"}} ><small><b>CARRERA</b></small></button>
+              </Link>
+              <br></br>
+              <Link to="/carrera">
+                <button className="btn btn-block" style={{backgroundColor:color?color:"#8965e0", color:"white"}} ><small><b>DASHBOARD</b></small></button>
+              </Link>
+              <br></br>
+
+        
+
       </>
     );
   }
