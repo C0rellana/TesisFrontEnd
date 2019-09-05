@@ -52,6 +52,7 @@
     "glamor": "^2.20.40",
     "headroom.js": "0.9.4",
     "immutable": "^4.0.0-rc.12",
+    "material-table": "^1.50.0",
     "moment": "2.24.0",
     "mui-datatables": "^2.9.0",
     "node-sass": "4.12.0",

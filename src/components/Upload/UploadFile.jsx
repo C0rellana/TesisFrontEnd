@@ -38,7 +38,7 @@ function UploadFile(props) {
           <div {...getRootProps({className: 'dropzone'})}>
             <input {...getInputProps()} />
             <br></br> 
-            <center><i className="fa fa-cloud-upload fa-5x" style={{color:props.color?props.color:'#8965e0'}} ></i></center>
+            <center><i className="fa fa-cloud-upload fa-5x" style={{color:props.user.color?props.user.color:'#8965e0'}} ></i></center>
             <center><strong>Arrastrar archivos aquí, o click para seleccionar</strong></center>
 
             <div align="center">   

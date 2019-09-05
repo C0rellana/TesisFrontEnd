@@ -3,68 +3,59 @@ const API=process.env.REACT_APP_API;
 //default localhost
 
 //auth 
-const ApiLogin = API+"/login";
-const ApiRegister = API+"/register";
-const ApiGetData = API+"/GetData"
-const ChangeColor = API+"/ChangeColor"
-const ApiAvatar = API+"/Avatar"
-const changePreferencias = API+"/changePreferencias"
+export const ApiLogin = API+"/login";
+export const ApiRegister = API+"/register";
+export const ApiGetData = API+"/GetData"
+export const ChangeColor = API+"/ChangeColor"
+export const ApiAvatar = API+"/Avatar"
+export const changePreferencias = API+"/changePreferencias"
 
 
 //carreras
-const ApiCarreras= API+"/carreras";
-const ApiCarrerasRamos= API+"/carrerasramos";
-const ApiGetCarrera= API+"/ApiGetCarrera";
+export const ApiCarreras= API+"/carreras";
+export const ApiCarrerasRamos= API+"/carrerasramos";
+export const ApiGetCarrera= API+"/ApiGetCarrera";
+export const ApiCarreraToken= API+"/CarreraToken";
 
+//admin
+export const ApiLogo= API+"/Logo";
 
 //categorias
-const ApiCategorias= API+"/categorias";
-const ApiEditarCategoria= API+"/editarcategoria";
-const ApiAgregarCategoria= API+"/agregarcategoria";
-const ApiEliminarCategoria= API+"/eliminarcategoria";
+export const ApiCategorias= API+"/categorias";
+export const ApiEditarCategoria= API+"/editarcategoria";
+export const ApiAgregarCategoria= API+"/agregarcategoria";
+export const ApiEliminarCategoria= API+"/eliminarcategoria";
 
 //archivos
-const ApiArchivos= API+"/archivos";
-const ApiFilterArchivo= API+"/FilterArchivos";
-const ApiDownloadArchivo= API+"/GetArchivo";
-const ApiValorarArchivo= API+"/ValorarArchivo";
+export const ApiArchivos= API+"/archivos";
+export const ApiFilterArchivo= API+"/FilterArchivos";
+export const ApiDownloadArchivo= API+"/GetArchivo";
+export const ApiValorarArchivo= API+"/ValorarArchivo";
 
 //ramos
-const ApiRamos= API+"/ramos";
+export const ApiRamos= API+"/ramos";
+export const ApiNuevoRamo= API+"/nuevoramo";
+export const ApiEditRamo= API+"/editramo";
+export const ApiDeleteRamo= API+"/deleteramo";
+export const ApiRamos2= API+"/ramos2";
+
+//contenidos
+export const ApiContenidos= API+"/contenidos";
+export const ApiNewContenido= API+"/newContenido";
+export const ApiEditContenido= API+"/editContenido";
+export const ApiDeletContenido= API+"/deleteContenido";
+
 
 //denuncias
-const ApiDenunciar= API+"/DenunciarArchivo";
-const ApiDenuncia= API+"/denuncias";
-const ApiAceptarDenuncia= API+"/AceptarDenuncia";
-const ApiIgnorarDenuncia= API+"/IgnorarDenuncia";
-const ApiGetTipos= API+"/GetTipos";
+export const ApiDenunciar= API+"/DenunciarArchivo";
+export const ApiDenuncia= API+"/denuncias";
+export const ApiAceptarDenuncia= API+"/AceptarDenuncia";
+export const ApiIgnorarDenuncia= API+"/IgnorarDenuncia";
+export const ApiGetTipos= API+"/GetTipos";
 
 //Api Notas
-const ApiNotas= API+"/notas";
-export {
-    ApiRamos,
-    ApiNotas,
-    ApiLogin,
-    ChangeColor,
-    ApiAvatar,
-    ApiArchivos,
-    ApiDownloadArchivo,
-    ApiRegister,
-    ApiCarreras,
-    ApiGetCarrera,
-    ApiCategorias,
-    ApiCarrerasRamos,
-    ApiGetData,
-    ApiValorarArchivo,
-    ApiFilterArchivo,
-    ApiDenunciar,
-    ApiDenuncia,
-    ApiAceptarDenuncia,
-    ApiIgnorarDenuncia,
-    changePreferencias,
-    ApiGetTipos,
-    ApiEditarCategoria,
-    ApiAgregarCategoria,
-    ApiEliminarCategoria,
+export const ApiNotas= API+"/notas";
 
-}
+//Api Roles
+export const ApiRoles= API+"/roles";
+export const ApiEditRole= API+"/editRole";

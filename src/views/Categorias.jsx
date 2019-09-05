@@ -11,7 +11,7 @@ import {
 import { Input } from "@material-ui/core";
 import { ToastContainer,toast,Flip } from 'react-toastify';
 import { css } from 'glamor';
-
+import Breadcrumbs from "components/Navbars/Breadcrumbs"
 
 class Categorias extends React.Component {
     constructor(props) {
@@ -46,7 +46,6 @@ class Categorias extends React.Component {
         let nav_item =[],TabPanes=[];
         var {Categorias,color,nombre,descripcion}= this.state;
         var user_color= this.props.user.color;
-
 
         for (let i = 0; i < Categorias.length; i++) {   
             nav_item.push(      
@@ -151,7 +150,8 @@ class Categorias extends React.Component {
         }
            
         return (
-
+            <>
+            <Breadcrumbs page="CATEGORIAS" {...this.props} />
              <Row className="justify-content-center">
                 <Col lg="12"> 
                     <ToastContainer transition={Flip}
@@ -269,6 +269,7 @@ class Categorias extends React.Component {
                     </Container>
                 </Col>
         </Row>
+         </>
          );
     }
 

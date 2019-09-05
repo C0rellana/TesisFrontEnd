@@ -1,8 +1,9 @@
 import React from "react";
 import  { withRouter } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import { auth } from 'services/authenticacion';
 import Ayuda from "./Ayuda";
+import { admin} from 'services/admin';
+
 import {
     UncontrolledCollapse,
     NavbarBrand,
@@ -12,8 +13,7 @@ import {
     Navbar,
     Container,
     Row,
-    Col,
-  
+    Col, 
   } from "reactstrap";
   
 class NavBar extends React.Component {
@@ -21,24 +21,39 @@ class NavBar extends React.Component {
         super(props);
         this.state = {
             Ayuda:false,
+            imagen:''
         };
-    this.logout = this.logout.bind(this); 
     this.OpenAyuda = this.OpenAyuda.bind(this); 
 }
+componentDidMount(){
+
+    admin.GetLogo().then(data=>{
+        var imagen='';
+        if(data.success){
+          imagen = "data:image/png;base64,"+ btoa(String.fromCharCode.apply(null, data.data.data));
+        }
+        this.setState({
+          imagen: imagen
+        })
+        
+      })
+}
   render() {
+      var color=this.props.user.color;
+      var textColor=this.props.textColor;
     return (
       <>
         <Ayuda isOpen={this.state.Ayuda} OpenAyuda={this.OpenAyuda}/>
         <Navbar
             className="navbar-transparent"
-            style={{backgroundColor:this.props.color?this.props.color:"#8965e0"}}
+            style={{backgroundColor:color?color:"#8965e0"}}
             expand="lg"
         >
-        <Container>
+        <Container >
         <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
                 <img
                 alt="..."
-                src={require("assets/img/brand/argon-react-white.png")}
+                src={this.state.imagen}
                 />
             </NavbarBrand>
             <button
@@ -60,7 +75,7 @@ class NavBar extends React.Component {
                     <Link to="/">
                     <img
                         alt="..."
-                        src={require("assets/img/brand/argon-react-black.png")}
+                        src={this.state.imagen}
                     />
                     </Link>
                 </Col>
@@ -87,6 +102,7 @@ class NavBar extends React.Component {
                     <NavLink
                     className="nav-link-icon"
                     href="/buscador"
+                    style={{color:textColor}}
                     >
                         <small><b>BUSCADOR</b></small>
                     </NavLink>
@@ -95,6 +111,7 @@ class NavBar extends React.Component {
                     <NavLink
                     className="nav-link-icon"
                     href="/upload"
+                    style={{color:textColor}}
                     >
                         <small><b>COMPARTIR</b></small>
                     </NavLink>
@@ -103,23 +120,15 @@ class NavBar extends React.Component {
                     <NavLink
                     className="nav-link-icon"
                     href="/notas"
+                    style={{color:textColor}}
                     >
                         <small><b>CALCULAR NOTA</b></small>
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink
-                    className="nav-link-icon"
-                    href="#"
-                    onClick={this.logout}
-                    >
-                        <small><b>SALIR</b></small>
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
                         className="nav-link-icon"
-                    
+                        style={{color:textColor}}
                         onClick={() => this.OpenAyuda()}
                         id="tooltip333589074"
                         target="_blank"
@@ -132,6 +141,7 @@ class NavBar extends React.Component {
                     </NavItem>
                 <NavItem>
                     <NavLink
+                        style={{color:textColor}}
                         className="nav-link-icon"
                         onClick={() => this.props.ChangeConfig(true)}
                         id="tooltip333589074"
@@ -142,8 +152,8 @@ class NavBar extends React.Component {
                         <small><b>CONFIGURACIÓN</b></small> 
                         </span>
                     </NavLink>
-                    </NavItem>
-                </Nav>
+                </NavItem> 
+            </Nav>
 
             </UncontrolledCollapse>
         </Container>
@@ -153,10 +163,6 @@ class NavBar extends React.Component {
     );
   }
 
-  logout() {
-    auth.logout()
-    this.props.history.push("/Auth");
-  }
   OpenAyuda(){
     this.setState({ Ayuda: !this.state.Ayuda });
   }

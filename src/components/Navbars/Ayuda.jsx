@@ -1,11 +1,11 @@
 import React from "react";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
- 
+import  { withRouter} from 'react-router-dom'
+
 const images = [
   'https://i.imgur.com/E6ne8wK.png',
   'https://i.imgur.com/fp1uVW1.png',
-  
 
 ];
 
@@ -13,10 +13,21 @@ class Ayuda extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      photoIndex: 0,
+      photoIndex: 0, //modificar este valor
     };
   };
 
+  componentDidMount(){
+    const {pathname} = this.props.location;
+    switch(pathname) {
+      case '/buscador':
+        return this.setState({photoIndex:0});
+      case '/upload':
+        return this.setState({photoIndex:1});
+      default:
+        return "";
+    }   
+  }
 
   render() {  
   
@@ -52,5 +63,5 @@ class Ayuda extends React.Component {
   }
 }
 
-export default Ayuda;
+export default withRouter(Ayuda)
 

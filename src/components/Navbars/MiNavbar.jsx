@@ -8,31 +8,19 @@ class MiNavbar extends React.Component {
     super(props);
     this.state = {
       sidebarOpen: false,
-      color:false,
-      nombre:'',
     };
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
 
   }
 
-  componentDidMount(){
-    this.setState({
-      color:this.props.user.color,
-      nombre: this.props.user.nombre,
-      role:this.props.user.role,
-    })
-  }
-
-
   render() {
-    var {color,nombre,role}=this.state;
     return (
       <>
       
       {/* CONFIG SIDEBAR */}
-       <SidebarConfig color={color} role={role}  nombre={nombre} isOpen={this.state.sidebarOpen} Change= {this.onSetSidebarOpen}/>
-      {/* NACBAR */}
-      <Navbar color={color}  ChangeConfig= {this.onSetSidebarOpen}></Navbar>
+       <SidebarConfig  {...this.props}  isOpen={this.state.sidebarOpen} Change= {this.onSetSidebarOpen}/>
+      {/* NAVBAR */}
+      <Navbar {...this.props}  ChangeConfig= {this.onSetSidebarOpen}></Navbar>
       </>
     );
   }

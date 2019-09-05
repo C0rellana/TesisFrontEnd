@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { auth } from 'services/authenticacion';
 import MiNavbar from 'components/Navbars/MiNavbar';
- 
+import {InvertirColor} from 'services/Constantes'
 export default function withAuth(ComponentToProtect,roles) {
   return class extends React.Component {
     constructor() {
@@ -22,7 +22,8 @@ export default function withAuth(ComponentToProtect,roles) {
         .then(res => {  
             this.setState({ loading: false,user: res });
         }).catch(error=>{
-         
+          
+          console.log(error)
           if(error.message==="Network Error"){
             this.setState({ servidor: true });
           }
@@ -47,10 +48,12 @@ export default function withAuth(ComponentToProtect,roles) {
       if (roles && roles.indexOf(user.role) === -1)  {
         return <Redirect to={{ pathname: '/'}} /> ;
       }
+      var textColor=InvertirColor(user.color?user.color:"#8965E0");
+            
       return (
         <React.Fragment>
-          <MiNavbar user={user} ></MiNavbar>
-          <ComponentToProtect user={user} {...this.props} />
+          <MiNavbar user={user} textColor={textColor} ></MiNavbar>
+          <ComponentToProtect  user={user} textColor={textColor}  {...this.props} />
           <br></br> <br></br>
         </React.Fragment>
       );

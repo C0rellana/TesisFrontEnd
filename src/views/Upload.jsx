@@ -11,6 +11,7 @@ import PacmanLoader from 'react-spinners/PacmanLoader';
 // reactstrap components
 import { ToastContainer,toast,Flip } from 'react-toastify';
 import { css } from 'glamor';
+import Breadcrumbs from "components/Navbars/Breadcrumbs"
 
 import {
   Button,
@@ -116,8 +117,9 @@ class FormUpload extends React.Component {
 
 
   render() {
-    
+
     var color=this.props.user.color;
+    var textColor= this.props.textColor;
 
     const Select = props => (
     <FixRequiredSelect
@@ -126,7 +128,8 @@ class FormUpload extends React.Component {
     />
   );
      return (
-      <>
+      <>  
+          <Breadcrumbs page="COMPARTIR" {...this.props} color={color}/>
           <ToastContainer transition={Flip}
                   position= "top-right"
                   autoClose= {3000}
@@ -165,8 +168,8 @@ class FormUpload extends React.Component {
                           <div align="right">
                             <label className="switch">
                               <input type="checkbox" id="togBtn" onClick={this.togglechange}/>
-                              <div className="slider round" style={{backgroundColor: color?color:"#8965e0"}} >
-                              <span className="on"><small>Enlace</small></span><span className="off"><small>Archivos</small></span>
+                              <div className="slider round" style={{backgroundColor: color?color:"#º122q", color:textColor}} >
+                              <span style={{color:textColor}} className="on"><small>Enlace</small></span><span style={{color:textColor}} className="off"><small>Archivos</small></span>
                               </div>
                             </label>
                           </div>
@@ -228,13 +231,13 @@ class FormUpload extends React.Component {
                               </Row>
 
                               {this.state.enlace
-                                ?<Enlaces dataEnlaces = {this.dataEnlaces} color= {color}/>
-                                :<UploadFile dataFromDropZone = {this.dataFromDropZone} color= {color}/>
+                                ?<Enlaces dataEnlaces = {this.dataEnlaces} {...this.props}/>
+                                :<UploadFile dataFromDropZone = {this.dataFromDropZone} {...this.props}/>
                               }   
                                     
                             <div className="text-center"> 
                             
-                                <Button className="my-4" type="submit" style={{backgroundColor:color?color:"#8965e0", color:"#fff" }}> Subir</Button>
+                                <Button className="my-4" type="submit" style={{backgroundColor:color?color:"#8965e0", color:textColor }}> Subir</Button>
                             </div>
                             </Form>
                       </CardBody>

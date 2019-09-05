@@ -5,41 +5,28 @@ import {
   Col
 } from "reactstrap";
 
-
-
 class Home extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      nombre: "",
-      color:false,
-    };
-  }
-  componentDidMount(){
-     this.setState({
-      color:this.props.user.color,
-      nombre: this.props.user.nombre,
-    })
-
-  }
-
-
   render() {
+    var {color,nombre} = this.props.user;
+    var textColor= this.props.textColor;
     return (
-      <>
+      <>         
+
        <section className="section section-lg section-shaped" >
-          <div className="shape shape-style-1" style={{backgroundColor:this.state.color?this.state.color:"#8965e0"}}>
+          <div className="shape shape-style-1" style={{backgroundColor:color?color:"#8965e0"}}>
             <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
-     
-          <Container className="">
-          <h3 className="display-3 text-white">
-                  Bienvenido  @{this.state.nombre}
+
+          <Container style={{color:textColor}}>
+    
+  
+          <h3 className="display-3" style={{color:textColor}}>
+                  Bienvenido  @{nombre}
                 </h3>
             <Row className="row-grid justify-content-between">
               <Col lg="6">
-                <p className="lead text-white" align="justify">
+                <p className="lead" align="justify">
                   <small>
                     <b>¿Que es Estudeo UCM?</b>
                     <br/>
@@ -58,7 +45,7 @@ class Home extends React.Component {
                 </p>
               </Col>
               <Col lg="6">
-                <p className="lead text-white" align="justify">
+                <p className="lead" align="justify">
                   <small>
                     <b>¿Necesitas ayuda?</b>
                     <br/>

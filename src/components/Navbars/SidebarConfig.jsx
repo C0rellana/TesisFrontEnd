@@ -3,14 +3,16 @@ import  { withRouter } from 'react-router-dom'
 import Sidebar from "react-sidebar";
 import { CirclePicker } from 'react-color';
 import { auth } from 'services/authenticacion';
-import {  Container} from "reactstrap";
+import {  Container,Button} from "reactstrap";
 import SidebarAdmin from "./SidebarAdmin";
+
 class SidebarConfig extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
         this.changeColor = this.changeColor.bind(this);
         this.changeImg = this.changeImg.bind(this);
+        this.logout = this.logout.bind(this); 
     }
     componentDidMount(){
 
@@ -21,21 +23,15 @@ class SidebarConfig extends React.Component {
           }
           this.setState({
             imagen: imagen
-          })
-          
+          })         
         })
-      
       }
 
   render() {
+    var {nombre,role}=this.props.user;
+    var {isOpen,Change} = this.props;
 
-    
-    var nombre=this.props.nombre;
-    var color = this.props.color;
-    var isOpen= this.props.isOpen
-    var Change= this.props.Change
-    var role = this.props.role
- 
+
     return (
       <>
     {/* CONFIG SIDEBAR */}
@@ -44,7 +40,10 @@ class SidebarConfig extends React.Component {
           <Container>
             <br/> <br/> <br/> <br/> <br/>
             <div align="center">
-                <h4><b>@{nombre} </b></h4>
+                <h4>
+                  <b>{nombre}</b>
+                  <small><small>{" ("+role+")"}</small></small>
+                  </h4>
                 <div className="container2">
                   <img src={this.state.imagen} alt="" className="image" style={{"width":"150px"}}/>
                   <div className="middle">
@@ -57,19 +56,24 @@ class SidebarConfig extends React.Component {
                  {/* ADMIN SIDEBAR */}
                  {(role==='ADMIN' || role==='DIRECTOR' || role==='CGA') &&
  
-                 <SidebarAdmin color={color} isOpen={this.state.sidebarAdminOpen} Change= {this.onSetSidebarAdminOpen}/>
+                 <SidebarAdmin {...this.props} isOpen={this.state.sidebarAdminOpen} Change= {this.onSetSidebarAdminOpen}/>
                 }
                 <hr></hr>  
-                <h4><small><b>ELIGE TU COLOR FAVORITO</b></small></h4>
+                <h4><small><b>PERSONALIZA A TU GUSTO</b></small></h4>
                 <br/>   
                 <CirclePicker
-                  triangle="hide"
-                  width="350px" 
-                  circleSize= {28}
-                  circleSpacing={10}
+                  //colors= {["#F44336","#E91E63","#9C27B0","#3F51B5","#4CAF50","#FF9800","#FF5722","#000"]}
+                  circleSize= {23}
+                  circleSpacing={8}
                   onChange={ this.changeColor }
                 />
+                <br></br>   
+            
                <hr></hr>
+                 <Button block color="danger" onClick={this.logout}>
+                    CERRAR SESIÓN
+                </Button>
+                <hr></hr>
             </div>
 
           </Container>  
@@ -99,6 +103,11 @@ class SidebarConfig extends React.Component {
     this.setState({
       imagen: URL.createObjectURL(file)
     })
+  }
+
+  logout() {
+    auth.logout()
+    this.props.history.push("/Auth");
   }
 
 

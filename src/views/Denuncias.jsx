@@ -5,6 +5,8 @@ import SelectRamo from "components/denuncia/Select"
 import { denuncias } from 'services/denuncias';
 import { ToastContainer,toast,Flip } from 'react-toastify';
 import { css } from 'glamor';
+import Breadcrumbs from "components/Navbars/Breadcrumbs"
+
 // reactstrap components
 import {
   Card,
@@ -36,9 +38,9 @@ class Navs extends React.Component {
 
 
   render() {
-   
     return (
       <>
+       <Breadcrumbs page="DENUNCIAS"  {...this.props} />
         <Row className="justify-content-center">
           <Col lg="12">
           <ToastContainer 

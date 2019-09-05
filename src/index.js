@@ -15,6 +15,7 @@ import Report from "views/Denuncias";
 import Notas from "views/Notas";
 import Categorias from "views/Categorias";
 import Carrera from "views/Carrera";
+import Config from "views/Config";
 
 //Middelware
 import RequireAuth from "components/Auth/RequireAuth";
@@ -42,6 +43,7 @@ ReactDOM.render(
     <Route exact path='/denuncias' component={RequireAuth(Report,Nivel2)} />
     <Route exact path='/categorias' component={RequireAuth(Categorias,Nivel2)} />
     <Route exact path='/carrera' component={RequireAuth(Carrera,Nivel2)} />
+    <Route exact path='/config' component={RequireAuth(Config,Nivel2)} />
     {/* Cualquier otra ruta Redirect to / */}
     <Redirect to="/" />
     

@@ -1,4 +1,4 @@
-import { ApiCarreras,ApiCarrerasRamos,ApiGetCarrera} from "./api";
+import { ApiCarreras,ApiCarrerasRamos,ApiGetCarrera,ApiCarreraToken} from "./api";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
@@ -24,9 +24,15 @@ async function GetCarrera() {
   return response.data;
 
 }
+async function CarreraToken(token) {
+  const response = await axios.post(ApiCarreraToken,{token:token}, await auth.ConfigHeader());
+  return response.data;
+
+}
 
 export const carrera = {
     getAllCarrerasRamos,
     getAllCarreras,
-    GetCarrera
+    GetCarrera,
+    CarreraToken
 };

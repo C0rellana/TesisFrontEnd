@@ -19,7 +19,7 @@ class Tabla extends React.Component {
       Categorias_Ids:[], //para filtro por categoria.
       Data: [],
       IsPreferencias:false,
-      Preferencias:[]
+      Preferencias:{}
     };
     this.changeRating = this.changeRating.bind(this); 
     this.changeCategoria = this.changeCategoria.bind(this); 

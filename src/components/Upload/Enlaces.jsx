@@ -46,7 +46,7 @@ class Enlaces extends React.Component {
 
 
     render() {
-      var color = this.props.color;
+      var color = this.props.user.color;
       return (
           <section>
             
@@ -65,7 +65,7 @@ class Enlaces extends React.Component {
                 )}   
 
               <div align="right">
-              <button className="miboton"  onClick={() => this.appendInput()}>
+              <button className="miboton" onClick={() => this.appendInput()}>
                   <i style={{color:color?color:"#8965e0"}} className="fa fa-plus-circle fa-2x"></i>
               </button>
               <button className="miboton" onClick={() => this.removeInput()}>

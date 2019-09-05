@@ -15,7 +15,7 @@ import { Column,Table } from 'react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 import { ToastContainer,toast,Flip } from 'react-toastify';
 import { css } from 'glamor';
-
+import Breadcrumbs from "components/Navbars/Breadcrumbs"
 class Home extends React.Component {
 
   constructor(props) {
@@ -39,6 +39,7 @@ class Home extends React.Component {
 
   render() {
     var color = this.props.user.color;
+    var textColor= this.props.textColor;
     var data = this.state.data
     var len=this.state.notas.length;
     var c1=1000/len, c2=1000/len,c6=1000/len;
@@ -51,6 +52,9 @@ class Home extends React.Component {
     return (
         
       <>
+
+        <Breadcrumbs page="CALCULAR NOTAS" {...this.props} />
+        
         <ToastContainer transition={Flip}
                   position= "top-right"
                   autoClose= {3000}
@@ -130,12 +134,12 @@ class Home extends React.Component {
                 </Col>
                 <Col md="2"> 
                   <br></br>
-                  <button className="btn" style={{backgroundColor:color?color:"#8965e0" ,width:"145px", color:"#fff"}} type="submit">
+                  <button className="btn" style={{backgroundColor:color?color:"#8965e0" ,width:"145px", color:textColor}} type="submit">
                      {this.state.isUploading?
                      <center>
                     <HashLoader
                       size={20}
-                      color="#fff"
+                      color={textColor}
                       loading={this.state.isUploading}
                     />   </center>
 
