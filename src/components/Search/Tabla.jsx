@@ -179,7 +179,8 @@ class Tabla extends React.Component {
           sort: false,
           customBodyRender: (value,tableMeta) => (  
             <div align="center">
-            {Data.length>0
+            {
+              Data.length>0
               ?Data[tableMeta.rowIndex].isEnlace?
                 <a
                   className="miboton"
@@ -191,10 +192,11 @@ class Tabla extends React.Component {
                   <i  className="fa fa-link" ></i>
                 </a>   
                 :
+               
                 <button
                   className="miboton"
                   type="button"
-                  onClick={() => this.downloadfile(value)}    
+                  onClick={() => this.downloadfile(value,Data[tableMeta.rowIndex].id,Data[tableMeta.rowIndex].ubicacion)}    
                 >
                   <i  className="ni ni-cloud-download-95" ></i>
                 </button> 
@@ -344,22 +346,33 @@ class Tabla extends React.Component {
 
   }
     
-  async downloadfile(value){
-    var response=await archivo.DownloadArchivo(value)
-    if(response.success){
-      window.location.assign(response.url);
+  async downloadfile(value,id,ubicacion){
+    if(ubicacion==="GOOGLE"){
+      var url= 'https://drive.google.com/uc?id='+value+'&export=download';
+      window.location.assign(url);
     }
-    else{
-      toast.error('Ooops.. ' + response.message,{
-        className: css({
-          background: '#FB6340',
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+    if(ubicacion==="DROPBOX"){
+      var response=await archivo.DownloadArchivo(value,id)
+
+      window.location.assign(response);
+
+      if(response.success){
+        window.location.assign(response.url);
+      }
+      else{
+        toast.error('Ooops.. ' + response.message,{
+          className: css({
+            background: '#FB6340',
+            borderRadius:'10px',
+            top:'10em'
+          }),
+        });
+      }
     }
 
-   };
+
+
+  };
  
 
 }

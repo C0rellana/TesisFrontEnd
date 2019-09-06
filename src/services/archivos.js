@@ -30,8 +30,8 @@ async function FilterArchivo(carrera,ramo,contenido,busqueda) {
     return response.data;
 }
 
-async function DownloadArchivo(file) {
-    const response = await axios.post(ApiDownloadArchivo, { nombre: file },  await auth.ConfigHeader());
+async function DownloadArchivo(file,id) {
+    const response = await axios.post(ApiDownloadArchivo, { nombre: file,id:id },  await auth.ConfigHeader());
     return response.data;
 }
 
