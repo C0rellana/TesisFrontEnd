@@ -28,9 +28,13 @@ export const ApiEliminarCategoria= API+"/eliminarcategoria";
 
 //archivos
 export const ApiArchivos= API+"/archivos";
+export const ApiMisArchivos= API+"/misarchivos";
 export const ApiFilterArchivo= API+"/FilterArchivos";
 export const ApiDownloadArchivo= API+"/GetArchivo";
 export const ApiValorarArchivo= API+"/ValorarArchivo";
+export const ApiEditArchivo= API+"/EditArchivo";
+export const ApiDeleteArchivo= API+"/DeleteArchivo";
+
 
 //ramos
 export const ApiRamos= API+"/ramos";

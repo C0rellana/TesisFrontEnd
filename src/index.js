@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch,Redirect} from "react-router-dom";
-
+//recursos
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss";
 import "assets/css/miscss.css";
 import 'react-toastify/dist/ReactToastify.css';
+//Vistas
 import Home from "views/Home";
 import Auth from "views/Auth";
 import Search from "views/Search";
@@ -16,6 +17,7 @@ import Notas from "views/Notas";
 import Categorias from "views/Categorias";
 import Carrera from "views/Carrera";
 import Config from "views/Config";
+import Archivos from "views/Archivos"
 
 //Middelware
 import RequireAuth from "components/Auth/RequireAuth";
@@ -38,6 +40,7 @@ ReactDOM.render(
       <Route exact path='/buscador' component={RequireAuth(Search,Nivel1)} />
       <Route exact path='/Upload' component={RequireAuth(Upload,Nivel1)} />
       <Route exact path='/Notas' component={RequireAuth(Notas,Nivel1)} />
+      <Route exact path='/Archivos' component={RequireAuth(Archivos,Nivel1)} />
 
     {/* Rutas con autentificacion  ROL :["ADMIN","CGA","DIRECTOR"]*/}
     <Route exact path='/denuncias' component={RequireAuth(Report,Nivel2)} />

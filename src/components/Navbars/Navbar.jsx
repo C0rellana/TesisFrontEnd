@@ -119,6 +119,15 @@ componentDidMount(){
                 <NavItem>
                     <NavLink
                     className="nav-link-icon"
+                    href="/archivos"
+                    style={{color:textColor}}
+                    >
+                        <small><b>MIS ARCHIVOS</b></small>
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                    className="nav-link-icon"
                     href="/notas"
                     style={{color:textColor}}
                     >
