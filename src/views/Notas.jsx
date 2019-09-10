@@ -8,9 +8,9 @@ import {
   InputGroup,
   InputGroupAddon,InputGroupText
 } from "reactstrap";
-import {ApiNotas} from "services/api";
+
 import HashLoader from 'react-spinners/HashLoader';
-import Axios from "axios";
+import  {Calcular} from "services/nota";
 import { Column,Table } from 'react-virtualized';
 import 'react-virtualized/styles.css'; // only needs to be imported once
 import { ToastContainer,toast,Flip } from 'react-toastify';
@@ -217,8 +217,9 @@ class Home extends React.Component {
         notas.push(N[i].nota)
         porcentajes.push(N[i].porcentaje)
       }
-      Axios.post(ApiNotas,{Notas:notas,Porcentajes:porcentajes,notadeseada:this.state.notadeseada}).then((resp)=>{
-        if(resp.data.length===0){
+      
+      Calcular({Notas:notas,Porcentajes:porcentajes,notadeseada:this.state.notadeseada}).then((data)=>{
+        if(data.length===0){
           toast.info('Oops... No se puede alcanzar la nota deseada :( ',{
             className: css({
               borderRadius:'10px',
@@ -227,7 +228,7 @@ class Home extends React.Component {
           });
         }
         this.setState({
-          data:resp.data,
+          data:data,
           isUploading:false
         })
    

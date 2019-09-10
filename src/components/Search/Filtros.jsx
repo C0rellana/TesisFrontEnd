@@ -76,10 +76,10 @@ class Search extends React.Component {
         var Contenidos_Ids =[];            
         if(c){
             for (var i = 0; i < c.length; i++) {
-                this.Contenidos_Ids=Contenidos_Ids.concat(c[i].value)
+                Contenidos_Ids=Contenidos_Ids.concat(c[i].value)
             }  
         }  
-        this.setState({Contenidos_Ids:this.Contenidos_Ids}, () => {
+        this.setState({Contenidos_Ids:Contenidos_Ids}, () => {
             this.getData();    
         });
     }
@@ -88,7 +88,7 @@ class Search extends React.Component {
           
     }
     PressEnter(event){
-      if(event.key==='Enter'){
+      if(event.key==='Enter' || event==="click"){
         this.getData();  
       }
     }
@@ -113,7 +113,7 @@ class Search extends React.Component {
             <div className="input-group input-group-alternative mb-4" style={{"zIndex": "0","boxShadow": "rgba(196, 89, 22, 0.48) 0px 1px 3px, rgba(0, 0, 0, 0.02) 0px 1px 0px"}}>
                 <Input className="form-control" placeholder="Buscador de contenidos" onChange={(e)=> this.changeBusqueda(e.target.value)} onKeyDown={this.PressEnter} type="text"/>
                 <div className="input-group-prepend">
-                  <button className="btn btn-warning" onClick={this.PressEnter} type="button">
+                  <button className="btn btn-warning" onClick={e=>this.PressEnter("click")} type="button">
                   <i className="fa fa-search" ></i>
               </button>
                 </div>
