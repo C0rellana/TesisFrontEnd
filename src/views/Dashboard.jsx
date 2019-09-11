@@ -1,23 +1,13 @@
 import React from "react";
 import {
-  Container,
   Col,Row
 } from "reactstrap";
 import Report from 'powerbi-report-component';
 
 
-class NULL extends React.Component {
+class Dashboard extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-  componentDidMount(){
-  }
-
-
-  render() {
+    render() {
     return (
       <>
 
@@ -27,15 +17,15 @@ class NULL extends React.Component {
               <Report embedType="report"
                 tokenType="Embed"
                 accessToken="none"
-                embedUrl="https://app.powerbi.com/view?r=eyJrIjoiMDY0YjI3YzYtMjQ2OC00ZmFhLTg2MTUtYWE2MzVkNGNhYmMxIiwidCI6IjFmMmIwZTJjLTM4NjctNGMyYi04NjJmLWYwMTBhZGY1ODA1NiIsImMiOjR9"
-                embedId="cd9db8ab-d20d-480d-ac1f-f4209487f77e"
+                embedUrl="https://app.powerbi.com/view?r=eyJrIjoiZjNkOGZiOTAtNzI0OS00NTg2LWJhYzEtZWE1MjBlNDNhYTI2IiwidCI6IjFmMmIwZTJjLTM4NjctNGMyYi04NjJmLWYwMTBhZGY1ODA1NiIsImMiOjR9"
+                embedId="19e7cdf1-02fd-4d99-99c0-19addba3be60/"
                 extraSettings={{
                   filterPaneEnabled: false,
                   navContentPaneEnabled: false,
                 }}
                 permissions="All"
                 style={{
-                  height:'900px',
+                  height:'700px',
                   border: '0',
                   padding: '20px',
                   background: '#eee'
@@ -71,4 +61,4 @@ class NULL extends React.Component {
   }
 }
 
-export default NULL;
+export default Dashboard;

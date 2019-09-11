@@ -347,14 +347,8 @@ class Tabla extends React.Component {
   }
     
   async downloadfile(value,id,ubicacion){
-    if(ubicacion==="GOOGLE"){
-      var url= 'https://drive.google.com/uc?id='+value+'&export=download';
-      window.location.assign(url);
-    }
-    if(ubicacion==="DROPBOX"){
-      var response=await archivo.DownloadArchivo(value,id)
 
-      window.location.assign(response);
+      var response=await archivo.DownloadArchivo(value,id)
 
       if(response.success){
         window.location.assign(response.url);
@@ -372,7 +366,7 @@ class Tabla extends React.Component {
 
 
 
-  };
+
  
 
 }

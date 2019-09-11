@@ -34,7 +34,7 @@ class SidebarAdmin extends React.Component {
                 <>
                 <br></br>
                 {/* SOLO DIRECTOR */}
-                <Link to="/carrera">
+                <Link to="/dashboard">
                   <button className="btn btn-block" style={{backgroundColor:color?color:"#8965e0", color:textColor}} ><small><b>DASHBOARD</b></small></button>
                 </Link>
                 </>

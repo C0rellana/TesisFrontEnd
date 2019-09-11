@@ -80,6 +80,7 @@
     "@types/googlemaps": "3.30.19",
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.8.16",
+    "powerbi-report-component": "^1.3.0",
     "typescript": "3.4.5"
   }
 }

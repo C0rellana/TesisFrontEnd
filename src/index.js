@@ -18,7 +18,7 @@ import Categorias from "views/Categorias";
 import Carrera from "views/Carrera";
 import Config from "views/Config";
 import Archivos from "views/Archivos"
-
+import Dashboard from "views/Dashboard"
 //Middelware
 import RequireAuth from "components/Auth/RequireAuth";
 
@@ -47,6 +47,7 @@ ReactDOM.render(
     <Route exact path='/categorias' component={RequireAuth(Categorias,Nivel2)} />
     <Route exact path='/carrera' component={RequireAuth(Carrera,Nivel2)} />
     <Route exact path='/config' component={RequireAuth(Config,Nivel2)} />
+    <Route exact path='/dashboard' component={RequireAuth(Dashboard,Nivel2)} />
     {/* Cualquier otra ruta Redirect to / */}
     <Redirect to="/" />
     
