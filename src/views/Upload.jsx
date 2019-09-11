@@ -173,6 +173,7 @@ class FormUpload extends React.Component {
                               </div>
                             </label>
                           </div>
+                          
                           <Form onSubmit={this.handleSubmit}>
                             <Row>
                                 <Col md="6">
