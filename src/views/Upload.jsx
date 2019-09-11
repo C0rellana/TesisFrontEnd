@@ -168,7 +168,7 @@ class FormUpload extends React.Component {
                           <div align="right">
                             <label className="switch">
                               <input type="checkbox" id="togBtn" onClick={this.togglechange}/>
-                              <div className="slider round" style={{backgroundColor: color?color:"#º122q", color:textColor}} >
+                              <div className="slider round" style={{backgroundColor: color?color:"#8965E0", color:textColor}} >
                               <span style={{color:textColor}} className="on"><small>Enlace</small></span><span style={{color:textColor}} className="off"><small>Archivos</small></span>
                               </div>
                             </label>
