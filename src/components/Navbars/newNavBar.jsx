@@ -59,7 +59,7 @@ class NavBar extends React.Component {
                 
                 <Toolbar className="container"  style={{display:"block"}}>
                         <a href="/">
-                            <img src={this.state.imagen} alt="logo" style={{paddingTop:"15px"}} hreonclif="/" />
+                            <img src={this.state.imagen} alt="logo" height="50px" style={{paddingTop:"15px"}} hreonclif="/" />
                         </a>
                         <Hidden mdUp>
                             <IconButton
