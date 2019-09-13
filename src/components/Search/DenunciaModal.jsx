@@ -4,8 +4,7 @@ import BaseSelect from "react-select";
 import * as Constants from 'services/Constantes'
 import FixRequiredSelect from "services/FixRequiredSelect";
 import {denuncias} from "services/denuncias"
-import { ToastContainer, toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import { toast} from 'react-toastify';
 class MiModal extends React.Component {
   constructor(props) {
     super(props);
@@ -21,12 +20,7 @@ class MiModal extends React.Component {
     event.preventDefault();
     let respuesta= await denuncias.Denunciar(this.props.idArchivo,this.state.denuncia.value,this.state.Descripcion);
     if(respuesta.status){
-      toast.info('Tu denuncia fue enviada',{
-        className: css({
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+      toast.info('Tu denuncia fue enviada');
       this.setState({
         modal:false
       })
@@ -74,16 +68,7 @@ class MiModal extends React.Component {
 
       return (
       <>      
-        <ToastContainer transition={Flip}
-                    position= "top-right"
-                    autoClose= {3000}
-                    hideProgressBar= {false}
-                    closeOnClick= {true}
-                    pauseOnHover= {true}
-                    draggable= {true}
-                 
-        />
-
+      
         <Modal
           className="modal-dialog-centered"
           isOpen={this.props.isOpen && this.state.modal}

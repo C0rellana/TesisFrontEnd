@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { auth } from 'services/authenticacion';
 import MiNavbar from 'components/Navbars/MiNavbar';
 import {InvertirColor} from 'services/Constantes'
+import { ToastContainer,Slide } from 'react-toastify';
 export default function withAuth(ComponentToProtect,roles) {
   return class extends React.Component {
     constructor() {
@@ -10,7 +11,6 @@ export default function withAuth(ComponentToProtect,roles) {
       this.state = {
         loading: true,
         redirect: false,
-        role: null,
         user:'',
         servidor:false,
       };
@@ -22,13 +22,12 @@ export default function withAuth(ComponentToProtect,roles) {
         .then(res => {  
             this.setState({ loading: false,user: res });
         }).catch(error=>{
-          
-          console.log(error)
+            
           if(error.message==="Network Error"){
             this.setState({ servidor: true });
           }
           if(error.response.status===401){
-          this.setState({ loading: false, redirect: true });
+            this.setState({ loading: false, redirect: true });
           }
           
         });
@@ -52,7 +51,13 @@ export default function withAuth(ComponentToProtect,roles) {
             
       return (
         <React.Fragment>
+           <ToastContainer 
+            transition={Slide}
+            position= "top-right"
+            autoClose={2000}
+          />
           <MiNavbar user={user} textColor={textColor} ></MiNavbar>
+          <br></br>
           <ComponentToProtect  user={user} textColor={textColor}  {...this.props} />
           <br></br> <br></br>
         </React.Fragment>

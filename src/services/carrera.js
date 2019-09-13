@@ -15,7 +15,7 @@ async function getAllCarrerasRamos() {
 
 }
 async function getAllCarreras() {
-    const response = await axios.get(ApiCarreras,  await auth.ConfigHeader());
+    const response = await axios.get(ApiCarreras);
     return response.data;
 }
 

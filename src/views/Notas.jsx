@@ -1,4 +1,10 @@
 import React from "react";
+import HashLoader from 'react-spinners/HashLoader';
+import  {Calcular} from "services/nota";
+import { Column,Table } from 'react-virtualized';
+import 'react-virtualized/styles.css'; // only needs to be imported once
+import {toast } from 'react-toastify';
+import Breadcrumbs from "components/Navbars/Breadcrumbs"
 import {
   Container,
   Row,
@@ -9,13 +15,7 @@ import {
   InputGroupAddon,InputGroupText
 } from "reactstrap";
 
-import HashLoader from 'react-spinners/HashLoader';
-import  {Calcular} from "services/nota";
-import { Column,Table } from 'react-virtualized';
-import 'react-virtualized/styles.css'; // only needs to be imported once
-import { ToastContainer,toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
-import Breadcrumbs from "components/Navbars/Breadcrumbs"
+
 class Home extends React.Component {
 
   constructor(props) {
@@ -54,16 +54,6 @@ class Home extends React.Component {
       <>
 
         <Breadcrumbs page="CALCULAR NOTAS" {...this.props} />
-        
-        <ToastContainer transition={Flip}
-                  position= "top-right"
-                  autoClose= {3000}
-                  hideProgressBar= {false}
-                  closeOnClick= {true}
-                  pauseOnHover= {true}
-                  draggable= {true}
-                  />
-
           <Container >
             <p align="justify"> <b>
                   En esta sección puedes calcular las notas faltantes para aprobar un ramo con cierta nota deseada.
@@ -220,12 +210,7 @@ class Home extends React.Component {
       
       Calcular({Notas:notas,Porcentajes:porcentajes,notadeseada:this.state.notadeseada}).then((data)=>{
         if(data.length===0){
-          toast.info('Oops... No se puede alcanzar la nota deseada :( ',{
-            className: css({
-              borderRadius:'10px',
-              top:'10em'
-            }),
-          });
+          toast.info('Oops... No se puede alcanzar la nota deseada :( ');
         }
         this.setState({
           data:data,
@@ -283,13 +268,7 @@ class Home extends React.Component {
     if(sum===100){
       return true;
     }
-    toast.error('Oops... La suma de los porcentajes debe ser 100!',{
-      className: css({
-        background: '#FB6340',
-        borderRadius:'10px',
-        top:'10em'
-      }),
-    });
+    toast.error('Oops... La suma de los porcentajes debe ser 100!');
     return false;
   }
   //COMPROBAR NOTAS
@@ -301,23 +280,11 @@ class Home extends React.Component {
     var cont = 0;
 
     if(isNaN(notadeseada)){
-      toast.error('Oops... La nota deseada debe ser valida!',{
-        className: css({
-          background: '#FB6340',
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+      toast.error('Oops... La nota deseada debe ser valida!');
       return false;
     }
     if(notadeseada<40 || notadeseada>70){
-      toast.error('Oops... La nota deseada debe estar entre 40-70!',{
-        className: css({
-          background: '#FB6340',
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+      toast.error('Oops... La nota deseada debe estar entre 40-70!');
       return false;
     }
 
@@ -334,33 +301,15 @@ class Home extends React.Component {
       }
     }
     if(cont<1 ){
-      toast.error('Oops... Debe ingresar al menos una nota!',{
-        className: css({
-          background: '#FB6340',
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+      toast.error('Oops... Debe ingresar al menos una nota!');
       return false;
     }
   if(notas.length===5 && cont<2 ){
-    toast.error('Oops... Debe ingresar al menos 2 notas!',{
-      className: css({
-        background: '#FB6340',
-        borderRadius:'10px',
-        top:'10em'
-      }),
-    });
+    toast.error('Oops... Debe ingresar al menos 2 notas!');
     return false;
   }
     if(!bool){
-    toast.error('Oops... Verifique las notas ingresadas!',{
-      className: css({
-        background: '#FB6340',
-        borderRadius:'10px',
-        top:'10em'
-      }),
-    });
+    toast.error('Oops... Verifique las notas ingresadas!');
     }
     return bool;
   }

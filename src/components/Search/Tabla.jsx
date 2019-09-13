@@ -5,10 +5,11 @@ import StarRatings from "react-star-ratings";
 import { archivo } from 'services/archivos';
 import * as Constants from 'services/Constantes'
 import Categoria from "./Categoria";
+import CategoriaMobile from "./CategoriaMobile";
 import DenunciaModal from "./DenunciaModal";
-import { ToastContainer, toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import {toast} from 'react-toastify';
 import { auth } from "services/authenticacion";
+import Hidden from '@material-ui/core/Hidden';
 
 class Tabla extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Tabla extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps,prevState) {
     // Uso tipico (no olvides de comparar los props):
     if (JSON.stringify(this.props.DATAFILTER )!== JSON.stringify(prevProps.DATAFILTER )) {
         this.setState({Data: this.props.DATAFILTER});
@@ -282,20 +283,16 @@ class Tabla extends React.Component {
     return (
       <>      
      
-      <ToastContainer transition={Flip}
-                    position= "top-right"
-                    autoClose= {3000}
-                    hideProgressBar= {false}
-                    closeOnClick= {true}
-                    pauseOnHover= {true}
-                    draggable= {true}
-                    
-        />
-
-        <DenunciaModal isOpen={this.state.isOpen} idArchivo={this.state.idArchivo}/>
+     
+          <DenunciaModal isOpen={this.state.isOpen} idArchivo={this.state.idArchivo}/>
 
           <div className="nav-wrapper">
-            <Categoria changeCategoria={this.changeCategoria}/>
+            <Hidden smDown>
+              <Categoria changeCategoria={this.changeCategoria}/>
+            </Hidden>
+            <Hidden mdUp>
+              <CategoriaMobile changeCategoria={this.changeCategoria}/>
+            </Hidden>
           </div>
           <div  style= {{  position: "sticky"}}> 
           <MuiThemeProvider theme={Constants.getMuiTheme()}>
@@ -311,24 +308,23 @@ class Tabla extends React.Component {
   }
 
   async changeRating(newRating, name) {
-    var  Data= await archivo.NuevaValoracion(name,newRating)
-    toast.info(Data.message,{
-      className: css({
-        borderRadius:'10px',
-        top:'10em'
-      }),
-    });
+    var Data= await archivo.NuevaValoracion(name,newRating)
+    if(Data.status){
+      toast.info(Data.message);
+    }
+   
   };
 
   changeColumn(columnas){
     var CustomColumns = columnas.map(function callback(currentValue, i, a) {
       return {"name":currentValue.name,"display":currentValue.display}
     });
-    //se podria eliminar
-    this.setState({
-      Preferencias:CustomColumns
-    })
-    auth.FchangePreferencias(CustomColumns);
+      auth.FchangePreferencias(CustomColumns).then(()=>{
+      this.setState({
+        IsPreferencias:true,
+        Preferencias:CustomColumns
+      })
+    });
       
   }
   async changeCategoria(Categorias_Ids){
@@ -337,7 +333,7 @@ class Tabla extends React.Component {
     })
   };
 
-  togleDenuncia(value,tableMeta){
+  togleDenuncia(tableMeta){
     var id= this.state.Data[tableMeta.rowIndex].id;
     this.setState({
       isOpen:true,
@@ -346,7 +342,7 @@ class Tabla extends React.Component {
 
   }
     
-  async downloadfile(value,id,ubicacion){
+  async downloadfile(value,id){
 
       var response=await archivo.DownloadArchivo(value,id)
 
@@ -354,14 +350,8 @@ class Tabla extends React.Component {
         window.location.assign(response.url);
       }
       else{
-        toast.error('Ooops.. ' + response.message,{
-          className: css({
-            background: '#FB6340',
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
-      }
+        toast.error('Ooops.. ' + response.message);
+        }
     }
 
 

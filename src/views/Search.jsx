@@ -3,6 +3,7 @@ import Tabla from "components/Search/Tabla";
 import Filtros from "components/Search/Filtros";
 import { Container, Row,Col} from "reactstrap";
 import Breadcrumbs from "components/Navbars/Breadcrumbs"
+
 class Search extends React.Component {
 
   constructor(props) {
@@ -23,9 +24,7 @@ class Search extends React.Component {
       return (
       <> 
         <Breadcrumbs page="BUSCADOR" {...this.props}/>
-
         <Container> 
-       
           <p align="justify"> <b>
               Esta sección te permite buscar una gran cantidad de contenido para tus estudios, puedes personalizar 
               la búsqueda a tu gusto modificando los siguientes filtros.</b> 

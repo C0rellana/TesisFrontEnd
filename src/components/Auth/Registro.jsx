@@ -1,8 +1,10 @@
 import React from "react";
 import  { withRouter} from 'react-router-dom'
 import { auth } from 'services/authenticacion';
-import { ToastContainer, toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import BaseSelect from "react-select";
+import * as Constants from 'services/Constantes'
+import { carrera } from 'services/carrera';
+import FixRequiredSelect from "services/FixRequiredSelect";
 // reactstrap components
 import {
   Button,
@@ -30,13 +32,27 @@ class Register extends React.Component {
       password:'',
       c_password:'',
       alert: false,
-      mensaje:''
+      mensaje:'',
+      carreras:[],
+      carrera_value:""
     };
     this.handleSubmit = this.handleSubmit.bind(this); 
     this.onDismiss = this.onDismiss.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.changeCarrera = this.changeCarrera.bind(this);
+    
   }
 
+  componentDidMount(){
+    carrera.getAllCarreras().then(carreras=>{
+      carreras.map(function callback(value, index, array) {
+        value.label=value.nombre;
+        value.value=value.id;
+        return value
+    });
+      this.setState({carreras:carreras})
+    })
+  }
   onDismiss() {
     this.setState({alert: false})
   }
@@ -59,23 +75,12 @@ class Register extends React.Component {
       rut: this.state.rut,
       correo: this.state.email,
       password: this.state.password,
+      cod_carrera:this.state.carrera_value.id,
     }
   
     var data= await auth.register(object)
     if(data.success){
-      toast.success('Se ha registrado correctamente',{
-        className: css({
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
-      setTimeout(
-        function() {
-          this.props.handleClick()
-        }
-        .bind(this),
-        3000
-    );
+      this.props.handleClick(true);
     }
     else{
       this.setState({
@@ -85,27 +90,29 @@ class Register extends React.Component {
     }
   }
 
+  changeCarrera(carrera){
+    this.setState({carrera_value:carrera})
+  }
 
   render() {
+    const Select = props => (
+      <FixRequiredSelect
+        {...props}
+        SelectComponent={BaseSelect}
+      />
+    );
+
     const {handleClick} = this.props;
 
     return (
-      <>
-       <section>
-          <ToastContainer transition={Flip}
-                        position= "top-right"
-                        autoClose= {3000}
-                        hideProgressBar= {false}
-                        closeOnClick= {true}
-                        pauseOnHover= {true}
-                        draggable= {true}
-            />
-            
+      <>            
             <Card className="shadow border-0">
-                <CardHeader className="bg-white pb-4">
-                     <div className="text text-center">
-                        <strong><big>Registro </big></strong>
-                    </div>
+              <CardHeader className="bg-white pb-4">
+                  <div className="text text-center">
+                      <strong><big>COMPARTE UCM 2019 </big></strong>
+                      <br/>
+                      <strong><small>REGISTRO</small></strong>
+                  </div>
                 </CardHeader>
                 <CardBody className=" px-lg-5 py-lg-5">
                 <UncontrolledAlert color="danger" fade={true} isOpen={this.state.alert} toggle={this.onDismiss}>
@@ -123,7 +130,7 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input placeholder="Nombre & Apellido" name="nombre" type="text" onChange={this.handleInputChange} required/>
+                            <Input placeholder="Nombre completo" name="nombre" type="text" onChange={this.handleInputChange} required/>
                             </InputGroup>
                         </FormGroup>
 
@@ -136,7 +143,7 @@ class Register extends React.Component {
                             </InputGroupAddon>
                             <Input  name="rut" type="text" pattern="[0-9]{7,8}"  placeholder="Rut: 12345678" onChange={this.handleInputChange} required/>
                             </InputGroup>
-                        </FormGroup>
+                        </FormGroup>                    
                     
                         <FormGroup >
                             <InputGroup className=" mb-3">
@@ -166,6 +173,19 @@ class Register extends React.Component {
                             />
                             </InputGroup>
                         </FormGroup>
+                        <FormGroup>
+                          <Select
+                                closeMenuOnSelect={true}
+                                components={Constants.animatedComponents}
+                                placeholder="Selecciona tu carrera"                    
+                                clearable={true}
+                                required
+                                value={this.state.carrera_value}
+                                options={this.state.carreras}
+                                styles={Constants.colourStyles}
+                                onChange={this.changeCarrera}
+                              /> 
+                          </FormGroup>
             
                         <div className="text-center"> 
                             <Button
@@ -187,7 +207,6 @@ class Register extends React.Component {
                     </Form>
                 </CardBody>
             </Card>  
-        </section>
         
       </>
     );

@@ -33,13 +33,7 @@ async function login(correo, password) {
 }
 
 async function register(object) {
-    const response = await axios.post(ApiRegister, {
-        nombre: object.nombre,
-        rut: object.rut,
-        correo: object.correo,
-        password: object.password,
-        cod_carrera: 1,
-    });
+    const response = await axios.post(ApiRegister, object);
     return response.data;
 }
 

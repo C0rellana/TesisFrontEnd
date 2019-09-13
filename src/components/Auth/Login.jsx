@@ -29,10 +29,6 @@ class Login extends React.Component {
       alert: false,
       message:'',
     };
-     //Si esta logeado ->redirect
-     auth.GetData().then(()=>{
-      this.props.history.push("/");
-     })
   
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this); 
@@ -76,11 +72,12 @@ class Login extends React.Component {
 
     return (
       <>
-          <section>
-                <Card className="shadow border-0">
+                <Card className="shadow border-1">
                     <CardHeader className="bg-white pb-4">
                         <div className="text text-center">
-                                <strong><big>Iniciar Sesión </big></strong>
+                            <strong><big>COMPARTE UCM 2019 </big></strong>
+                            <br/>
+                            <strong><small>INICIAR SESION</small></strong>
                         </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
@@ -98,7 +95,7 @@ class Login extends React.Component {
                                 <i className="ni ni-email-83" />
                             </InputGroupText>
                             </InputGroupAddon>
-                            <Input required placeholder="Correo" name="correo" type="email" onChange={this.handleInputChange}/>
+                            <Input  required placeholder="Correo" name="correo" type="email" onChange={this.handleInputChange}/>
                         </InputGroup>
                         </FormGroup>
                         <FormGroup>
@@ -146,7 +143,7 @@ class Login extends React.Component {
                     </Form>
                     </CardBody>
                 </Card>
-          </section>
+     
      
       </>
     );

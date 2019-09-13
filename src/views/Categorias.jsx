@@ -9,8 +9,7 @@ import {
   Row,Col,CardBody,Card,TabContent,TabPane
 } from "reactstrap";
 import { Input } from "@material-ui/core";
-import { ToastContainer,toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import { toast } from 'react-toastify';
 import Breadcrumbs from "components/Navbars/Breadcrumbs"
 
 class Categorias extends React.Component {
@@ -154,14 +153,6 @@ class Categorias extends React.Component {
             <Breadcrumbs page="CATEGORIAS" {...this.props} />
              <Row className="justify-content-center">
                 <Col lg="12"> 
-                    <ToastContainer transition={Flip}
-                        position= "top-right"
-                        autoClose= {3000}
-                        hideProgressBar= {false}
-                        closeOnClick= {true}
-                        pauseOnHover= {true}
-                        draggable= {true}
-                    />    
                     <Container>       
                         <p align="justify"> 
                             <b>
@@ -287,12 +278,7 @@ class Categorias extends React.Component {
             //agregar
             categoria.AgregarCategoria(object).then((resp)=>{
                 if(resp.status){
-                    toast.success(resp.message,{
-                        className: css({
-                          borderRadius:'10px',
-                          top:'10em'
-                        }),
-                      });
+                    toast.success(resp.message);
                     categoria.GetCategorias().then(data=>{
                         this.setState({
                             Categorias: data,
@@ -305,24 +291,14 @@ class Categorias extends React.Component {
     
                 }
                 else{
-                    toast.error(resp.message,{
-                        className: css({
-                          borderRadius:'10px',
-                          top:'10em'
-                        }),
-                      });
+                    toast.error(resp.message);
                 }
             })
         }
         else{
             categoria.EditarCategoria(object).then((resp)=>{
                 if(resp.status){
-                    toast.success(resp.message,{
-                        className: css({
-                          borderRadius:'10px',
-                          top:'10em'
-                        }),
-                      });
+                    toast.success(resp.message);
                     categoria.GetCategorias().then(data=>{
                         this.setState({
                             Categorias: data,
@@ -331,12 +307,7 @@ class Categorias extends React.Component {
     
                 }
                 else{
-                    toast.error(resp.message,{
-                        className: css({
-                          borderRadius:'10px',
-                          top:'10em'
-                        }),
-                      });
+                    toast.error(resp.message);
                 }
             })
         }
@@ -345,12 +316,7 @@ class Categorias extends React.Component {
     Eliminar(){
         categoria.EliminarCategoria(this.state.Tab).then((resp)=>{
             if(resp.status){
-                toast.success(resp.message,{
-                    className: css({
-                      borderRadius:'10px',
-                      top:'10em'
-                    }),
-                  });
+                toast.success(resp.message);
                 categoria.GetCategorias().then(data=>{
                     this.setState({
                         Categorias: data,
@@ -359,12 +325,7 @@ class Categorias extends React.Component {
 
             }
             else{
-                toast.error(resp.message,{
-                    className: css({
-                      borderRadius:'10px',
-                      top:'10em'
-                    }),
-                  });
+                toast.error(resp.message);
             }
         })
     }

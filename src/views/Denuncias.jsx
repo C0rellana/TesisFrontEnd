@@ -3,8 +3,7 @@ import classnames from "classnames";
 import Tabla from "components/denuncia/Tabla"
 import SelectRamo from "components/denuncia/Select"
 import { denuncias } from 'services/denuncias';
-import { ToastContainer,toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import {toast} from 'react-toastify';
 import Breadcrumbs from "components/Navbars/Breadcrumbs"
 
 // reactstrap components
@@ -43,15 +42,6 @@ class Navs extends React.Component {
        <Breadcrumbs page="DENUNCIAS"  {...this.props} />
         <Row className="justify-content-center">
           <Col lg="12">
-          <ToastContainer 
-                    transition={Flip}
-                    position= "top-right"
-                    autoClose= {3000}
-                    hideProgressBar= {false}
-                    closeOnClick= {true}
-                    pauseOnHover= {true}
-                    draggable= {true}
-                />
             <Container>
                  <p align="justify"> 
                       <b>
@@ -181,19 +171,9 @@ class Navs extends React.Component {
           Data :  data
         })
       })
-      toast.success("Acción completada con éxito",{
-        className: css({
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+      toast.success("Acción completada con éxito");
     }else{
-      toast.error("No se pudo realizar la acción solicitada",{
-        className: css({
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+      toast.error("No se pudo realizar la acción solicitada",);
     }
   }
   toggleNavs = (e, state, index) => {

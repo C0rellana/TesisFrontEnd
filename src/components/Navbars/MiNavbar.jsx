@@ -1,8 +1,8 @@
 import React from "react";
 import  { withRouter } from 'react-router-dom'
 import SidebarConfig from "./SidebarConfig";
-import Navbar from "./Navbar";
-
+// import Navbar from "./Navbar";
+import NewNavBar from "./newNavBar"
 class MiNavbar extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,9 @@ class MiNavbar extends React.Component {
       {/* CONFIG SIDEBAR */}
        <SidebarConfig  {...this.props}  isOpen={this.state.sidebarOpen} Change= {this.onSetSidebarOpen}/>
       {/* NAVBAR */}
-      <Navbar {...this.props}  ChangeConfig= {this.onSetSidebarOpen}></Navbar>
+      {/* <Navbar {...this.props}  ChangeConfig= {this.onSetSidebarOpen}></Navbar> */}
+      <NewNavBar {...this.props}  ChangeConfig= {this.onSetSidebarOpen}></NewNavBar>
+     
       </>
     );
   }

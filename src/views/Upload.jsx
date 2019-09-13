@@ -8,12 +8,10 @@ import { categoria } from 'services/categoria';
 import { ramo } from 'services/ramos';
 import FixRequiredSelect from "services/FixRequiredSelect";
 import PacmanLoader from 'react-spinners/PacmanLoader';
-// reactstrap components
-import { ToastContainer,toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
 import Breadcrumbs from "components/Navbars/Breadcrumbs"
-
+import {toast } from 'react-toastify';
 import {
+
   Button,
   Card,
   CardBody,
@@ -60,13 +58,7 @@ class FormUpload extends React.Component {
    
 
     if(this.state.files.length<=0 && this.state.enlaces.length<=0){
-      toast.error('Oops... Debes ingresar al menos un archivo!',{
-        className: css({
-          background: '#FB6340',
-          borderRadius:'10px',
-          top:'10em'
-        }),
-      });
+      toast.error('Oops... Debes ingresar al menos un archivo!');
 
     }else{
       this.setState({isUploading:true})
@@ -82,12 +74,7 @@ class FormUpload extends React.Component {
       formData.append('enlace',this.state.enlace)
       archivo.Upload(formData).then(data=>{
         this.setState({isUploading:false})
-        toast.success('Muchas gracias por compartir!',{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.success('Muchas gracias por compartir!');
 
       })
     }  
@@ -129,15 +116,8 @@ class FormUpload extends React.Component {
   );
      return (
       <>  
-          <Breadcrumbs page="COMPARTIR" {...this.props} color={color}/>
-          <ToastContainer transition={Flip}
-                  position= "top-right"
-                  autoClose= {3000}
-                  hideProgressBar= {false}
-                  closeOnClick= {true}
-                  pauseOnHover= {true}
-                  draggable= {true}
-                  />
+              <Breadcrumbs page="COMPARTIR" {...this.props} color={color}/>
+
                {this.state.isUploading?
                <div className="overlay">
                     <div className="divcenter">

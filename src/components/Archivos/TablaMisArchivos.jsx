@@ -127,7 +127,7 @@ import { Input } from '@material-ui/core';
       <Container>
         <MaterialTable
           icons={tableIcons}
-          title={"ARCHIVOS COMPARTIDOS"}
+          title={""}
           columns={columns}
           data={Data}
           actions={[

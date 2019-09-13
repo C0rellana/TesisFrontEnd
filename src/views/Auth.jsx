@@ -1,5 +1,5 @@
 import React from "react";
-
+import { auth } from 'services/authenticacion';
 import {
   Container,
   Row,
@@ -7,7 +7,7 @@ import {
 } from "reactstrap";
 import Login from "components/Auth/Login";
 import Registro from "components/Auth/Registro";
-
+import { ToastContainer, toast,Flip } from 'react-toastify';
 
 class Auth extends React.Component {
 
@@ -16,11 +16,19 @@ class Auth extends React.Component {
     this.state = {
       boolean : true
     }
+     //Si esta logeado ->redirect
+    auth.GetData().then(()=>{
+      this.props.history.push("/");
+     }).catch(err=>{
+     })
 
    this.handleClick = this.handleClick.bind(this);
   
   }
-  handleClick() {
+  handleClick(val) {
+    if(val===true){
+      toast.success('Se ha registrado correctamente');
+    }
     this.setState(state => ({
       boolean: !state.boolean
     }));
@@ -31,18 +39,30 @@ class Auth extends React.Component {
     return (
       
       <> 
-      <main >
+        <ToastContainer transition={Flip}
+                position= "top-right"
+                autoClose= {3000}
+                hideProgressBar= {false}
+                closeOnClick= {true}
+                pauseOnHover= {true}
+                draggable= {true}
+        />
+   
         <section className="section section-lg section-shaped" >
-          <div className="shape shape-style-1 bg-purple">
+          <div className="shape shape-style-1 bg-orange">
             <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
           </div>
      
           <Container className=""  >
             <Row className="row-grid justify-content-between align-items-center" >
-              <Col lg="5">
+              <Col>
+              </Col>
+              <Col md="5">
                 {this.state.boolean ? <Login boolean={this.state.boolean} handleClick = {this.handleClick} ></Login>   :  <Registro boolean={this.state.boolean} handleClick = {this.handleClick}> </Registro> }    
-                </Col>
-                <Col lg="6">
+              </Col>
+              <Col>
+              </Col>
+                {/* <Col lg="6">
                   <h3 className="display-3 text-white">
                     ESTUDEO UCM 
                   </h3>
@@ -55,13 +75,13 @@ class Auth extends React.Component {
                   puede servirle a un compañero, comparte!!
                   </small>
                   </p>
-                </Col>
+                </Col> */}
               </Row>
           </Container>
          
         </section>
  
-      </main>
+  
         
       </>
     );

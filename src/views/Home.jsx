@@ -4,7 +4,8 @@ import {
   Row,
   Col
 } from "reactstrap";
-
+import HelpIcon from '@material-ui/icons/Help';
+import SettingsIcon from '@material-ui/icons/Settings';
 class Home extends React.Component {
 
   render() {
@@ -28,11 +29,11 @@ class Home extends React.Component {
               <Col lg="6">
                 <p className="lead" align="justify">
                   <small>
-                    <b>¿Que es Estudeo UCM?</b>
+                    <b>¿Que es COMPARTE UCM?</b>
                     <br/>
                     Es una plataforma que tiene como objetivo apoyar la interaccion entre alumnos para 
                     poder compartir material,
-                    en Estudeo ayudas, te ayudan!
+                    en COMPARTE UCM ayudas, te ayudan!
                     <br/><br/>
                     <b>¿Como lograr esto?</b>
                     <br/>
@@ -50,12 +51,12 @@ class Home extends React.Component {
                     <b>¿Necesitas ayuda?</b>
                     <br/>
                     Si tienes dudas con respecto a las funcionalidades de la plataforma puedes presionar el icono
-                    de ( <i className="fa fa-question fa-2x"></i> ) ubicado en la parte superior derecha.
+                    de ( {<HelpIcon/>} ) ubicado en la parte superior derecha.
                     <br/>  <br/>
                     <b>¿Deseas otro color?</b>
                     <br/>
                     Puedes modificarlo a tu gusto, solo tienes que presionar el icono de
-                    ( <i className="fa fa-cogs fa-2x"></i> ) ubicado en la parte superior derecha y elegir tu color favorito.
+                    ( {<SettingsIcon/>} ) ubicado en la parte superior derecha y elegir tu color favorito.
                     Tambien puedes modificar tu foto de perfil presionando sobre ella y seleccionado la que mas te guste.
                     
                   </small> 
