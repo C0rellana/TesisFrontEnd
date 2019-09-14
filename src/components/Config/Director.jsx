@@ -11,8 +11,7 @@ import BaseSelect from "react-select";
 import FixRequiredSelect from "services/FixRequiredSelect";
 import { role} from 'services/roles';
 import { carrera} from 'services/carrera';
-import { ToastContainer,toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import { toast} from 'react-toastify';
 
 
 class Director extends React.Component {
@@ -90,14 +89,6 @@ class Director extends React.Component {
 
     return (
       <>
-        <ToastContainer transition={Flip}
-            position= "top-right"
-            autoClose= {3000}
-            hideProgressBar= {false}
-            closeOnClick= {true}
-            pauseOnHover= {true}
-            draggable= {true}
-        />
         <p><small>Asignar rol de <b>DIRECTOR</b> a un usuario.</small></p>
         <Row>
           <Col>    
@@ -208,20 +199,10 @@ class Director extends React.Component {
             carrera:null,
           }) 
         })
-        toast.success('Director Editado',{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.success('Director Editado');
       }
       else{
-        toast.error(r.message,{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.error(r.message);
       }
     
     });
@@ -239,20 +220,10 @@ class Director extends React.Component {
             data:r
           }) 
         })
-        toast.success('Director eliminado',{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.success('Director eliminado');
       }
       else{
-        toast.error(r.message,{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.error(r.message);
       }
      
     });
@@ -272,20 +243,10 @@ class Director extends React.Component {
             data:r
           }) 
         })
-        toast.success('Nuevo DIRECTOR añadido',{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.success('Nuevo DIRECTOR añadido');
       }
       else{
-        toast.error(r.message,{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.error(r.message);
       }
      
     });

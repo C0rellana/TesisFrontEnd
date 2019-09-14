@@ -6,7 +6,7 @@ import {
 import Cga from "components/Config/Cga"
 import Director from "components/Config/Director"
 import Logo from "components/Config/Logo"
-class NULL extends React.Component {
+class Config extends React.Component {
 
   constructor(props) {
     super(props);
@@ -96,4 +96,4 @@ class NULL extends React.Component {
   }
 }
 
-export default NULL;
+export default Config;

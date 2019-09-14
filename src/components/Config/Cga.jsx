@@ -7,8 +7,7 @@ import {
     Form
   } from "reactstrap";
 import { role} from 'services/roles';
-import { ToastContainer,toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import { toast} from 'react-toastify';
 
 class Cga extends React.Component {
 
@@ -43,12 +42,7 @@ class Cga extends React.Component {
               data:r
             }) 
           })
-          toast.success('CGA eliminado',{
-            className: css({
-              borderRadius:'10px',
-              top:'10em'
-            }),
-          });
+          toast.success('CGA eliminado');
         }
       });
 
@@ -66,20 +60,10 @@ class Cga extends React.Component {
               data:r
             }) 
           })
-          toast.success('Nuevo CGA añadido',{
-            className: css({
-              borderRadius:'10px',
-              top:'10em'
-            }),
-          });
+          toast.success('Nuevo CGA añadido');
         }
         else{
-          toast.error(r.message,{
-            className: css({
-              borderRadius:'10px',
-              top:'10em'
-            }),
-          });
+          toast.error(r.message);
         }
        
       });
@@ -93,14 +77,6 @@ class Cga extends React.Component {
 
     return (
       <>
-        <ToastContainer transition={Flip}
-              position= "top-right"
-              autoClose= {3000}
-              hideProgressBar= {false}
-              closeOnClick= {true}
-              pauseOnHover= {true}
-              draggable= {true}
-          />
        <p><small>Asignar rol de <b>CGA</b> a un usuario.</small></p>
       <Row>
         <Col>

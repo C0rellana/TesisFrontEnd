@@ -3,8 +3,7 @@ import {
   Input,Button,Col,Row,
 } from "reactstrap";
 import { carrera} from 'services/carrera';
-import { ToastContainer,toast,Flip } from 'react-toastify';
-import { css } from 'glamor';
+import { toast } from 'react-toastify';
 
 class Token extends React.Component {
 
@@ -28,12 +27,7 @@ class Token extends React.Component {
     var token=this.state.token;
     carrera.CarreraToken(token).then(r=>{
       if(r.success){
-        toast.success('Token modificado',{
-          className: css({
-            borderRadius:'10px',
-            top:'10em'
-          }),
-        });
+        toast.success('Token modificado');
         this.setState({
           disabled:true,
           token:'******************',
@@ -47,14 +41,6 @@ class Token extends React.Component {
   render() {
     return (
       <>
-        <ToastContainer transition={Flip}
-            position= "top-right"
-            autoClose= {3000}
-            hideProgressBar= {false}
-            closeOnClick= {true}
-            pauseOnHover= {true}
-            draggable= {true}
-        />
       <p><small>Editar cuenta de almacenamiento. <b>Cuidado! al modificar esta opcion los datos almacenados seran removidos</b></small></p>
       <Row>
           <Col md="9">        

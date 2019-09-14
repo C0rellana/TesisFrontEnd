@@ -16,7 +16,7 @@ class Search extends React.Component {
   
   changeData(Data){
     this.setState({
-      Data: Data
+      Data: Data,
     })
   }
 

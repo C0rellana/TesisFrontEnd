@@ -31,7 +31,7 @@ class Tabla extends React.Component {
   };
 
 
-  async componentDidMount(){
+  componentDidMount(){
     if(this.props.user.preferencias){
       this.setState({
         Preferencias: JSON.parse(this.props.user.preferencias),
@@ -40,7 +40,7 @@ class Tabla extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps,prevState) {
+  componentDidUpdate(prevProps) {
     // Uso tipico (no olvides de comparar los props):
     if (JSON.stringify(this.props.DATAFILTER )!== JSON.stringify(prevProps.DATAFILTER )) {
         this.setState({Data: this.props.DATAFILTER});
@@ -218,7 +218,7 @@ class Tabla extends React.Component {
             <button
               className="miboton"
               type="button"
-              onClick={() => this.togleDenuncia(value,tableMeta)}    
+              onClick={() => this.togleDenuncia(tableMeta)}    
             >
              <i  className="fa fa-exclamation-circle" style={{color:'red'}}></i>
            </button> 
