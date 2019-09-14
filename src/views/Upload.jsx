@@ -12,6 +12,8 @@ import "components/Upload/upload/Upload.css";
 import Progress from "components/Upload/progress/Progress";
 import Formulario from "components/Upload/Form"
 import { auth } from 'services/authenticacion';
+import Hidden from '@material-ui/core/Hidden';
+
 class FormUpload extends React.Component {
   constructor(props) {
     super(props);
@@ -77,29 +79,62 @@ class FormUpload extends React.Component {
                             ?<Enlaces dataEnlaces = {this.dataEnlaces} {...this.props}/>
 
                             : 
-                            <div className="Upload">
-                                <div className="Content">
-                                  <div>
-                                    <Dropzone
-                                      {...this.props}
-                                      onFilesAdded={this.onFilesAdded}
-                                      disabled={this.state.uploading || this.state.successfullUploaded}
-                                    />
-                                  </div>
-                                  <div className="Files">
-                                    {this.state.files.map(file => {
-                                      return (
-                                      
-                                        <div key={file.name} className="Row">
-                                          <span className="Filename"><small>{file.name}</small></span>
-                                          {this.renderProgress(file)}
-                                        </div>
-                                      );
-                                    })}
+                            <>
+                             <Hidden smDown>
+                              <div className="Upload">
+                                  <div className="Content">
+                                
+                                    <div>
+                                      <Dropzone
+                                        {...this.props}
+                                        onFilesAdded={this.onFilesAdded}
+                                        disabled={this.state.uploading || this.state.successfullUploaded}
+                                      />
+                                    </div>
+                                    <div className="Files">
+                                      {this.state.files.map(file => {
+                                        return (
+                                        
+                                          <div key={file.name} className="Row">
+                                            <span className="Filename"><small>{file.name}</small></span>
+                                            {this.renderProgress(file)}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>   
                                   </div>
                                 </div>
-                               
-                              </div>
+                            </Hidden>
+                              <Hidden mdUp>
+                                <div className="">
+                                  <div className="">
+                                    <center>
+                                   
+                                      <Dropzone
+                                        {...this.props}
+                                        onFilesAdded={this.onFilesAdded}
+                                        disabled={this.state.uploading || this.state.successfullUploaded}
+                                      />
+                                 
+                                    </center>
+                                  </div>
+                                
+                                  <hr></hr>
+                                  <div style={{  height: "100px", "overflowY": "scroll"}}>
+                                      {this.state.files.map(file => {
+                                        return (
+                                        
+                                          <div key={file.name} className="Row">
+                                            <span className="Filename"><small>{file.name}</small></span>
+                                            {this.renderProgress(file)}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                </div>
+                              </Hidden>
+                            </>
+                          
                           }   
                                
                         <div className="text-center"> 
