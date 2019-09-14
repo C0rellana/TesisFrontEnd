@@ -6,6 +6,7 @@ import {archivo} from "services/archivos"
 import HashLoader from 'react-spinners/HashLoader';
 import {Card,CardBody,CardHeader,Container,Form,} from "reactstrap"; 
 //archivos
+import {ApiArchivos,} from "services/api";
 import Dropzone from  "components/Upload/dropzone/Dropzone";
 import "components/Upload/upload/Upload.css";
 import Progress from "components/Upload/progress/Progress";
@@ -191,7 +192,7 @@ class FormUpload extends React.Component {
       formData.append('isEnlace',this.state.isEnlace)
       formData.append("file", file, file.name);
       auth.ConfigHeader().then(r=>{
-        req.open("POST", "http://192.168.18.37:5000/archivos");
+        req.open("POST", ApiArchivos);
         req.setRequestHeader("Authorization",r.headers.Authorization)
         req.send(formData);
       })
