@@ -21,8 +21,12 @@ class SidebarConfig extends React.Component {
 
         auth.GetAvatar().then(data=>{
           var imagen ="https://icon-library.net/images/default-user-icon/default-user-icon-4.jpg";
-          if(data.success){
-            imagen = "data:image/png;base64,"+ btoa(String.fromCharCode.apply(null, data.data.data));
+          if(data.success){ 
+            imagen = "data:image/png;base64,"+ btoa(
+              new Uint8Array(data.data.data)
+                .reduce((data, byte) => data + String.fromCharCode(byte), '')
+            );
+
           }
           this.setState({
             imagen: imagen,
