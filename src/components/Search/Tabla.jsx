@@ -190,16 +190,15 @@ class Tabla extends React.Component {
                   href={value}
                   target="_blank"
                 >
-                  <i  className="fa fa-link" ></i>
+                  <i  className="fa fa-link" style={{color:"#172B4D"}} ></i>
                 </a>   
-                :
-               
+                :             
                 <button
                   className="miboton"
                   type="button"
                   onClick={() => this.downloadfile(value,Data[tableMeta.rowIndex].id,Data[tableMeta.rowIndex].ubicacion)}    
                 >
-                  <i  className="ni ni-cloud-download-95" ></i>
+                  <i  className="ni ni-cloud-download-95" style={{color:"#172B4D"}} ></i>
                 </button> 
               :''  
             }

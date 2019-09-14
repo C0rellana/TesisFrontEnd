@@ -16,8 +16,10 @@ function UploadFile(props) {
             'application/vnd.ms-powerpoint',
             'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             'application/vnd.oasis.opendocument.text',
-            'application/sql'
-          ],     
+            'application/sql',
+            'application/*'
+          ],   
+            
     onDrop: acceptedFiles => {
       //enviar al padre.
       props.dataFromDropZone(acceptedFiles);

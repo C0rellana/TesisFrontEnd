@@ -141,9 +141,10 @@ class Register extends React.Component {
                                 <i className="ni ni-hat-3" />
                                 </InputGroupText>
                             </InputGroupAddon>
-                            <Input  name="rut" type="text" pattern="[0-9]{7,8}"  placeholder="Rut: 12345678" onChange={this.handleInputChange} required/>
+                            <Input  name="rut" type="text"  placeholder="Rut: 12345678" onChange={this.handleInputChange} required/>
                             </InputGroup>
-                        </FormGroup>                    
+                        </FormGroup>    
+                                        {/*  pattern="[0-9]{7,8}" */}
                     
                         <FormGroup >
                             <InputGroup className=" mb-3">

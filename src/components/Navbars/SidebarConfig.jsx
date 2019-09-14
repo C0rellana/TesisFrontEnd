@@ -9,10 +9,13 @@ import SidebarAdmin from "./SidebarAdmin";
 class SidebarConfig extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+          loading: true,
+        }
         this.changeColor = this.changeColor.bind(this);
         this.changeImg = this.changeImg.bind(this);
         this.logout = this.logout.bind(this); 
+        
     }
     componentDidMount(){
 
@@ -22,7 +25,8 @@ class SidebarConfig extends React.Component {
             imagen = "data:image/png;base64,"+ btoa(String.fromCharCode.apply(null, data.data.data));
           }
           this.setState({
-            imagen: imagen
+            imagen: imagen,
+            loading:false,
           })         
         })
       }
@@ -45,7 +49,11 @@ class SidebarConfig extends React.Component {
                   <small><small>{" ("+role+")"}</small></small>
                   </h4>
                 <div className="container2">
-                  <img src={this.state.imagen} alt="" className="image" style={{"width":"150px"}}/>
+                  {
+                    this.state.loading
+                  ? <div className="loader"></div>
+                  :<img src={this.state.imagen} alt="" className="image" />
+                  } 
                   <div className="middle">
                     <label htmlFor="file-input">
                         <i className="fa fa-camera fa-2x"></i>
@@ -99,10 +107,16 @@ class SidebarConfig extends React.Component {
     const formData = new FormData();
     var file=event.target.files[0];
     formData.append('file', file);
-    auth.ChangeAvatar(formData)
     this.setState({
-      imagen: URL.createObjectURL(file)
+      loading: true,
     })
+    auth.ChangeAvatar(formData).then(()=>{
+      this.setState({
+        loading:false,
+        imagen: URL.createObjectURL(file)
+      })
+    })
+    
   }
 
   logout() {

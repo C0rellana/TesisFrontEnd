@@ -15,7 +15,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import ShareIcon from '@material-ui/icons/Share';
 import SearchIcon from '@material-ui/icons/Search';
-import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+import SpellcheckIcon from '@material-ui/icons/Spellcheck';
+
 import Ayuda from "./Ayuda";
 import { admin} from 'services/admin';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -121,7 +122,7 @@ class NavBar extends React.Component {
                         </ListItem>
 
                         <ListItem button key="CALCULAR" component="a" href="/notas">
-                            <ListItemIcon>< AllInclusiveIcon/></ListItemIcon>
+                            <ListItemIcon>< SpellcheckIcon/></ListItemIcon>
                             <ListItemText primary="CALCULAR NOTA" />
                         </ListItem>
                 

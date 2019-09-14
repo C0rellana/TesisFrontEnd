@@ -59,7 +59,7 @@ export default function withAuth(ComponentToProtect,roles) {
           <MiNavbar user={user} textColor={textColor} ></MiNavbar>
           <br></br>
           <ComponentToProtect  user={user} textColor={textColor}  {...this.props} />
-          <br></br> <br></br>
+         
         </React.Fragment>
       );
     }
