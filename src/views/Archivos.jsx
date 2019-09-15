@@ -20,6 +20,7 @@ import Breadcrumbs from "components/Navbars/Breadcrumbs"
         <Tabla {...this.props}></Tabla>
       
       </Container>
+      <br/><br/>
     </>
     );
   }

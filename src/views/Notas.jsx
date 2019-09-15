@@ -190,6 +190,7 @@ class Home extends React.Component {
               </Table>
             </div>
          </Container>
+         <br/><br/>
       </>
     );
   }

@@ -22,13 +22,16 @@ export default function withAuth(ComponentToProtect,roles) {
         .then(res => {  
             this.setState({ loading: false,user: res });
         }).catch(error=>{
-            
+         
           if(error.message==="Network Error"){
             this.setState({ servidor: true });
           }
-          if(error.response.status===401){
-            this.setState({ loading: false, redirect: true });
+          else{
+            if(error.response.status===401){
+              this.setState({ loading: false, redirect: true });
+            }
           }
+        
           
         });
     }

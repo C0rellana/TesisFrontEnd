@@ -68,7 +68,7 @@ class Info extends React.Component {
                     Si tienes dudas con respecto a las funcionalidades de la plataforma 
                     puedes presionar el icono
                     de ( {<HelpIcon/>} ) ubicado en la parte superior derecha.
-                    Si tienes otro problema, puedes escribir a tu administrador con el siguiente enlace.
+                    Además si deseas puedes escribir a tu administrador con el siguiente enlace.
                     </p>
                     <a
                       className="text-info"
@@ -97,8 +97,8 @@ class Info extends React.Component {
                       Puedes modificar el color a tu gusto, solo tienes que presionar el icono de
                       ( {<SettingsIcon/>} ) ubicado en la parte superior derecha y elegir 
                       tu tema favorito.
-                      Tambien puedes modificar tu foto de perfil presionando sobre ella y
-                       seleccionado la que mas te guste.
+                      Además puedes modificar tu foto de perfil presionando sobre ella y
+                      seleccionado la que mas te guste.
                       
                     </p>
 
@@ -186,7 +186,7 @@ class Info extends React.Component {
                       CALCULAR TUS NOTAS
                     </h5>
                     <p>
-                      Agregamos esta seccion para ayudarte a calcular las notas faltantes
+                      Agregamos esta sección para ayudarte a calcular tus calificaciones faltantes
                       para cumplir con tu promedio deseado, solo debes ingresar las notas que tienes 
                       y los respectivos porcentajes.
                     </p>

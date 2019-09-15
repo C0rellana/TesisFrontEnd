@@ -54,7 +54,7 @@ class Token extends React.Component {
           </Col>
           <Col md="3">
             {this.state.disabled
-                ? <Button onClick={this.edit}> <i className="fa fa-pencil"></i></Button>
+                ? <Button onClick={this.edit} disabled > <i className="fa fa-pencil"></i></Button>
             
                 : <Button onClick={this.save}> <i className="fa fa-check"></i></Button>
             } 

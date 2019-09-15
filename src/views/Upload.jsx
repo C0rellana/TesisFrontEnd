@@ -13,6 +13,7 @@ import Progress from "components/Upload/progress/Progress";
 import Formulario from "components/Upload/Form"
 import { auth } from 'services/authenticacion';
 import Hidden from '@material-ui/core/Hidden';
+import { carrera } from "services/carrera";
 
 class FormUpload extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class FormUpload extends React.Component {
       descripcion:null,
       categoria:null,
       contenido:null,
+      isEnabled:true,
       uploading: false, uploadProgress: {}, successfullUploaded: false
     };
     this.dataEnlaces = this.dataEnlaces.bind(this);
@@ -37,6 +39,11 @@ class FormUpload extends React.Component {
     this.uploadEnlaces = this.uploadEnlaces.bind(this);
     
   }
+  componentDidMount(){
+    carrera.isEnabled().then(data=>{
+      this.setState({isEnabled:data})
+    })
+  }
 
 
 
@@ -48,8 +55,8 @@ class FormUpload extends React.Component {
      return (
       <>  
           <Breadcrumbs page="COMPARTIR" {...this.props} color={color}/>
-
-            <Container>
+          {this.state.isEnabled?
+             <Container>
             <p align="justify"> <b>
                 En esta sección puedes compartir distintos tipos de material para estudiar y así ayudar a tus compañeros
                 de las siguientes generaciones.
@@ -144,7 +151,15 @@ class FormUpload extends React.Component {
                   </CardBody>
               </Card>
               <br></br>
-            </Container>     
+            </Container>    
+         
+         :  <Container>
+              <strong>
+                ESTA SECCIÓN ESTA DESHABILITADA DEBIDO A QUE TU CARRERA NO HA CONFIGURADO UNA CUENTA DE ALMACENAMIENTO EXTERNO (DROPBOX/GOOGLE DRIVE).
+                PARA ESTO TU CGA O DIRECTOR DEBE COLOCARSE EN CONTACTO CON NOSOTROS.
+              </strong>
+            </Container>       
+        } 
       </>
     );
   }
@@ -278,7 +293,7 @@ class FormUpload extends React.Component {
       return (
         <button
           className="btn"
-          style={{color:this.props.textColor, backgroundColor:this.props.user.color}}
+          style={{color:this.props.textColor, backgroundColor:this.props.user.color?this.props.user.color:"#8965E0"}}
           type="submit"
           disabled={(!this.state.isEnlace && this.state.files.length <= 0) || this.state.uploading}
         >

@@ -1,4 +1,4 @@
-import { ApiCarreras,ApiCarrerasRamos,ApiGetCarrera,ApiCarreraToken} from "./api";
+import { ApiCarreras,ApiCarrerasRamos,ApiGetCarrera,ApiCarreraToken,ApiCarreraIsEnabled} from "./api";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
@@ -30,9 +30,17 @@ async function CarreraToken(token) {
 
 }
 
+async function isEnabled() {
+  const response = await axios.get(ApiCarreraIsEnabled,await auth.ConfigHeader());
+  return response.data;
+
+}
+
+
 export const carrera = {
     getAllCarrerasRamos,
     getAllCarreras,
     GetCarrera,
-    CarreraToken
+    CarreraToken,
+    isEnabled,
 };

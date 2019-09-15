@@ -16,7 +16,7 @@ export const ApiCarreras= API+"/carreras";
 export const ApiCarrerasRamos= API+"/carrerasramos";
 export const ApiGetCarrera= API+"/ApiGetCarrera";
 export const ApiCarreraToken= API+"/CarreraToken";
-
+export const ApiCarreraIsEnabled= API+"/CarreraIsEnabled";
 //admin
 export const ApiLogo= API+"/Logo";
 
@@ -63,3 +63,4 @@ export const ApiNotas= API+"/notas";
 //Api Roles
 export const ApiRoles= API+"/roles";
 export const ApiEditRole= API+"/editRole";
+export const ApiRoleDirector= API+"/roleDirector";

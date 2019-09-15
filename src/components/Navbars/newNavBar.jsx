@@ -11,15 +11,19 @@ import HelpIcon from '@material-ui/icons/Help';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Hidden from '@material-ui/core/Hidden';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import ShareIcon from '@material-ui/icons/Share';
 import SearchIcon from '@material-ui/icons/Search';
 import SpellcheckIcon from '@material-ui/icons/Spellcheck';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import WebIcon from '@material-ui/icons/Web';
+
+
 
 import Ayuda from "./Ayuda";
 import { admin} from 'services/admin';
 import FolderIcon from '@material-ui/icons/Folder';
+import { Divider } from '@material-ui/core';
 
 
 
@@ -93,39 +97,55 @@ class NavBar extends React.Component {
                 </Toolbar>
             </AppBar>
             <Drawer   
+                
                 open={this.state.Open}
                 onClose={this.sidebar} 
                 ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
                 }}
             >   
-                    <List style={{top:"65px"}}>
-
-                        <ListItem button key="INICIO" component="a" href="/">
+                    <List style={{top:"65px" }}>
+                      
+                        <ListItem button  component="a" href="/">
                             <ListItemIcon><HomeIcon /></ListItemIcon>
-                            <ListItemText primary="INICIO" />
+                            <i>INICIO</i>
                         </ListItem>
-
-                        <ListItem button key="COMPARTIR" component="a" href="/upload">
+                        <Divider/>
+                        <ListItem button component="a" href="/upload">
                             <ListItemIcon><ShareIcon /></ListItemIcon>
-                            <ListItemText primary="COMPARTIR"/>
+                            <i>COMPARTIR</i>
                         </ListItem>
-
-                        <ListItem button key="Buscar" component="a" href="/buscador"  >
+                        <Divider/>
+                        <ListItem button component="a" href="/buscador"  >
                             <ListItemIcon><SearchIcon /></ListItemIcon>
-                            <ListItemText primary="BUSCAR" />
+                            <i>BUSCAR</i>
                         </ListItem>
-
-                        <ListItem button key="Archivos" component="a" href="/archivos">
+                        <Divider/>
+                        <ListItem button  component="a" href="/archivos">
                             <ListItemIcon><FolderIcon /></ListItemIcon>
-                            <ListItemText primary="MIS ARCHIVOS" />
+                            <i>MIS ARCHIVOS</i>
                         </ListItem>
-
-                        <ListItem button key="CALCULAR" component="a" href="/notas">
+                        <Divider/>
+                        <ListItem button component="a" href="/notas">
                             <ListItemIcon>< SpellcheckIcon/></ListItemIcon>
-                            <ListItemText primary="CALCULAR NOTA" />
+                            <i>CALCULAR NOTAS</i>
                         </ListItem>
-                
+                        <Divider/>
+                        <ListItem button  component="a" href="http://www.sibib.ucm.cl/">
+                            <ListItemIcon>< LibraryBooksIcon/></ListItemIcon>
+                            <i>BIBLOTECA UCM</i>
+                        </ListItem>
+                        <Divider/>
+                        <ListItem button  component="a" href="http://portal.ucm.cl/">
+                            <ListItemIcon>< WebIcon/></ListItemIcon>
+                            <i>PORTAL UCM</i>
+                        </ListItem>
+                        <Divider/>
+                        <ListItem button component="a" href="https://lms.ucm.cl/">
+                            <ListItemIcon>< WebIcon/></ListItemIcon>
+                            <i>LMS</i>
+                        </ListItem>
+                        <Divider/>
                 
                     </List>
             

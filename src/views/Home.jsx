@@ -31,9 +31,9 @@ class Home extends React.Component {
               <Col lg="6">
                 <p className="lead" align="justify">
                   <small>
-                    <b>¿Que es COMPARTE UCM?</b>
+                    <b>¿Que es "COMPARTE UCM" ?</b>
                     <br/>
-                    Es una plataforma que tiene como objetivo apoyar la interaccion entre alumnos 
+                    Es una plataforma que tiene como objetivo apoyar la interacción entre alumnos 
                     de nuestra universidad para fortalecernos mutuamente compartiendo material relevante 
                     que nos ayude a cursar nuestros ramos.
                     

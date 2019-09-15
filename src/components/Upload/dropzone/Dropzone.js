@@ -74,7 +74,7 @@ class Dropzone extends Component {
           multiple
           onChange={this.onFilesAdded}
         />
-        <i className="fa fa-cloud-upload fa-5x" style={{color:this.props.user.color}} ></i>
+        <i className="fa fa-cloud-upload fa-5x" style={{color:this.props.user.color?this.props.user.color:"#8965E0"}} ></i>
        
       </div>
     );

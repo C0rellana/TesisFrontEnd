@@ -50,8 +50,9 @@ class Config extends React.Component {
                
                   
                  
-                  <br/>
+                <br/><hr></hr>
                 <Cga></Cga>
+                <br/><hr></hr>
                 <Token></Token> 
                 </>
               }
@@ -82,7 +83,9 @@ class Config extends React.Component {
                   <p style={{textIndent:""}}> 
                     <b>Modificar logo del sistema" </b>=>  esto cambia automaticamente el logo de esta plataforma.
                   </p>
+                <br/><hr></hr>
                 <Director></Director>
+                <br/><hr></hr>
                 <Logo></Logo> 
                 </>
               }
@@ -90,7 +93,7 @@ class Config extends React.Component {
               
               
           </Container>
-     
+           <br/><br/>
       </>
     );
   }

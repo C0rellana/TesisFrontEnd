@@ -74,7 +74,7 @@ class SidebarConfig extends React.Component {
                 <h4><small><b>PERSONALIZA A TU GUSTO</b></small></h4>
                 <br/>   
                 <CirclePicker
-                  //colors= {["#F44336","#E91E63","#9C27B0","#3F51B5","#4CAF50","#FF9800","#FF5722","#000"]}
+                  colors= {["#8965E0","#F44336","#E91E63","#9C27B0","#3F51B5","#4CAF50","#FF9800","#FF5722","#2889ff" ,"#253E85","#001740","#000","#FFEB3B","#CDDC39","#795548","#fa00ff"]}
                   circleSize= {23}
                   circleSpacing={8}
                   onChange={ this.changeColor }

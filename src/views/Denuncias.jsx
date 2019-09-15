@@ -153,6 +153,7 @@ class Navs extends React.Component {
               </Container>
           </Col>
         </Row>
+        <br/><br/>
       </>
     );
   }

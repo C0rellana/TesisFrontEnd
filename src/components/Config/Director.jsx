@@ -129,6 +129,7 @@ class Director extends React.Component {
                     />
                 </Col>
                 <Col  md="3">
+                  <br></br>
                   {this.state.enable!==index
                       ? <Button  onClick={e=>this.edit(index)}> <i className="fa fa-pencil"></i></Button>
                   

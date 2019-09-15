@@ -1,4 +1,4 @@
-import { ApiRoles,ApiEditRole} from "./api";
+import { ApiRoles,ApiEditRole,ApiRoleDirector} from "./api";
 import axios from 'axios';
 import { auth } from 'services/authenticacion';
 
@@ -9,7 +9,7 @@ async function getRoleCga() {
 }
 
 async function getRoleDirector() {
-    const response = await axios.post(ApiRoles, {role:"DIRECTOR"}, await auth.ConfigHeader());
+    const response = await axios.get(ApiRoleDirector, await auth.ConfigHeader());
     return response.data;
 }
 
