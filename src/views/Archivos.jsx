@@ -14,7 +14,7 @@ import Breadcrumbs from "components/Navbars/Breadcrumbs"
       <Breadcrumbs page="MIS ARCHIVOS"  {...this.props} />
         <p align="justify"> <b>
           En esta sección te muestra los archivos que has compartido con los demás estudiantes,
-          tienes la posibilidad de modificarlos o eliminarlos lógicamente del sistema.</b> 
+          tienes la posibilidad de modificarlos o eliminarlos del sistema.</b> 
         </p>
     
         <Tabla {...this.props}></Tabla>

@@ -60,7 +60,7 @@ class FormUpload extends React.Component {
             <p align="justify"> <b>
                 En esta sección puedes compartir distintos tipos de material para estudiar y así ayudar a tus compañeros
                 de las siguientes generaciones.
-                  Puedes subir archivos o enlaces completando el siguiente formulario el cual facilita la búsqueda de los mismos. </b> 
+                  Puedes subir archivos o enlaces completando el siguiente formulario; el cual facilita la búsqueda de los mismos. </b> 
               </p>
               <br/>
               <Card className=" shadow border-0">

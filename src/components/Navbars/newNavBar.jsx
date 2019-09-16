@@ -60,7 +60,7 @@ class NavBar extends React.Component {
         return (
             <>
             <Ayuda isOpen={this.state.Ayuda} OpenAyuda={this.OpenAyuda}/>
-            <AppBar position="relative" style={{zIndex:"2000", backgroundColor:color}}>
+            <AppBar position="sticky" style={{zIndex:"900", backgroundColor:color}}>
                 
                 <Toolbar className="container"  style={{display:"block"}}>
                         <a href="/">
@@ -97,7 +97,7 @@ class NavBar extends React.Component {
                 </Toolbar>
             </AppBar>
             <Drawer   
-                
+                style={{zIndex:"800"}}
                 open={this.state.Open}
                 onClose={this.sidebar} 
                 ModalProps={{

@@ -45,8 +45,8 @@ class Home extends React.Component {
                   <small>
                   <b>¿Como lograr esto?</b>
                     <br/>
-                    Cada vez que cursas una asignatura quedas con una gran cantidad de conocimiento en tus manos, 
-                    estos pueden ser de gran ayuda a tus compañeros.
+                    Cada vez que cursas una asignatura, quedas con una gran cantidad de conocimiento en tus manos, 
+                    estos pueden ser de gran ayuda a tus compañeros.<br></br>
                     Mediante esta plataforma podrás compartir todos aquellos conocimientos, 
                     así como acceder a los que alumnos de otras generaciones entregaron.
 

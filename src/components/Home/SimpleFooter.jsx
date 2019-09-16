@@ -16,21 +16,19 @@ class SimpleFooter extends React.Component {
         <footer className="footer" style={{backgroundColor:"#001740"}}>
           <Container>
             <Row className=" row-grid align-items-center mb-5">
+            <Col lg="3">
+                <center>
+                  <img alt="UCM" src="../imagenes/logo-footer_nuevo.png"></img>
+                </center>
+              </Col>
               <Col lg="5">
                 <h3 className="text-white mb-2">
-                  Gracias por compartir.
+                  Gracias por compartir
                 </h3>
                 <h6 className="text-white text-justify">
-                  Puedes colocarte en contacto con nosotros a través de las siguientes plataformas
+                  Puedes colocarte en contacto con nosotros a través de las siguientes plataformas.
                 </h6>
-              </Col>
-              <Col lg="3">
-                <>
-                  <img alt="UCM" src="../imagenes/logo-footer_nuevo.png"></img>
-                </>
-              
-              </Col>
-             
+              </Col> 
               <Col className=" text-lg-center btn-wrapper" lg="3">
                 <>
                   <Button
