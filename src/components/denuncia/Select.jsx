@@ -29,6 +29,7 @@ class SelectRamos extends React.Component {
           closeMenuOnSelect={true}
           components={Constants.animatedComponents}
           placeholder="Seleccionar Ramo"
+          isClearable
           options={this.state.ramos}
           styles={Constants.colourStyles}
           onChange={e=>this.props.changeRamo(e)}

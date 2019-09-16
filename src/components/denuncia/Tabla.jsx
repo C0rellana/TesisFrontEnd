@@ -168,13 +168,14 @@ class Tabla extends React.Component {
         renderExpandableRow: (rowData, rowMeta) => {
             var index = rowMeta.rowIndex;
             var data2 =Data[index]
+            console.log(data2)
         
             var detalles = data2.Denuncia.map(function callback(currentValue, index, array) {
             return  (
                 
                 <TableRow key={index} bgcolor="#EDEDED" >
                     <TableCell  colSpan={2}  >
-                    <i> {data2.Usuario.nombre.toUpperCase()}</i>
+                    <i> {currentValue.Usuario.nombre.toUpperCase()}</i>
                     </TableCell>
                     <TableCell colSpan={1} >
                     <i>  {currentValue.Tipodenuncium.nombre}</i>

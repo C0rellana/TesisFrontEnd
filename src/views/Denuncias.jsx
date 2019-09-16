@@ -160,9 +160,17 @@ class Navs extends React.Component {
 
 
   changeRamo(e){
-    this.setState({
-      Ramoid: [e.value]
-    })
+    if(e){
+      this.setState({
+        Ramoid: [e.value]
+      })
+    }
+    else{
+      this.setState({
+        Ramoid: []
+      })
+    }
+   
   };
   
   showToast(e){
