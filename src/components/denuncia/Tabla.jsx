@@ -167,9 +167,7 @@ class Tabla extends React.Component {
         },
         renderExpandableRow: (rowData, rowMeta) => {
             var index = rowMeta.rowIndex;
-            var data2 =Data[index]
-            console.log(data2)
-        
+            var data2 =Data[index]       
             var detalles = data2.Denuncia.map(function callback(currentValue, index, array) {
             return  (
                 
