@@ -22,6 +22,7 @@ export const ApiLogo= API+"/Logo";
 
 //categorias
 export const ApiCategorias= API+"/categorias";
+export const ApiMisCategorias=API+"/miscategorias";
 export const ApiEditarCategoria= API+"/editarcategoria";
 export const ApiAgregarCategoria= API+"/agregarcategoria";
 export const ApiEliminarCategoria= API+"/eliminarcategoria";

@@ -44,6 +44,16 @@ class FormUpload extends React.Component {
       this.setState({isEnabled:data})
     })
   }
+  remove(file){
+    var files= this.state.files;
+    for( var i = 0; i < files.length; i++){ 
+      if ( files[i] === file) {
+        files.splice(i, 1); 
+      }
+   }
+   this.setState({files: files})
+
+  }
 
 
 
@@ -93,6 +103,7 @@ class FormUpload extends React.Component {
                                 
                                     <div>
                                       <Dropzone
+                                        cant = {this.state.files.length}
                                         {...this.props}
                                         onFilesAdded={this.onFilesAdded}
                                         disabled={this.state.uploading || this.state.successfullUploaded}
@@ -103,7 +114,11 @@ class FormUpload extends React.Component {
                                         return (
                                         
                                           <div key={file.name} className="Row">
-                                            <span className="Filename"><small>{file.name}</small></span>
+                                            {/* <span className="Filename"><small>{file.name}</small></span> */}
+                                            <small>
+                                              <b>{file.name +" "}</b> ~  {Math.round( file.size/(1000**2)*10)/10 +"Mb "}  
+                                              <i className="fa fa-remove" style={{color:"red"}} onClick={e=>this.remove(file)} ></i>
+                                             </small> 
                                             {this.renderProgress(file)}
                                           </div>
                                         );
@@ -118,6 +133,7 @@ class FormUpload extends React.Component {
                                     <center>
                                    
                                       <Dropzone
+                                        cant = {this.state.files.length}
                                         {...this.props}
                                         onFilesAdded={this.onFilesAdded}
                                         disabled={this.state.uploading || this.state.successfullUploaded}

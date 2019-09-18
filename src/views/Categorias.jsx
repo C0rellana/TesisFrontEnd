@@ -31,7 +31,7 @@ class Categorias extends React.Component {
     }
 
     componentDidMount() {
-        categoria.GetCategorias().then(data=>{
+        categoria.MisCategorias().then(data=>{
             this.setState({
                 Categorias: data,
             })
@@ -279,7 +279,7 @@ class Categorias extends React.Component {
             categoria.AgregarCategoria(object).then((resp)=>{
                 if(resp.status){
                     toast.success(resp.message);
-                    categoria.GetCategorias().then(data=>{
+                    categoria.MisCategorias().then(data=>{
                         this.setState({
                             Categorias: data,
                             descripcion:'',
@@ -299,7 +299,7 @@ class Categorias extends React.Component {
             categoria.EditarCategoria(object).then((resp)=>{
                 if(resp.status){
                     toast.success(resp.message);
-                    categoria.GetCategorias().then(data=>{
+                    categoria.MisCategorias().then(data=>{
                         this.setState({
                             Categorias: data,
                         })
@@ -317,7 +317,7 @@ class Categorias extends React.Component {
         categoria.EliminarCategoria(this.state.Tab).then((resp)=>{
             if(resp.status){
                 toast.success(resp.message);
-                categoria.GetCategorias().then(data=>{
+                categoria.MisCategorias().then(data=>{
                     this.setState({
                         Categorias: data,
                     })

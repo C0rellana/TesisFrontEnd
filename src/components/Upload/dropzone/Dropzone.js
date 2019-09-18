@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./Dropzone.css";
+import { toast } from "react-toastify";
 
 class Dropzone extends Component {
   constructor(props) {
     super(props);
-    this.state = { hightlight: false };
+    this.state = { hightlight: false ,cantidad:0};
     this.fileInputRef = React.createRef();
-
     this.openFileDialog = this.openFileDialog.bind(this);
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
@@ -20,6 +20,7 @@ class Dropzone extends Component {
   }
 
   onFilesAdded(evt) {
+  
     if (this.props.disabled) return;
     const files = evt.target.files;
     if (this.props.onFilesAdded) {
@@ -50,9 +51,24 @@ class Dropzone extends Component {
   }
 
   fileListToArray(list) {
+   
+    var cant= this.props.cant
     const array = [];
     for (var i = 0; i < list.length; i++) {
-      array.push(list.item(i));
+      if(cant<10){
+        if(list.item(i).size<=100000000){
+          cant=cant+1;
+          array.push(list.item(i));
+        }
+        else{  
+          toast.error("El archivo "+list.item(i).name+" supera el tamaño máximo establecido")
+        }
+      }
+      else{  
+        toast.error("No se puede agregar el archivo "+list.item(i).name+" ,cantidad máxima de archivos alcanzado")
+      }
+     
+     
     }
     return array;
   }
@@ -75,6 +91,10 @@ class Dropzone extends Component {
           onChange={this.onFilesAdded}
         />
         <i className="fa fa-cloud-upload fa-5x" style={{color:this.props.user.color?this.props.user.color:"#8965E0"}} ></i>
+        <span><small>Max Files : 10</small></span>
+        <span><small>Max Size : 100mb</small></span>
+        
+       
        
       </div>
     );

@@ -3,6 +3,7 @@ import {
     ApiAgregarCategoria,
     ApiEditarCategoria,
     ApiEliminarCategoria,
+    ApiMisCategorias,
 } from "./api";
 import React from "react";
 import axios from 'axios';
@@ -18,6 +19,14 @@ async function getAllCategoriasbyCarrera() {
 
     return response.data
 }
+
+
+
+async function MisCategorias() {
+    const response = await axios.get(ApiMisCategorias,await auth.ConfigHeader());
+       return response.data
+}
+
 
 async function GetCategorias() {
     const response = await axios.get(ApiCategorias,await auth.ConfigHeader());
@@ -39,6 +48,7 @@ async function EliminarCategoria(id) {
 
 
 export const categoria = {
+    MisCategorias,
     getAllCategoriasbyCarrera,
     GetCategorias,
     EditarCategoria,

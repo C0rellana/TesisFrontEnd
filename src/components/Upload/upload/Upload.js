@@ -20,10 +20,12 @@ class Upload extends Component {
   }
 
   onFilesAdded(files) {
+    console.log("a")
     this.setState(prevState => ({
-      files: prevState.files.concat(files)
+      files:  [new set(prevState.files.concat(files))]
     }));
   }
+
 
   async uploadFiles() {
     this.setState({ uploadProgress: {}, uploading: true });
