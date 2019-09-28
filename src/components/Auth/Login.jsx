@@ -116,9 +116,9 @@ class Login extends React.Component {
                         </InputGroup>
                         </FormGroup>
                         <div className="text-right">
-                        <button className="text-light text-center miboton"  onClick={e=>handleClick("password")}  >
+                        <a className="text-light text-center miboton" href="#/"  onClick={e=>handleClick("password")}  >
                         <small>¿Olvidó la contraseña?</small>
-                        </button>
+                        </a>
 
                         </div>
             
