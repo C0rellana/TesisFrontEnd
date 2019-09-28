@@ -115,12 +115,12 @@ class Login extends React.Component {
                             />
                         </InputGroup>
                         </FormGroup>
-                        {/* <div className="text-right">
-                        <a className="text-light" href="#pablo" onClick={e => e.preventDefault()} >
-                        <small>¿Olvido la contraseña?</small>
-                        </a>
+                        <div className="text-right">
+                        <button className="text-light text-center miboton"  onClick={e=>handleClick("password")}  >
+                        <small>¿Olvidó la contraseña?</small>
+                        </button>
 
-                        </div> */}
+                        </div>
             
                         <div className="text-center"> 
                         <Button
@@ -135,10 +135,10 @@ class Login extends React.Component {
                         <div className="text-center">
                         <hr></hr>
                        
-                        <button className="text-light text-center miboton" onClick={handleClick} >
+                        <button className="text-light text-center miboton" onClick={e=>handleClick("register")} >
                             <small>¿No tienes una cuenta? <strong>Crear cuenta</strong></small>            
                         </button>
-                  
+                      
                         </div>
                     </Form>
                     </CardBody>

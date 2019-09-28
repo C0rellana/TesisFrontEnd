@@ -9,8 +9,8 @@ export const ApiGetData = API+"/GetData"
 export const ChangeColor = API+"/ChangeColor"
 export const ApiAvatar = API+"/Avatar"
 export const changePreferencias = API+"/changePreferencias"
-
-
+export const ApiRestablecer = API+"/Restablecer";
+export const ApiCambiarContraseña = API+"/CambiarContrasena";
 //carreras
 export const ApiCarreras= API+"/carreras";
 export const ApiCarrerasRamos= API+"/carrerasramos";

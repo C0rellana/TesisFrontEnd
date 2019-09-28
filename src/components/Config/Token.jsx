@@ -42,8 +42,10 @@ class Token extends React.Component {
     return (
       <>
       <p><small>Editar cuenta de almacenamiento. <b>Cuidado! al modificar esta opcion los datos almacenados seran removidos</b></small></p>
+      
       <Row>
-          <Col md="9">        
+          <Col md="9">   
+           <label>TOKEN ID</label>     
             <Input name="token" 
             disabled={this.state.disabled} 
             onChange={e=>this.setState({token:e.target.value})} 
@@ -52,8 +54,27 @@ class Token extends React.Component {
             />  
             <br/>
           </Col>
+          <Col md="9">     
+            <label>CARPETA ID</label>     
+            <Input name="token" 
+            disabled={this.state.disabled} 
+            onChange={e=>this.setState({token:e.target.value})} 
+            value={this.state.token}
+            placeholder="INGRESE TOKEN"
+            />  
+            <br/>
+          </Col>
+          <Col md="9">     
+            <label>CORREO</label>     
+            <Input name="token" 
+            disabled={this.state.disabled} 
+            onChange={e=>this.setState({token:e.target.value})} 
+            value={this.state.token}
+            placeholder="INGRESE TOKEN"
+            />  
+          </Col>
           <Col md="3">
-            {this.state.disabled
+          <br/>            {this.state.disabled
                 ? <Button onClick={this.edit} disabled > <i className="fa fa-pencil"></i></Button>
             
                 : <Button onClick={this.save}> <i className="fa fa-check"></i></Button>

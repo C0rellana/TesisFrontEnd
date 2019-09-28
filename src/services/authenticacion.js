@@ -1,4 +1,4 @@
-import {ApiLogin, ApiRegister,ApiGetData,ChangeColor,ApiAvatar,changePreferencias} from "./api";
+import {ApiLogin, ApiRegister,ApiGetData,ChangeColor,ApiAvatar,changePreferencias,ApiRestablecer,ApiCambiarContraseña} from "./api";
 import axios from 'axios';
 import { BehaviorSubject } from 'rxjs';
 
@@ -34,6 +34,16 @@ async function login(correo, password) {
 
 async function register(object) {
     const response = await axios.post(ApiRegister, object);
+    return response.data;
+}
+
+async function Restablecer(object) {
+    const response = await axios.post(ApiRestablecer, object);
+    return response.data;
+}
+
+async function CambiarContraseña(object) {
+    const response = await axios.post(ApiCambiarContraseña, object);
     return response.data;
 }
 
@@ -102,5 +112,7 @@ export const auth = {
     FChangeColor,
     ChangeAvatar,
     GetAvatar,
-    FchangePreferencias
+    FchangePreferencias,
+    Restablecer,
+    CambiarContraseña
 };

@@ -7,14 +7,17 @@ import {
 } from "reactstrap";
 import Login from "components/Auth/Login";
 import Registro from "components/Auth/Registro";
+import Contrasena from "components/Auth/Contraseña";
 import { ToastContainer, toast,Flip } from 'react-toastify';
+import Reset from "components/Auth/Reset";
 
 class Auth extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      boolean : true
+      opcion : "login",
+      reset: true,
     }
      //Si esta logeado ->redirect
     auth.GetData().then(()=>{
@@ -25,17 +28,24 @@ class Auth extends React.Component {
    this.handleClick = this.handleClick.bind(this);
   
   }
-  handleClick(val) {
-    if(val===true){
+  handleClick(val,estado,msg) {
+    if(estado==="res"){
+      toast.success(msg);
+    }
+    if(estado===true){
       toast.success('Se ha registrado correctamente');
     }
-    this.setState(state => ({
-      boolean: !state.boolean
-    }));
+    this.setState({
+      opcion: val,
+      reset: false,
+    });
+  
+    
   }
  
 
   render() {
+    var reset= this.props.reset && this.state.reset;
     return (
       
       <> 
@@ -58,24 +68,18 @@ class Auth extends React.Component {
               <Col>
               </Col>
               <Col md="5">
-                {this.state.boolean ? <Login boolean={this.state.boolean} handleClick = {this.handleClick} ></Login>   :  <Registro boolean={this.state.boolean} handleClick = {this.handleClick}> </Registro> }    
+                {reset
+                ?<Reset handleClick = {this.handleClick}></Reset>
+                :this.state.opcion==="password"
+                  ?<Contrasena  handleClick = {this.handleClick}/>
+                  :this.state.opcion==="login" 
+                    ?<Login boolean={this.state.boolean} handleClick = {this.handleClick} ></Login>  
+                    :<Registro boolean={this.state.boolean} handleClick = {this.handleClick}> </Registro> 
+                   
+              }
               </Col>
               <Col>
               </Col>
-                {/* <Col lg="6">
-                  <h3 className="display-3 text-white">
-                    ESTUDEO UCM 
-                  </h3>
-                  <p  className="lead text-white" align="justify">
-                  <small>
-                  Bienvendio!,  
-                  aquí podrás encontrar material para complementar tus estudios
-                  con personas que ya pasaron por lo mismo que tú, 
-                  recuerda que cualquier conocimiento que tengas plasmado de alguna forma 
-                  puede servirle a un compañero, comparte!!
-                  </small>
-                  </p>
-                </Col> */}
               </Row>
           </Container>
          

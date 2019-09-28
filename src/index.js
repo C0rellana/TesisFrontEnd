@@ -33,6 +33,8 @@ ReactDOM.render(
     {/* Rutas sin autentificacion */}
     <Route path="/Auth" exact render={props => <Auth {...props} />} />
 
+    <Route path="/reset"  render={props =>  <Auth {...props}  reset={true}/>}/>
+
      {/* Rutas con autentificacion  ROL : ["USER","ADMIN","CGA","DIRECTOR"]*/}
      <Route exact path='/' component={RequireAuth(Home,Nivel1)} />
 

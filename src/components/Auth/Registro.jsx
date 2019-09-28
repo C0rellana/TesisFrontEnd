@@ -127,7 +127,7 @@ class Register extends React.Component {
   
     var data= await auth.register(object)
     if(data.success){
-      this.props.handleClick(true);
+      this.props.handleClick("login",true);
     }
     else{
       this.setState({
@@ -250,7 +250,7 @@ class Register extends React.Component {
                         <div className="text-center">
                         <hr></hr>
 
-                        <button className="text-light text-center miboton" onClick={handleClick} >
+                        <button className="text-light text-center miboton" onClick={e=>handleClick("login")} >
                             <small>Ya tengo una cuenta.  <strong>Iniciar Sesión</strong></small>       
                         </button>
           

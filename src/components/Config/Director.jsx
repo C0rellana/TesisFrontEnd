@@ -129,7 +129,7 @@ class Director extends React.Component {
                     />
                 </Col>
                 <Col  md="3">
-                  <br></br>
+                
                   {this.state.enable!==index
                       ? <Button  onClick={e=>this.edit(index)}> <i className="fa fa-pencil"></i></Button>
                   
@@ -138,6 +138,7 @@ class Director extends React.Component {
                   <Button onClick={e=>this.DeleteDirector(user.rut)}> <i className="fa fa-trash"></i></Button>
                   <br/>
                 </Col>
+                
                 </Row>
             )
             }
