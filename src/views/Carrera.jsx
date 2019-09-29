@@ -55,14 +55,14 @@ class Carrera extends React.Component {
                 <Card>
                   <CardBody>
                     <div style={{'height': '440px', 'overflowY': 'scroll'}}>
-                        <li key="add" > 
+                        <li key="add" style={{listStyleType:"none"}} > 
                           <Button  style={{backgroundColor:color?color:"#8965E0",color:textColor}}  block onClick={this.nuevo}>
                             <i className="fa fa-plus"></i> Nuevo Ramo
                           </Button>
                           <br/>
                         </li>
                         { Ramos.map((ramo, index) =>              
-                            <li key={index}> 
+                            <li key={index} style={{listStyleType:"none"}}> 
                               <Button  block  onClick={e=>this.clickramo(e,index)}>
                                 <small>
                                 { ramo.nombre.length<30? ramo.nombre: ramo.nombre.slice(0, 25)+'...' }
