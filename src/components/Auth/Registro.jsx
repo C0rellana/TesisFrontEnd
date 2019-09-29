@@ -218,6 +218,7 @@ class Register extends React.Component {
                                 type="password"
                                 autoComplete="off"
                                 name="password"
+                                minLength="6"
                                 onChange={this.handleInputChange}
                                 required
                                 
