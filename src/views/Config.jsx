@@ -6,6 +6,7 @@ import {
 import Cga from "components/Config/Cga"
 import Director from "components/Config/Director"
 import Logo from "components/Config/Logo"
+import Mensaje from "components/Config/Mensaje"
 class Config extends React.Component {
 
   constructor(props) {
@@ -83,6 +84,8 @@ class Config extends React.Component {
                   <p style={{textIndent:""}}> 
                     <b>Modificar logo del sistema" </b>=>  esto cambia automaticamente el logo de esta plataforma.
                   </p>
+                <br/><hr></hr>
+                <Mensaje></Mensaje>
                 <br/><hr></hr>
                 <Director></Director>
                 <br/><hr></hr>

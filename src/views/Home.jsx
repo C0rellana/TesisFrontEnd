@@ -7,10 +7,34 @@ import {
 } from "reactstrap";
 import CardsFooter from "components/Home/SimpleFooter";
 import Info from "components/Home/Info";
-
+import ReactHtmlParser from 'react-html-parser'; 
+import { admin } from "services/admin";
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+     
+        data:'',       
+        tipo:"warning",
+        estado:false
+    
+    };
+    
+  }
+
+ async componentDidMount(){
+   var a= await admin.GetMensaje();
+   if(a.length >0){
+    this.setState({
+      data: a[0].mensaje,
+      tipo: a[0].tipo,
+      estado: a[0].estado
+   })
+   }
+ 
+  }
   render() {
     var {color,nombre} = this.props.user;
     var textColor= this.props.textColor;
@@ -23,13 +47,12 @@ class Home extends React.Component {
           </div>
 
           <Container style={{color:textColor}}>
-          <Alert color="primary">
-            <strong>Compañeros. </strong>
-            Por motivos de la conexión con google,
-             se tuvo que deshabilitar los archivos compartidos hasta el momento 
-             <strong> 1/10/2019 13:20. </strong>
-            Disculpen las molestias. Sistema nuevamente <strong>ACTIVO</strong> 
+          {this.state.estado &&
+          <Alert color={this.state.tipo}>
+            { ReactHtmlParser(this.state.data) }
+         
           </Alert>
+          }
   
           <h3 className="display-3" style={{color:textColor}}>
                   Bienvenido  @{nombre}

@@ -65,3 +65,7 @@ export const ApiNotas= API+"/notas";
 export const ApiRoles= API+"/roles";
 export const ApiEditRole= API+"/editRole";
 export const ApiRoleDirector= API+"/roleDirector";
+
+//Api mensaje
+export const ApiGetMensaje= API+"/getMensaje";
+export const ApiSetmensaje= API+"/setMensaje";
