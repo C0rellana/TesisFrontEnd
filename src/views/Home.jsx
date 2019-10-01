@@ -3,6 +3,7 @@ import {
   Container,
   Row,
   Col,
+  Alert
 } from "reactstrap";
 import CardsFooter from "components/Home/SimpleFooter";
 import Info from "components/Home/Info";
@@ -22,7 +23,13 @@ class Home extends React.Component {
           </div>
 
           <Container style={{color:textColor}}>
-    
+          <Alert color="primary">
+            <strong>Compañeros. </strong>
+            Por motivos de la conexión con google,
+             se tuvo que deshabilitar los archivos compartidos hasta el momento 
+             <strong> 1/10/2019 13:20. </strong>
+            Disculpen las molestias. Sistema nuevamente <strong>ACTIVO</strong> 
+          </Alert>
   
           <h3 className="display-3" style={{color:textColor}}>
                   Bienvenido  @{nombre}
