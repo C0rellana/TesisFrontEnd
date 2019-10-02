@@ -4,8 +4,10 @@ import 'react-image-lightbox/style.css'; // This only needs to be imported once 
 import  { withRouter} from 'react-router-dom'
 
 const images = [
-  'https://i.imgur.com/E6ne8wK.png',
-  'https://i.imgur.com/fp1uVW1.png',
+  'https://i.imgur.com/E6ne8wK.png', //buscador
+  'https://i.imgur.com/fp1uVW1.png', //upload
+  'https://i.imgur.com/QoK2ex6.png', //notas
+  'https://i.imgur.com/bQhC1RS.png', //archivos
 
 ];
 
@@ -24,6 +26,10 @@ class Ayuda extends React.Component {
         return this.setState({photoIndex:0});
       case '/upload':
         return this.setState({photoIndex:1});
+      case '/notas':
+        return this.setState({photoIndex:2}); 
+      case '/archivos':
+        return this.setState({photoIndex:3});
       default:
         return "";
     }   
