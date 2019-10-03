@@ -107,7 +107,7 @@ class Register extends React.Component {
      dvEsperado = 11 - (suma % 11);    
      // Casos Especiales (0 y K)
      dv = (dv === 'K')?10:dv;
-     dv = (dv === 0)?11:dv; 
+     dv = (parseInt(dv) === 0)?11:parseInt(dv); 
      // Validar que el Cuerpo coincide con su Dígito Verificador
      if(dvEsperado !== parseInt(dv)) { rut.setCustomValidity("RUT Inválido"); return false; }
      
