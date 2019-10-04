@@ -63,7 +63,7 @@ class Carrera extends React.Component {
                         </li>
                         { Ramos.map((ramo, index) =>              
                             <li key={index} style={{listStyleType:"none"}}> 
-                              <Button  block  onClick={e=>this.clickramo(e,index)}>
+                              <Button  block  onClick={e=>this.clickramo(e,ramo)}>
                                 <small>
                                 { ramo.nombre.length<30? ramo.nombre: ramo.nombre.slice(0, 25)+'...' }
                                 </small>
@@ -172,10 +172,11 @@ class Carrera extends React.Component {
     })
   }
   
-  clickramo(e,id){
+  clickramo(e,ramo){
+
     e.preventDefault();
     this.setState({
-      ramo: this.state.DataRamos[id],
+      ramo: ramo,
       nuevo:false
     })
   }
