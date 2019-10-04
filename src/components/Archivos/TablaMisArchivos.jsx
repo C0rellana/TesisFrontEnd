@@ -124,8 +124,9 @@ import { Input } from '@material-ui/core';
 
     return (
     <>
-      <Container>
+   
         <MaterialTable
+          
           icons={tableIcons}
           title={""}
           columns={columns}
@@ -143,6 +144,7 @@ import { Input } from '@material-ui/core';
             search:true,
             actionsColumnIndex: -1,
             headerStyle:{zIndex:'0'},
+            maxBodyHeight:"500px"
           }}
           localization={localization}
           editable={{
@@ -220,7 +222,7 @@ import { Input } from '@material-ui/core';
             }
           }}
         />
-      </Container>
+      
     </>
     );
   }
