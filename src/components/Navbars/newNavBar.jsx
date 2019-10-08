@@ -18,7 +18,7 @@ import SpellcheckIcon from '@material-ui/icons/Spellcheck';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import WebIcon from '@material-ui/icons/Web';
 
-
+import { Link } from 'react-router-dom';
 
 import Ayuda from "./Ayuda";
 import { admin} from 'services/admin';
@@ -63,9 +63,12 @@ class NavBar extends React.Component {
             <AppBar position="sticky" style={{zIndex:"900", backgroundColor:color}}>
                 
                 <Toolbar className="container"  style={{display:"block"}}>
-                        <a href="/">
-                            <img src={this.state.imagen} alt="logo" height="50px" style={{paddingTop:"15px"}} hreonclif="/" />
-                        </a>
+                        
+                            <Link to="/" className="link" style={{color:textColor}} >
+                                <img src={this.state.imagen} alt="logo" height="50px" style={{paddingTop:"15px"}} hreonclif="/" />
+                            </Link>
+                           
+                     
                         <Hidden mdUp>
                             <IconButton
                         
@@ -85,11 +88,19 @@ class NavBar extends React.Component {
                                 <HelpIcon />
                         </IconButton>
                         <Hidden smDown>                        
-                            <Button href="/notas" style={{float:"right", top:"15px",color:textColor}} >CALCULAR NOTAS</Button>
-                            <Button href="/archivos" style={{float:"right", top:"15px",color:textColor}} >MIS ARCHIVOS</Button>
-                            <Button href="/upload"  style={{float:"right", top:"15px",color:textColor}} >COMPARTIR</Button>
-                            <Button href="/buscador" style={{float:"right", top:"15px",color:textColor}}  >BUSCAR</Button>
-                        
+                            <Button style={{float:"right", top:"15px",color:textColor}} >
+                                <Link to="/notas" className="link" style={{color:textColor}} >CALCULAR NOTAS</Link>
+                            </Button>
+                            <Button style={{float:"right", top:"15px",color:textColor}} >
+                                <Link to="/archivos" className="link" style={{color:textColor}} >MIS ARCHIVOS</Link>
+                            </Button>
+                            <Button style={{float:"right", top:"15px",color:textColor}} >
+                                <Link to="/upload" className="link" style={{color:textColor}} >COMPARTIR</Link>
+                            </Button>
+                            <Button style={{float:"right", top:"15px",color:textColor}} >
+                                <Link to="/buscador" className="link" style={{color:textColor}} >BUSCAR</Link>
+                            </Button>
+                         
                         </Hidden>
 
                 
@@ -105,30 +116,30 @@ class NavBar extends React.Component {
                 }}
             >   
                     <List style={{top:"65px" }}>
-                      
-                        <ListItem button  component="a" href="/">
+                    
+                        <ListItem button >
                             <ListItemIcon><HomeIcon /></ListItemIcon>
-                            <i>INICIO</i>
+                            <Link to="/" className="link">INICIO</Link>
                         </ListItem>
                         <Divider/>
-                        <ListItem button component="a" href="/upload">
+                        <ListItem button>
                             <ListItemIcon><ShareIcon /></ListItemIcon>
-                            <i>COMPARTIR</i>
+                            <Link to="/upload" className="link">COMPARTIR</Link>
                         </ListItem>
                         <Divider/>
-                        <ListItem button component="a" href="/buscador"  >
+                        <ListItem button >
                             <ListItemIcon><SearchIcon /></ListItemIcon>
-                            <i>BUSCAR</i>
+                            <Link to="/buscador" className="link">BUSCAR</Link>
                         </ListItem>
                         <Divider/>
-                        <ListItem button  component="a" href="/archivos">
+                        <ListItem button>
                             <ListItemIcon><FolderIcon /></ListItemIcon>
-                            <i>MIS ARCHIVOS</i>
+                            <Link to="/archivos" className="link">MIS ARCHIVOS</Link>
                         </ListItem>
                         <Divider/>
-                        <ListItem button component="a" href="/notas">
+                        <ListItem button >
                             <ListItemIcon>< SpellcheckIcon/></ListItemIcon>
-                            <i>CALCULAR NOTAS</i>
+                            <Link to="/notas" className="link">CALCULAR NOTAS</Link>
                         </ListItem>
                         <Divider/>
                         <ListItem button  component="a" href="http://www.sibib.ucm.cl/">
