@@ -53,11 +53,16 @@ class Enlaces extends React.Component {
             {this.state.Inputs.map(Inputs =>
               <Row key={Inputs.row+'a'}>
                 <Col md="6" key={Inputs.row+'b'} >
-                    <Input type="text" placeholder="Nombre del enlace" maxLength="10" key={Inputs.nombre} name={Inputs.nombre} onChange={this.handleChange} required />
+                    <Input type="text" placeholder="Nombre del recurso web" maxLength="15" key={Inputs.nombre} name={Inputs.nombre} onChange={this.handleChange} required />
                     <br/>
                   </Col>
                 <Col md="6" key={Inputs.row+'c'}>
-                  <Input type="url" placeholder="http://www.Mienlace.com" key={Inputs.enlace} name={Inputs.enlace} onChange={this.handleChange} required/>
+                  <Input 
+                  type="textarea"
+                  placeholder="Ingrese los enlaces correspondientes. Ej:http://google.com"
+                  key={Inputs.enlace}
+                  name={Inputs.enlace} 
+                  onChange={this.handleChange} required/>
                   <br/>
                 </Col>
                 

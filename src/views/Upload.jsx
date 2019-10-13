@@ -269,23 +269,36 @@ class FormUpload extends React.Component {
   uploadEnlaces(e){
     e.preventDefault();
     var enlaces=this.state.enlaces;
+    //console.log(enlaces[0].enlace.match(/\bhttps?:\/\/\S+/gi))
     for (let i = 0; i < enlaces.length; i++) {
-      const formData = new FormData();
-      formData.append('enlace', JSON.stringify(enlaces[i]));
-      formData.append('cod_categoria', this.state.categoria);
-      formData.append('cod_contenido', this.state.contenido);
-      formData.append('descripcion', this.state.descripcion);
-      formData.append('isEnlace',this.state.isEnlace)
-      archivo.Upload(formData).then(res=>{
-        toast.success("Enlace nº "+(i+1)+" subido")
-      })
+      var matchEnlaces= enlaces[i].enlace.match(/\bhttps?:\/\/\S+/gi);
+      if(matchEnlaces){
+        for (let j=0; j< matchEnlaces.length; j++) {
+          
+          let json={nombre:enlaces[i].nombre, enlace:matchEnlaces[j]}
+          const formData = new FormData();
+          formData.append('enlace', JSON.stringify(json));
+          formData.append('cod_categoria', this.state.categoria);
+          formData.append('cod_contenido', this.state.contenido);
+          formData.append('descripcion', this.state.descripcion);
+          formData.append('isEnlace',this.state.isEnlace)
+          this.enviar(formData,matchEnlaces[j])
+   
+        }
+      }
+      else{
+        toast.error("Debe ingresar los enlaces en el formato correcto")
+      }
       
     }
-
-    
- 
-
   }
+  enviar(formData,nombre){  
+    archivo.Upload(formData).then(res=>{
+      toast.success("Enlace: " + nombre+ " subido")
+    })
+
+ }
+
   renderProgress(file) {
     const uploadProgress = this.state.uploadProgress[file.name];
     if (this.state.uploading || this.state.successfullUploaded) {
