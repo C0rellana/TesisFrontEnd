@@ -14,3 +14,8 @@ $ cd FrontEnd
 $ npm install
 $ npm start
 ```
+Configurar conexion con la API.
+```sh
+FrontEnd/src/services/api.js
+```
+
